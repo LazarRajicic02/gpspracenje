@@ -2,6 +2,7 @@ import Hero from "./components/Hero";
 import Features from "./components/Features";
 import WhyUs from "./components/WhyUs";
 import AppShowcase from "./components/AppShowcase";
+import Reviews from "./components/Reviews";
 import FAQ from "./components/FAQ";
 import Order from "./components/Order";
 import Contact from "./components/Contact";
@@ -13,6 +14,7 @@ export default function Home() {
       <Features />
       <WhyUs />
       <AppShowcase />
+      <Reviews />
       <FAQ />
       <Order />
       <Contact />

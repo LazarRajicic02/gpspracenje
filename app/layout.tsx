@@ -1,30 +1,37 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./context/ThemeContext";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const plusJakarta = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta",
   subsets: ["latin", "latin-ext"],
   display: "swap",
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
-  title: "Cyber Tracking – Pametno GPS praćenje vozila",
+  title: "Cyber Tracking – GPS praćenje vozila u realnom vremenu | Srbija",
   description:
-    "Profesionalno GPS praćenje vozila u realnom vremenu. Zaštita flote, smanjenje troškova i potpuna kontrola nad vozilima.",
-  keywords: ["GPS praćenje", "praćenje vozila", "flota", "Cyber Tracking", "GPS Srbija"],
+    "GPS praćenje vozila i praćenje flote u realnom vremenu. Geofencing, izveštaji, zaštita od krade. Kontrola kompanijskih vozila – pristupačne cene za sve veličine flote. gpspracenje.rs",
+  keywords: [
+    "GPS praćenje",
+    "praćenje vozila",
+    "praćenje flote",
+    "GPS praćenje vozila",
+    "GPS Srbija",
+    "praćenje vozila u realnom vremenu",
+    "geofencing",
+    "kontrola flote",
+    "Cyber Tracking",
+    "gps za vozila",
+    "nadzor vozila",
+  ],
   openGraph: {
-    title: "Cyber Tracking – Pametno GPS praćenje vozila",
-    description: "Profesionalno GPS praćenje vozila u realnom vremenu.",
+    title: "Cyber Tracking – GPS praćenje vozila u realnom vremenu | Srbija",
+    description: "GPS praćenje vozila i flote u realnom vremenu. Geofencing, izveštaji, zaštita od krade. Kontrola vozila za kompanije i pojedince.",
     url: "https://gpspracenje.rs",
   },
 };
@@ -50,7 +57,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="sr" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[var(--background)] text-[var(--foreground)]`}>
+      <body className={`${plusJakarta.variable} font-sans antialiased bg-[var(--background)] text-[var(--foreground)]`}>
         <ThemeProvider>
           <div className="flex min-h-screen flex-col">
             <Header />

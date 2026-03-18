@@ -1,59 +1,174 @@
 "use client";
 
-import { useState } from "react";
+import Link from "next/link";
+import { useMemo, useState } from "react";
+import { faqCategories, faqItems, type FaqItem } from "../data/faq";
 
-const faqItems = [
-  { question: "Koliko košta GPS praćenje vozila?", answer: "Cene zavise od broja vozila i izabranog paketa. Nudimo fleksibilne pakete za male flote i pojedinačna vozila, kao i posebne uslove za veće kompanije. Kontaktirajte nas za besplatnu ponudu prilagođenu vašim potrebama." },
-  { question: "Koliko traje instalacija uređaja?", answer: "Instalacija jednog uređaja obično traje 30–60 minuta. Dolazimo na vašu adresu ili u vaše poslovne prostore. Nakon instalacije, vozilo je odmah vidljivo na platformi i možete početi sa praćenjem." },
-  { question: "Da li mogu da pratim više vozila?", answer: "Da. Naša platforma podržava praćenje neograničenog broja vozila. Sva vozila su prikazana na jednoj mapi, sa mogućnošću filtriranja po grupi, tipu ili statusu. Posebno su pogodni paketi za flote od nekoliko do stotina vozila." },
-  { question: "Šta ako mi ukradu vozilo?", answer: "U slučaju krade, trenutna lokacija vozila je dostupna u realnom vremenu na platformi. Preporučujemo da odmah obavestite policiju i da im prosledite podatke o lokaciji. Naši uređaji su skriveni i teško se uočavaju, što povećava šanse za brzu povratnost vozila." },
-  { question: "Da li postoji podrška za korisnike?", answer: "Da. Naš tim je dostupan putem emaila i telefona tokom radnog vremena. Za hitne slučajeve (npr. krada) možete nas kontaktirati i van radnog vremena. Takođe nudimo obuku za korišćenje platforme." },
-  { question: "Koja je tačnost praćenja?", answer: "GPS uređaji koje koristimo nude tačnost pozicije do nekoliko metara u otvorenom prostoru. U gradskim zonama sa visokim zgradama tačnost može biti nešto manja, ali i dalje dovoljna za praćenje rute i lokacije vozila." },
-];
+type FAQProps = {
+  variant?: "landing" | "all";
+};
 
-export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+function FaqAccordionItem({
+  item,
+  isOpen,
+  onToggle,
+}: {
+  item: FaqItem;
+  isOpen: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <li
+      className="transition-smooth overflow-hidden rounded-xl border border-slate-200 bg-slate-50/80 hover:border-slate-300 dark:border-slate-700 dark:bg-slate-800/50 dark:hover:border-slate-600"
+    >
+      <button
+        type="button"
+        onClick={onToggle}
+        className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-medium text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:text-white dark:focus-visible:ring-offset-slate-900"
+        aria-expanded={isOpen}
+      >
+        <span>{item.question}</span>
+        <span
+          className={`transition-smooth flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-teal-600 dark:text-teal-400 ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        >
+          <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </span>
+      </button>
+
+      <div
+        className={`grid transition-[grid-template-rows] duration-200 ease-out ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+      >
+        <div className="overflow-hidden">
+          <div className="border-t border-slate-200 px-5 pb-4 pt-2 text-slate-600 dark:border-slate-700 dark:text-slate-400">
+            {item.answer}
+          </div>
+        </div>
+      </div>
+    </li>
+  );
+}
+
+export default function FAQ({ variant = "landing" }: FAQProps) {
+  const isLanding = variant === "landing";
+
+  const featuredItems = useMemo(() => faqItems.filter((i) => i.featured), []);
+  const baseItems = isLanding ? featuredItems : faqItems;
+
+  const initialOpenId = isLanding && featuredItems.length > 0 ? featuredItems[0].id : null;
+  const [openId, setOpenId] = useState<string | null>(initialOpenId);
+  const [query, setQuery] = useState("");
+  const [activeCategoryId, setActiveCategoryId] = useState<string>("all");
+
+  const filteredItems = useMemo(() => {
+    if (isLanding) return baseItems;
+
+    const q = query.trim().toLowerCase();
+    return baseItems.filter((item) => {
+      const categoryOk = activeCategoryId === "all" ? true : item.categoryId === activeCategoryId;
+      const text = `${item.question} ${item.answer}`.toLowerCase();
+      const queryOk = q.length === 0 ? true : text.includes(q);
+      return categoryOk && queryOk;
+    });
+  }, [activeCategoryId, baseItems, isLanding, query]);
+
+  const categories = faqCategories;
 
   return (
     <section id="faq" className="scroll-mt-20 bg-white px-4 py-20 dark:bg-slate-900 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-3xl">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
-            Često postavljana pitanja
+            {isLanding ? "Najčešća pitanja" : "Često postavljana pitanja"}
           </h2>
           <p className="mt-4 text-lg text-slate-600 dark:text-slate-400">
-            Odgovori na najčešća pitanja o GPS praćenju vozila.
+            {isLanding
+              ? "Kratki odgovori na najčešća pitanja o GPS uređajima i pretplati."
+              : "Pretražite odgovore po kategorijama o instalaciji, aplikaciji, bezbednosti i pretplati."}
           </p>
         </div>
-        <ul className="mt-12 space-y-3">
-          {faqItems.map((item, index) => (
-            <li
-              key={index}
-              className="overflow-hidden rounded-xl border border-slate-200 bg-slate-50/80 transition hover:border-slate-300 dark:border-slate-700 dark:bg-slate-800/50 dark:hover:border-slate-600"
-            >
-              <button
-                type="button"
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-medium text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:text-white dark:focus-visible:ring-offset-slate-900"
-                aria-expanded={openIndex === index}
-              >
-                <span>{item.question}</span>
-                <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-teal-600 transition-transform dark:text-teal-400 ${openIndex === index ? "rotate-180" : ""}`}>
-                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </span>
-              </button>
-              <div className={`grid transition-[grid-template-rows] duration-200 ease-out ${openIndex === index ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
-                <div className="overflow-hidden">
-                  <div className="border-t border-slate-200 px-5 pb-4 pt-2 text-slate-600 dark:border-slate-700 dark:text-slate-400">
-                    {item.answer}
-                  </div>
-                </div>
+
+        {!isLanding && (
+          <div className="mt-10">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="w-full sm:max-w-md">
+                <label htmlFor="faq-search" className="sr-only">
+                  Pretraga FAQ-a
+                </label>
+                <input
+                  id="faq-search"
+                  type="search"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Pretraži (npr. instalacija, pretplata, cena)"
+                  className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 shadow-sm outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/30 dark:border-slate-700 dark:bg-slate-800/50 dark:text-white"
+                />
               </div>
+
+              <div className="flex flex-wrap items-center justify-center gap-2 sm:justify-end">
+                <button
+                  type="button"
+                  className={`rounded-full px-3 py-1 text-sm font-medium transition ${
+                    activeCategoryId === "all"
+                      ? "bg-teal-500 text-white"
+                      : "border border-slate-200 bg-white/70 text-slate-700 hover:bg-white dark:border-slate-700 dark:bg-slate-800/40 dark:text-slate-200 dark:hover:bg-slate-800"
+                  }`}
+                  onClick={() => setActiveCategoryId("all")}
+                >
+                  Sve
+                </button>
+                {categories.map((c) => (
+                  <button
+                    key={c.id}
+                    type="button"
+                    className={`rounded-full px-3 py-1 text-sm font-medium transition ${
+                      activeCategoryId === c.id
+                        ? "bg-teal-500 text-white"
+                        : "border border-slate-200 bg-white/70 text-slate-700 hover:bg-white dark:border-slate-700 dark:bg-slate-800/40 dark:text-slate-200 dark:hover:bg-slate-800"
+                    }`}
+                    onClick={() => setActiveCategoryId(c.id)}
+                  >
+                    {c.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        <ul className="mt-12 space-y-3">
+          {filteredItems.length === 0 ? (
+            <li className="rounded-xl border border-slate-200 bg-slate-50/80 p-6 text-center text-slate-600 dark:border-slate-700 dark:bg-slate-800/50 dark:text-slate-400">
+              Nismo pronašli odgovor za dati upit. Pokušajte drugu reč ili izaberite drugu kategoriju.
             </li>
-          ))}
+          ) : (
+            filteredItems.map((item) => (
+              <FaqAccordionItem
+                key={item.id}
+                item={item}
+                isOpen={openId === item.id}
+                onToggle={() => setOpenId(openId === item.id ? null : item.id)}
+              />
+            ))
+          )}
         </ul>
+
+        {isLanding && (
+          <div className="mt-10 text-center">
+            <Link
+              href="/faq"
+              className="inline-flex items-center gap-2 rounded-xl bg-teal-600 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-lg shadow-teal-500/25 transition hover:bg-teal-500"
+            >
+              Pogledajte sva pitanja
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

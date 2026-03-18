@@ -23,11 +23,11 @@ export default function Header() {
         <Link
           href="/"
           className="absolute left-4 top-1/2 z-10 flex -translate-y-1/2 sm:left-6 lg:left-8"
-          aria-label="Cyber Tracking - početna"
+          aria-label="Cyber Tracking – GPS praćenje vozila, početna"
         >
           <Image
             src="/logo.svg"
-            alt=""
+            alt="Cyber Tracking – GPS praćenje vozila u realnom vremenu"
             width={280}
             height={80}
             className="h-14 w-auto sm:h-16 md:h-20"
@@ -41,7 +41,7 @@ export default function Header() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="text-slate-600 transition hover:text-teal-600 dark:text-slate-400 dark:hover:text-teal-400"
+                className="transition-smooth text-slate-600 hover:text-teal-600 dark:text-slate-400 dark:hover:text-teal-400"
                 onClick={() => setOpen(false)}
               >
                 {link.label}
@@ -52,7 +52,7 @@ export default function Header() {
             <ThemeToggle />
             <Link
               href="/kontakt"
-              className="rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-teal-500"
+              className="transition-smooth rounded-xl bg-teal-600 px-4 py-2 text-sm font-semibold uppercase tracking-wide text-white shadow-md shadow-teal-500/20 hover:bg-teal-500 hover:shadow-teal-500/30 hover:-translate-y-0.5"
             >
               Pošalji upit
             </Link>
@@ -63,7 +63,7 @@ export default function Header() {
           <ThemeToggle />
           <button
             type="button"
-            className="flex h-10 w-10 items-center justify-center rounded-lg text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+            className="transition-smooth flex h-10 w-10 items-center justify-center rounded-lg text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
             onClick={() => setOpen(!open)}
             aria-label={open ? "Zatvori meni" : "Otvori meni"}
           >

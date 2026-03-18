@@ -6,5 +6,5 @@ export const metadata = {
 };
 
 export default function FAQPage() {
-  return <FAQ />;
+  return <FAQ variant="all" />;
 }

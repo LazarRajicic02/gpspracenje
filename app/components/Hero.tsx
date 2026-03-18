@@ -67,31 +67,36 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-4xl pt-8 text-center">
-        <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl dark:text-slate-200 min-h-[1em]">
-          Najjednostavniji način da pratite i upravljate vozilima
+        <h1 className="animate-fade-in-up text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl dark:text-slate-100 min-h-[1em]">
+          Potpuna kontrola vozila sa Cyber Tracking GPS sistemom
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 sm:text-xl dark:text-slate-400">
-          Dajemo vam snagu i performanse kompletnog sistema za upravljanje flotom. Dobijate potpunu
-          kontrolu nad vozilima, vozačima i troškovima poslovanja.
+        <p className="animate-fade-in-up animation-delay-75 mx-auto mt-4 max-w-2xl text-lg font-semibold text-teal-600 dark:text-teal-400">
+          GPS sistem spreman za odmah korišćenje u Srbiji i Evropi
+        </p>
+        <p className="animate-fade-in-up animation-delay-150 mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+          GPS Tracker dolazi unapred podešen sa EURO41 SIM karticom i radi u preko 40 zemalja. Pogodan za sve vrste vozila (8V–32V). Potrebno je samo instalirati aplikaciju i početi praćenje.
         </p>
 
-        <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-4">
-          <Link
-            href="/usluge"
-            className="w-full rounded-lg bg-teal-600 px-8 py-4 text-center text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-teal-500 sm:w-auto"
+        <div className="animate-fade-in-up animation-delay-225 mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-4">
+          <a
+            href="tel:+381614030888"
+            className="transition-smooth w-full rounded-xl bg-teal-600 px-8 py-4 text-center text-sm font-bold uppercase tracking-wide text-white shadow-lg shadow-teal-500/30 hover:bg-teal-500 hover:shadow-teal-500/40 hover:-translate-y-0.5 sm:w-auto"
           >
-            Saznajte više
-          </Link>
+            Pozovite: 061 4030 888
+          </a>
           <Link
             href="/narudzba"
-            className="w-full rounded-lg bg-slate-600 px-8 py-4 text-center text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-slate-500 sm:w-auto dark:bg-slate-500 dark:hover:bg-slate-400"
+            className="transition-smooth w-full rounded-xl border-2 border-slate-300 bg-white px-8 py-4 text-center text-sm font-bold uppercase tracking-wide text-slate-700 shadow-md hover:border-teal-400 hover:bg-slate-50 hover:-translate-y-0.5 sm:w-auto dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:border-teal-500 dark:hover:bg-slate-700"
           >
             Naručite
           </Link>
         </div>
+        <p className="animate-fade-in-up animation-delay-300 mt-4 text-center text-sm text-slate-500 dark:text-slate-400">
+          Pratite vozila u bilo kom trenutku, bez ugovora i skrivenih troškova.
+        </p>
         <Link
           href="/aplikacija"
-          className="mt-4 inline-block rounded-lg border-2 border-slate-300 bg-white/80 px-8 py-4 text-sm font-semibold uppercase tracking-wide text-slate-800 backdrop-blur-sm transition hover:border-teal-400 hover:bg-slate-50 dark:border-slate-400/80 dark:bg-slate-900/40 dark:text-white dark:hover:border-slate-300 dark:hover:bg-slate-800/50"
+          className="transition-smooth animate-fade-in-up animation-delay-400 mt-2 inline-block rounded-xl border-2 border-slate-300 bg-white/90 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-slate-800 backdrop-blur-sm hover:border-teal-400 hover:bg-white hover:shadow-md dark:border-slate-600 dark:bg-slate-800/60 dark:text-white dark:hover:border-teal-500 dark:hover:bg-slate-700/80"
         >
           Live demo
         </Link>
