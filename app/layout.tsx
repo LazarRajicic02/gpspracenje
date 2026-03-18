@@ -42,7 +42,10 @@ const themeScript = `
   try {
     var stored = localStorage.getItem(key);
     var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    var dark = stored === 'dark' || (stored !== 'light' && (prefersDark || true));
+    var dark;
+    if (stored === 'dark') dark = true;
+    else if (stored === 'light') dark = false;
+    else dark = !!prefersDark;
     var el = document.documentElement;
     if (dark) { el.classList.add('dark'); el.setAttribute('data-theme', 'dark'); }
     else { el.classList.remove('dark'); el.setAttribute('data-theme', 'light'); }

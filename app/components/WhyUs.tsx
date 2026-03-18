@@ -49,6 +49,7 @@ const useCases = [
 
 function OrbitVisual() {
   const orbitDurationSec = 42;
+  const orbitItems = whatYouGet;
 
   return (
     <div className="relative mx-auto flex aspect-square max-w-[420px] items-center justify-center lg:max-w-[480px]">
@@ -68,12 +69,12 @@ function OrbitVisual() {
       </div>
 
       {/* Orbiting feature cards */}
-      {whatYouGet.map((item, i) => {
+      {orbitItems.map((item, i) => {
         // Two rings: inner and outer. Radius scales with viewport so cards won't overlap as easily.
         const isOuter = i % 2 === 0;
         const radius = isOuter ? "clamp(175px, 26vw, 260px)" : "clamp(130px, 20vw, 210px)";
         // Stagger phases so cards are visible at different positions along the circles.
-        const delay = -(i * (orbitDurationSec / whatYouGet.length));
+        const delay = -(i * (orbitDurationSec / orbitItems.length));
 
         return (
           <div key={item.label} className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">

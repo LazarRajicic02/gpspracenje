@@ -19,7 +19,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setThemeState(getTheme());
     setMounted(true);
   }, []);
@@ -37,13 +36,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       el.setAttribute("data-theme", "light");
     }
   }, []);
-
   const valueTheme = mounted ? theme : "dark";
-  return (
-    <ThemeContext.Provider value={{ theme: valueTheme, setTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+
+  return <ThemeContext.Provider value={{ theme: valueTheme, setTheme }}>{children}</ThemeContext.Provider>;
 }
 
 export function useTheme() {

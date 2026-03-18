@@ -6,10 +6,8 @@ type ShowcaseItem = {
   id: string;
   title: string;
   description: string;
-  type: "image" | "video";
-  imageSrc?: string;
-  videoSrc?: string;
-  videoPoster?: string;
+  type: "image";
+  imageSrc: string;
 };
 
 const showcaseItems: ShowcaseItem[] = [
@@ -34,14 +32,6 @@ const showcaseItems: ShowcaseItem[] = [
     type: "image",
     imageSrc: "/phone3.png",
   },
-  {
-    id: "video",
-    title: "Kako aplikacija radi",
-    description: "Kratak video koji pokazuje korišćenje aplikacije na telefonu.",
-    type: "video",
-    videoSrc: undefined,
-    videoPoster: undefined,
-  },
 ];
 
 function PhoneFrame({
@@ -65,78 +55,35 @@ function PhoneFrame({
 }
 
 function ShowcaseContent({ item }: { item: ShowcaseItem }) {
-  if (item.type === "video") {
-    return (
-      <PhoneFrame>
-        <div className="relative h-full w-full bg-slate-900">
-          {item.videoSrc ? (
-            <video
-              src={item.videoSrc}
-              poster={item.videoPoster}
-              controls
-              playsInline
-              className="h-full w-full  object-top"
-            />
-          ) : (
-            <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-gradient-to-b from-slate-800 to-slate-900 p-4 text-white">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-teal-500/20">
-                <svg className="h-8 w-8 text-teal-400" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </div>
-              <p className="text-center text-sm font-medium">Video demo</p>
-              <p className="text-center text-xs text-slate-400">
-                Dodajte video u <code className="rounded bg-slate-700 px-1">public/showcase/demo.mp4</code>
-              </p>
-            </div>
-          )}
-        </div>
-      </PhoneFrame>
-    );
-  }
-
   return (
     <PhoneFrame>
-      {item.imageSrc ? (
-        <div className="relative h-full w-full">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={item.imageSrc}
-            alt={`GPS praćenje vozila – ${item.title}`}
-            className="h-full w-full  object-top"
-            onError={(e) => {
-              const target = e.currentTarget;
-              target.style.display = "none";
-              const placeholder = target.nextElementSibling as HTMLElement;
-              if (placeholder) placeholder.style.display = "flex";
-            }}
-          />
-          <div
-            className="hidden h-full w-full flex-col items-center justify-center gap-2 bg-gradient-to-b from-sky-900/30 to-slate-800 p-4 text-white"
-            style={{ display: "none" }}
-          >
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-teal-500/20">
-              <svg className="h-6 w-6 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14" />
-              </svg>
-            </div>
-            <p className="text-center text-xs text-slate-400">
-              Slika: <code className="rounded bg-slate-700/50 px-1">{item.imageSrc}</code>
-            </p>
-          </div>
-        </div>
-      ) : (
-        <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-gradient-to-b from-teal-900/30 to-slate-800 p-4 text-white">
+      <div className="relative h-full w-full">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={item.imageSrc}
+          alt={`GPS praćenje vozila – ${item.title}`}
+          className="h-full w-full  object-top"
+          onError={(e) => {
+            const target = e.currentTarget;
+            target.style.display = "none";
+            const placeholder = target.nextElementSibling as HTMLElement;
+            if (placeholder) placeholder.style.display = "flex";
+          }}
+        />
+        <div
+          className="hidden h-full w-full flex-col items-center justify-center gap-2 bg-gradient-to-b from-sky-900/30 to-slate-800 p-4 text-white"
+          style={{ display: "none" }}
+        >
           <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-teal-500/20">
             <svg className="h-6 w-6 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14" />
             </svg>
           </div>
           <p className="text-center text-xs text-slate-400">
-            Dodajte sliku u <code className="rounded bg-slate-700/50 px-1">public/showcase/</code>
+            Slika: <code className="rounded bg-slate-700/50 px-1">{item.imageSrc}</code>
           </p>
         </div>
-      )}
+      </div>
     </PhoneFrame>
   );
 }
@@ -177,7 +124,7 @@ export default function AppShowcase() {
           <button
             type="button"
             onClick={goPrev}
-            className="transition-smooth order-2 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-slate-300 bg-white text-slate-600 shadow-md hover:border-teal-500 hover:bg-teal-50 hover:text-teal-600 hover:-translate-y-0.5 dark:border-white/10 dark:bg-white/[0.06] dark:text-slate-200 dark:hover:border-[#00ff9d]/50 dark:hover:bg-[#00ff9d]/10 dark:hover:text-[#00ff9d] lg:order-1 lg:self-center"
+            className="hidden lg:flex transition-smooth order-2 h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-slate-300 bg-white text-slate-600 shadow-md hover:border-teal-500 hover:bg-teal-50 hover:text-teal-600 hover:-translate-y-0.5 dark:border-white/10 dark:bg-white/[0.06] dark:text-slate-200 dark:hover:border-[#00ff9d]/50 dark:hover:bg-[#00ff9d]/10 dark:hover:text-[#00ff9d] lg:order-1 lg:self-center"
             aria-label="Prethodna slika"
           >
             <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -202,7 +149,7 @@ export default function AppShowcase() {
           <button
             type="button"
             onClick={goNext}
-            className="transition-smooth order-3 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-slate-300 bg-white text-slate-600 shadow-md hover:border-teal-500 hover:bg-teal-50 hover:text-teal-600 hover:-translate-y-0.5 dark:border-white/10 dark:bg-white/[0.06] dark:text-slate-200 dark:hover:border-[#00ff9d]/50 dark:hover:bg-[#00ff9d]/10 dark:hover:text-[#00ff9d] lg:self-center"
+            className="hidden lg:flex transition-smooth order-3 h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-slate-300 bg-white text-slate-600 shadow-md hover:border-teal-500 hover:bg-teal-50 hover:text-teal-600 hover:-translate-y-0.5 dark:border-white/10 dark:bg-white/[0.06] dark:text-slate-200 dark:hover:border-[#00ff9d]/50 dark:hover:bg-[#00ff9d]/10 dark:hover:text-[#00ff9d] lg:self-center"
             aria-label="Sledeća slika"
           >
             <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -212,7 +159,7 @@ export default function AppShowcase() {
         </div>
 
         {/* Dots */}
-        <div className="mt-8 flex justify-center gap-2">
+        <div className="mt-8 hidden sm:flex justify-center gap-2">
           {showcaseItems.map((_, i) => (
             <button
               key={showcaseItems[i].id}

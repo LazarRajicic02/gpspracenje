@@ -159,7 +159,7 @@ export default function Contact() {
           </div>
 
           {/* Right: image */}
-          <div className="relative mt-2 lg:mt-0 lg:flex lg:items-center lg:justify-center">
+          <div className="hidden lg:flex relative items-center justify-center">
             <div className="absolute inset-0 -z-10 rounded-3xl bg-gradient-to-b from-white/5 to-transparent" aria-hidden />
             <div className="rounded-3xl">
               <Image

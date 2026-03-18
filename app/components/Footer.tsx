@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-slate-200 bg-slate-900 text-slate-300 dark:border-white/10 dark:bg-black">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 text-center md:text-left md:grid-cols-2 lg:grid-cols-4">
           <div>
             <Link href="/" className="mb-4 inline-block">
               <Image
@@ -15,7 +15,7 @@ export default function Footer() {
                 alt="Cyber Tracking – GPS praćenje vozila Srbija"
                 width={200}
                 height={56}
-                className="h-10 w-auto dark:invert"
+                className="h-10 w-auto dark:invert mx-auto"
               />
             </Link>
             <p className="text-sm text-slate-400">
@@ -25,7 +25,7 @@ export default function Footer() {
 
           <div>
             <h3 className="mb-3 font-semibold text-white">Brzi linkovi</h3>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm mx-auto md:mx-0">
               <li>
                 <Link href="/usluge" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
                   Usluge
@@ -61,7 +61,7 @@ export default function Footer() {
 
           <div>
             <h3 className="mb-3 font-semibold text-white">Kontakt</h3>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm mx-auto md:mx-0">
               <li>
                 <a href="mailto:info@gpspracenje.rs" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
                   info@gpspracenje.rs
