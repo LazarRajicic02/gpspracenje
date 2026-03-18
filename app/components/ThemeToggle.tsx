@@ -9,7 +9,7 @@ export default function ThemeToggle() {
     <button
       type="button"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="flex h-10 w-10 items-center justify-center rounded-lg text-slate-600 transition hover:bg-slate-100 hover:text-teal-600 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-teal-400"
+      className="flex h-11 w-11 items-center justify-center rounded-lg text-slate-600 transition hover:bg-slate-100 hover:text-teal-600 dark:text-white dark:hover:bg-white/10 dark:hover:text-[#00ff9d]"
       aria-label={theme === "dark" ? "Uključi svetlu temu" : "Uključi tamnu temu"}
     >
       {theme === "dark" ? (

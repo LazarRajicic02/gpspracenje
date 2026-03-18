@@ -14,10 +14,8 @@ export default function Hero() {
           backgroundSize: "40px 40px",
         }}
       />
-      {/* Dark gradient + grid */}
-      <div className="absolute inset-0 hidden dark:block" style={{
-        background: "linear-gradient(180deg, #2c1810 0%, #1a1614 25%, #1e293b 50%, #1e293b 70%, #0f172a 100%)",
-      }} />
+      {/* Dark: true black */}
+      <div className="absolute inset-0 hidden bg-black dark:block" />
       <div
         className="absolute inset-0 hidden opacity-[0.06] dark:block"
         style={{
@@ -73,30 +71,30 @@ export default function Hero() {
         <p className="animate-fade-in-up animation-delay-75 mx-auto mt-4 max-w-2xl text-lg font-semibold text-teal-600 dark:text-teal-400">
           GPS sistem spreman za odmah korišćenje u Srbiji i Evropi
         </p>
-        <p className="animate-fade-in-up animation-delay-150 mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+        <p className="animate-fade-in-up animation-delay-150 mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">
           GPS Tracker dolazi unapred podešen sa EURO41 SIM karticom i radi u preko 40 zemalja. Pogodan za sve vrste vozila (8V–32V). Potrebno je samo instalirati aplikaciju i početi praćenje.
         </p>
 
         <div className="animate-fade-in-up animation-delay-225 mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-4">
           <a
             href="tel:+381614030888"
-            className="transition-smooth w-full rounded-xl bg-teal-600 px-8 py-4 text-center text-sm font-bold uppercase tracking-wide text-white shadow-lg shadow-teal-500/30 hover:bg-teal-500 hover:shadow-teal-500/40 hover:-translate-y-0.5 sm:w-auto"
+            className="transition-smooth w-full rounded-xl bg-teal-600 px-8 py-4 text-center text-sm font-bold uppercase tracking-wide text-white shadow-lg shadow-teal-500/30 hover:bg-teal-500 hover:shadow-teal-500/40 hover:-translate-y-0.5 sm:w-auto dark:bg-[#00ff9d] dark:text-black dark:hover:bg-[#00e699] dark:hover:shadow-[0_0_24px_rgba(0,255,157,0.35)]"
           >
             Pozovite: 061 4030 888
           </a>
           <Link
             href="/narudzba"
-            className="transition-smooth w-full rounded-xl border-2 border-slate-300 bg-white px-8 py-4 text-center text-sm font-bold uppercase tracking-wide text-slate-700 shadow-md hover:border-teal-400 hover:bg-slate-50 hover:-translate-y-0.5 sm:w-auto dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:border-teal-500 dark:hover:bg-slate-700"
+            className="transition-smooth w-full rounded-xl border-2 border-slate-300 bg-white px-8 py-4 text-center text-sm font-bold uppercase tracking-wide text-slate-700 shadow-md hover:border-teal-400 hover:bg-slate-50 hover:-translate-y-0.5 sm:w-auto dark:border-white/20 dark:bg-white/[0.08] dark:text-white dark:hover:border-[#00ff9d]/50 dark:hover:bg-white/10"
           >
             Naručite
           </Link>
         </div>
-        <p className="animate-fade-in-up animation-delay-300 mt-4 text-center text-sm text-slate-500 dark:text-slate-400">
+        <p className="animate-fade-in-up animation-delay-300 mt-4 text-center text-sm text-slate-500 dark:text-slate-300">
           Pratite vozila u bilo kom trenutku, bez ugovora i skrivenih troškova.
         </p>
         <Link
           href="/aplikacija"
-          className="transition-smooth animate-fade-in-up animation-delay-400 mt-2 inline-block rounded-xl border-2 border-slate-300 bg-white/90 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-slate-800 backdrop-blur-sm hover:border-teal-400 hover:bg-white hover:shadow-md dark:border-slate-600 dark:bg-slate-800/60 dark:text-white dark:hover:border-teal-500 dark:hover:bg-slate-700/80"
+          className="transition-smooth animate-fade-in-up animation-delay-400 mt-2 inline-block rounded-xl border-2 border-slate-300 bg-white/90 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-slate-800 backdrop-blur-sm hover:border-teal-400 hover:bg-white hover:shadow-md dark:border-white/20 dark:bg-white/[0.08] dark:text-white dark:hover:border-[#00ff9d]/50 dark:hover:bg-white/10"
         >
           Live demo
         </Link>

@@ -57,7 +57,7 @@ function PhoneFrame({
       style={{ aspectRatio: "9/19.5" }}
     >
       <div className="absolute left-1/2 top-0 z-10 h-6 w-32 -translate-x-1/2 rounded-b-2xl bg-slate-800 dark:bg-black" />
-      <div className="absolute inset-0 overflow-hidden rounded-[1.5rem] bg-slate-100 dark:bg-slate-900">
+      <div className="absolute inset-0 overflow-hidden rounded-[1.5rem] bg-slate-100 dark:bg-black">
         {children}
       </div>
     </div>
@@ -161,13 +161,13 @@ export default function AppShowcase() {
   const item = showcaseItems[index];
 
   return (
-    <section id="aplikacija" className="scroll-mt-20 bg-slate-100 px-4 py-20 dark:bg-slate-800/80 sm:px-6 lg:px-8">
+    <section id="aplikacija" className="scroll-mt-20 bg-slate-100 px-4 py-20 dark:bg-black sm:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl">
         <div className="text-center">
           <h2 className="animate-fade-in-up text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
             Aplikacija za GPS praćenje vozila
           </h2>
-          <p className="animate-fade-in-up animation-delay-75 mt-4 text-lg text-slate-600 dark:text-slate-400">
+          <p className="animate-fade-in-up animation-delay-75 mt-4 text-lg text-slate-600 dark:text-slate-300">
             Pratite flotu sa telefona – mapa vozila u realnom vremenu, istorija ruta i geofencing u džepu.
           </p>
         </div>
@@ -177,7 +177,7 @@ export default function AppShowcase() {
           <button
             type="button"
             onClick={goPrev}
-            className="transition-smooth order-2 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-slate-300 bg-white text-slate-600 shadow-md hover:border-teal-500 hover:bg-teal-50 hover:text-teal-600 hover:-translate-y-0.5 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-400 dark:hover:border-teal-500 dark:hover:bg-teal-900/20 dark:hover:text-teal-400 lg:order-1 lg:self-center"
+            className="transition-smooth order-2 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-slate-300 bg-white text-slate-600 shadow-md hover:border-teal-500 hover:bg-teal-50 hover:text-teal-600 hover:-translate-y-0.5 dark:border-white/10 dark:bg-white/[0.06] dark:text-slate-200 dark:hover:border-[#00ff9d]/50 dark:hover:bg-[#00ff9d]/10 dark:hover:text-[#00ff9d] lg:order-1 lg:self-center"
             aria-label="Prethodna slika"
           >
             <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -192,7 +192,7 @@ export default function AppShowcase() {
             </div>
             <div className="text-center">
               <h3 className="font-semibold text-slate-900 dark:text-white">{item.title}</h3>
-              <p className="mt-2 max-w-sm text-sm text-slate-600 dark:text-slate-400">
+              <p className="mt-2 max-w-sm text-sm text-slate-600 dark:text-slate-300">
                 {item.description}
               </p>
             </div>
@@ -202,7 +202,7 @@ export default function AppShowcase() {
           <button
             type="button"
             onClick={goNext}
-            className="transition-smooth order-3 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-slate-300 bg-white text-slate-600 shadow-md hover:border-teal-500 hover:bg-teal-50 hover:text-teal-600 hover:-translate-y-0.5 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-400 dark:hover:border-teal-500 dark:hover:bg-teal-900/20 dark:hover:text-teal-400 lg:self-center"
+            className="transition-smooth order-3 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-slate-300 bg-white text-slate-600 shadow-md hover:border-teal-500 hover:bg-teal-50 hover:text-teal-600 hover:-translate-y-0.5 dark:border-white/10 dark:bg-white/[0.06] dark:text-slate-200 dark:hover:border-[#00ff9d]/50 dark:hover:bg-[#00ff9d]/10 dark:hover:text-[#00ff9d] lg:self-center"
             aria-label="Sledeća slika"
           >
             <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -218,14 +218,18 @@ export default function AppShowcase() {
               key={showcaseItems[i].id}
               type="button"
               onClick={() => setIndex(i)}
-              className={`transition-smooth h-2.5 rounded-full ${
-                i === index
-                  ? "w-8 bg-teal-500"
-                  : "w-2.5 bg-slate-300 hover:bg-slate-400 dark:bg-slate-600 dark:hover:bg-slate-500"
-              }`}
+              className="transition-smooth group flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900"
               aria-label={`Slajd ${i + 1}`}
               aria-current={i === index ? "true" : undefined}
-            />
+            >
+              <span
+                className={`h-2.5 rounded-full ${
+                  i === index
+                    ? "w-8 bg-teal-500"
+                    : "w-2.5 bg-slate-300 group-hover:bg-slate-400 dark:bg-slate-600 dark:group-hover:bg-slate-500"
+                }`}
+              />
+            </button>
           ))}
         </div>
       </div>

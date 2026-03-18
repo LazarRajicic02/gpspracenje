@@ -64,13 +64,13 @@ const features = [
 
 export default function Features() {
   return (
-    <section id="usluge" className="scroll-mt-20 bg-white px-4 py-20 dark:bg-slate-900 sm:px-6 lg:px-8">
+    <section id="usluge" className="scroll-mt-20 bg-white px-4 py-20 dark:bg-black sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <div className="text-center">
           <h2 className="animate-fade-in-up text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
             Usluge GPS praćenja vozila
           </h2>
-          <p className="animate-fade-in-up animation-delay-75 mx-auto mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
+          <p className="animate-fade-in-up animation-delay-75 mx-auto mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-300">
             Multinetwork, gašenje vozila iz aplikacije, istorija 180 dana, geo-fence, alarm za brzinu, izveštaji – sve u jednom GPS sistemu.
           </p>
         </div>
@@ -78,14 +78,14 @@ export default function Features() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="group animate-fade-in-up transition-smooth rounded-2xl border border-slate-200 bg-slate-50/80 p-6 hover:-translate-y-1 hover:border-teal-300 hover:shadow-xl hover:shadow-teal-500/10 dark:border-slate-700/80 dark:bg-slate-800/50 dark:hover:border-teal-500/50 dark:hover:shadow-teal-500/10"
+              className="group animate-fade-in-up transition-smooth rounded-2xl border border-slate-200 bg-slate-50/80 p-6 hover:-translate-y-1 hover:border-teal-300 hover:shadow-xl hover:shadow-teal-500/10 dark:border-white/10 dark:bg-white/[0.06] dark:hover:border-[#00ff9d]/40 dark:hover:shadow-teal-500/10"
               style={{ animationDelay: `${120 + index * 80}ms` }}
             >
               <div className="transition-smooth flex h-12 w-12 items-center justify-center rounded-xl bg-teal-500 text-white group-hover:scale-110">
                 {feature.icon}
               </div>
               <h3 className="mt-4 font-semibold text-slate-900 dark:text-white">{feature.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{feature.description}</p>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">{feature.description}</p>
             </div>
           ))}
         </div>

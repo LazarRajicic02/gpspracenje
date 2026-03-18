@@ -69,13 +69,13 @@ function ReviewCard({
 }) {
   return (
     <div
-      className="transition-smooth flex h-full w-[min(340px,85vw)] shrink-0 flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-md hover:border-teal-200 hover:shadow-lg dark:border-slate-700 dark:bg-slate-800/80 dark:hover:border-teal-500/40"
+      className="transition-smooth flex h-full w-[min(340px,85vw)] shrink-0 flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-md hover:border-teal-200 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.06] dark:hover:border-[#00ff9d]/40"
     >
       <StarRating n={rating} />
       <p className="mt-4 flex-1 text-slate-600 dark:text-slate-300">{text}</p>
-      <div className="mt-4 border-t border-slate-100 pt-4 dark:border-slate-700">
+      <div className="mt-4 border-t border-slate-100 pt-4 dark:border-white/10">
         <p className="font-semibold text-slate-900 dark:text-white">{name}</p>
-        <p className="text-sm text-slate-500 dark:text-slate-400">{role}</p>
+        <p className="text-sm text-slate-500 dark:text-slate-300">{role}</p>
       </div>
     </div>
   );
@@ -85,13 +85,13 @@ export default function Reviews() {
   const duplicated = [...reviews, ...reviews];
 
   return (
-    <section className="scroll-mt-20 bg-slate-50 px-4 py-20 dark:bg-slate-800/50 sm:px-6 lg:px-8">
+    <section className="scroll-mt-20 bg-slate-50 px-4 py-20 dark:bg-black sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <div className="text-center">
           <h2 className="animate-fade-in-up text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
             Šta kažu korisnici
           </h2>
-          <p className="animate-fade-in-up animation-delay-75 mx-auto mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
+          <p className="animate-fade-in-up animation-delay-75 mx-auto mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-300">
             Recenzije korisnika koji koriste Cyber Tracking za praćenje vozila i flote.
           </p>
         </div>

@@ -14,10 +14,12 @@
 }
 
 .dark {
-  --background: #0f172a;
-  --foreground: #e2e8f0;
-  --accent: #14b8a6;
-  --accent-hover: #0d9488;
+  --background: #000000;
+  --foreground: #f1f5f9;
+  --accent: #00e699;
+  --accent-hover: #00ff9d;
+  --accent-cta-bg: #00ff9d;
+  --surface: #0a0a0a;
 }
 
 @theme inline {
@@ -104,3 +106,37 @@ html {
 .animation-delay-300 { animation-delay: 300ms; }
 .animation-delay-400 { animation-delay: 400ms; }
 .animation-delay-500 { animation-delay: 500ms; }
+
+/* Orbit animation (Reviews/WhyUs) */
+@keyframes orbit-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbit-counter {
+  from {
+    transform: translateX(var(--r)) rotate(0deg);
+  }
+  to {
+    transform: translateX(var(--r)) rotate(-360deg);
+  }
+}
+
+.orbit-spin {
+  animation: orbit-spin var(--orbit-duration, 18s) linear infinite;
+}
+
+.orbit-counter {
+  animation: orbit-counter var(--orbit-duration, 18s) linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit-spin,
+  .orbit-counter {
+    animation: none !important;
+  }
+}

@@ -5,7 +5,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-slate-200 bg-slate-900 text-slate-300 dark:border-slate-700">
+    <footer className="border-t border-slate-200 bg-slate-900 text-slate-300 dark:border-white/10 dark:bg-black">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div>
@@ -15,7 +15,7 @@ export default function Footer() {
                 alt="Cyber Tracking – GPS praćenje vozila Srbija"
                 width={200}
                 height={56}
-                className="h-10 w-auto"
+                className="h-10 w-auto dark:invert"
               />
             </Link>
             <p className="text-sm text-slate-400">
@@ -27,32 +27,32 @@ export default function Footer() {
             <h3 className="mb-3 font-semibold text-white">Brzi linkovi</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/usluge" className="transition-smooth hover:text-teal-400">
+                <Link href="/usluge" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
                   Usluge
                 </Link>
               </li>
               <li>
-                <Link href="/prednosti" className="transition-smooth hover:text-teal-400">
+                <Link href="/prednosti" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
                   Prednosti
                 </Link>
               </li>
               <li>
-                <Link href="/aplikacija" className="transition-smooth hover:text-teal-400">
+                <Link href="/aplikacija" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
                   Aplikacija
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="transition-smooth hover:text-teal-400">
+                <Link href="/faq" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
                   FAQ
                 </Link>
               </li>
               <li>
-                <Link href="/narudzba" className="transition-smooth hover:text-teal-400">
+                <Link href="/narudzba" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
                   Narudžba
                 </Link>
               </li>
               <li>
-                <Link href="/kontakt" className="transition-smooth hover:text-teal-400">
+                <Link href="/kontakt" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
                   Kontakt
                 </Link>
               </li>
@@ -63,12 +63,12 @@ export default function Footer() {
             <h3 className="mb-3 font-semibold text-white">Kontakt</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="mailto:info@gpspracenje.rs" className="transition-smooth hover:text-teal-400">
+                <a href="mailto:info@gpspracenje.rs" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
                   info@gpspracenje.rs
                 </a>
               </li>
               <li>
-                <a href="tel:+381614030888" className="transition-smooth hover:text-teal-400">
+                <a href="tel:+381614030888" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
                   061 4030 888
                 </a>
               </li>
@@ -83,9 +83,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-slate-700 pt-8 text-center text-sm text-slate-500">
+        <div className="mt-10 border-t border-slate-700 pt-8 text-center text-sm text-slate-500 dark:border-white/10 dark:text-slate-400">
           © {currentYear} Cyber Tracking – gpspracenje.rs.{" "}
-          <Link href="/politika-privatnosti" className="transition-smooth hover:text-teal-400">
+          <Link href="/politika-privatnosti" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
             Politika privatnosti
           </Link>
           . Sva prava zadržana.
