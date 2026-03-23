@@ -6,10 +6,11 @@ import { useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
-  { href: "/usluge", label: "Usluge" },
   { href: "/prednosti", label: "Prednosti" },
+  { href: "/gps-sistem", label: "GPS sistem" },
   { href: "/aplikacija", label: "Aplikacija" },
   { href: "/faq", label: "FAQ" },
+  { href: "/blog", label: "Blog" },
   { href: "/narudzba", label: "Narudžba" },
   { href: "/kontakt", label: "Kontakt" },
 ];
@@ -29,9 +30,9 @@ export default function Header() {
           <Image
             src="/logo.svg"
             alt="Cyber Tracking – GPS praćenje vozila u realnom vremenu"
-            width={280}
-            height={80}
-            className="h-12 w-auto sm:h-14 md:h-16 dark:invert"
+            width={360}
+            height={103}
+            className="logo-brand-orange h-16 w-auto sm:h-[4.5rem] md:h-20 lg:h-[5.25rem]"
             priority
           />
         </Link>
@@ -58,7 +59,7 @@ export default function Header() {
             href="/kontakt"
             className="transition-smooth hidden rounded-lg bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-teal-500 hover:-translate-y-0.5 md:inline-block dark:bg-[#00ff9d] dark:text-black dark:hover:bg-[#00e699] dark:hover:shadow-[0_0_20px_rgba(0,255,157,0.3)]"
           >
-            Pošalji upit
+            Zatraži ponudu
           </Link>
           <button
             type="button"
@@ -100,7 +101,7 @@ export default function Header() {
                 className="block rounded-lg bg-[#00ff9d] px-3 py-3 text-center font-semibold text-black hover:bg-[#00e699]"
                 onClick={() => setOpen(false)}
               >
-                Pošalji upit
+                Zatraži ponudu
               </Link>
             </li>
           </ul>

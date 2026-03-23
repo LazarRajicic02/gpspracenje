@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-
+import type { CSSProperties } from "react";
 const whatYouGet = [
   {
     label: "Praćenje u realnom vremenu",
@@ -37,19 +37,24 @@ const whatYouGet = [
   },
 ];
 
-const useCases = [
-  "Privatna vozila",
-  "Rent a car",
-  "Transport i logistika",
-  "Kurirske službe",
-  "Građevina i poljoprivreda",
-  "Taxi udruženja",
-  "Plovila",
-];
-
 function OrbitVisual() {
   const orbitDurationSec = 42;
   const orbitItems = whatYouGet;
+
+  function getOrbitSpinStyle(delay: number): CSSProperties & Record<"--orbit-duration", string> {
+    return {
+      "--orbit-duration": `${orbitDurationSec}s`,
+      animationDelay: `${delay}s`,
+    };
+  }
+
+  function getOrbitCounterStyle(delay: number, radius: string): CSSProperties & Record<"--orbit-duration" | "--r", string> {
+    return {
+      "--orbit-duration": `${orbitDurationSec}s`,
+      "--r": radius,
+      animationDelay: `${delay}s`,
+    };
+  }
 
   return (
     <div className="relative mx-auto flex aspect-square max-w-[420px] items-center justify-center lg:max-w-[480px]">
@@ -80,24 +85,13 @@ function OrbitVisual() {
           <div key={item.label} className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
             <div
               className="orbit-spin"
-              style={
-                {
-                  ["--orbit-duration" as any]: `${orbitDurationSec}s`,
-                  animationDelay: `${delay}s`,
-                } as React.CSSProperties
-              }
+              style={getOrbitSpinStyle(delay)}
             >
               <div
                 className="orbit-counter"
-                style={
-                  {
-                    ["--orbit-duration" as any]: `${orbitDurationSec}s`,
-                    ["--r" as any]: radius,
-                    animationDelay: `${delay}s`,
-                  } as React.CSSProperties
-                }
+                style={getOrbitCounterStyle(delay, radius)}
               >
-                <div className={`transition-smooth rounded-xl border border-slate-200/80 bg-white px-3 py-2.5 shadow-lg shadow-slate-200/50 dark:border-white/10 dark:bg-white/[0.08] dark:shadow-none dark:backdrop-blur-sm sm:px-4 sm:py-3`}>
+                <div className="transition-smooth rounded-xl border border-slate-200/80 bg-white px-3 py-2.5 shadow-lg shadow-slate-200/50 dark:border-white/10 dark:bg-white/[0.08] dark:shadow-none dark:backdrop-blur-sm sm:px-4 sm:py-3">
                   <div className="flex items-center gap-2 sm:gap-2.5">
                     <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-teal-500/15 text-teal-600 dark:bg-[#00ff9d]/20 dark:text-[#00ff9d]">
                       {item.icon}
@@ -118,15 +112,15 @@ function OrbitVisual() {
 
 export default function WhyUs() {
   return (
-    <section id="prednosti" className="scroll-mt-20 bg-slate-50 px-4 py-20 dark:bg-black sm:px-6 lg:px-8">
+    <section id="gps-sistem" className="scroll-mt-20 bg-slate-50 px-4 py-20 dark:bg-black sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 lg:items-center">
           <div>
             <h2 className="animate-fade-in-up text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
-              Kontrola i menadžment – bez obzira na broj vozila
+              GPS sistemi za privatnu i poslovnu upotrebu
             </h2>
             <p className="animate-fade-in-up animation-delay-75 mt-4 text-lg text-slate-600 dark:text-slate-300">
-              Neograničen broj uređaja. Praćenje preko mobilne aplikacije i web platforme. Pogodno za firme i vozne parkove.
+              Pogodan za različite delatnosti i za praćenje jednog ili više vozila u realnom vremenu.
             </p>
             <h3 className="mt-8 font-semibold text-slate-900 dark:text-white">Šta dobijate</h3>
             <ul className="mt-3 space-y-2">
@@ -143,7 +137,7 @@ export default function WhyUs() {
             </ul>
             <h3 className="mt-6 font-semibold text-slate-900 dark:text-white">Namena</h3>
             <p className="mt-2 text-slate-600 dark:text-slate-300">
-              {useCases.join(" • ")}
+              Privatna vozila • Rent-a-car • Kurirske službe • Dostava • Građevinske i poljoprivredne mašine • Transport i logistika • Auto-škole • Taxi vozila • Plovila • Ostala vozila i prevozna sredstva
             </p>
           </div>
           <div className="flex items-center justify-center min-h-[380px] sm:min-h-[440px]">

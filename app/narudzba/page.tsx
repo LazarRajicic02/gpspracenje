@@ -1,8 +1,9 @@
 import Order from "../components/Order";
 
 export const metadata = {
-  title: "Narudžba – Cyber Tracking",
-  description: "Naručite GPS praćenje vozila. Izaberite paket i popunite formular za narudžbu.",
+  title: "Poručivanje – Cyber Tracking",
+  description:
+    "Započnite GPS praćenje već danas. Izaberite PRO ili Smart GPS sistem ili produžite pretplatu – uređaj, SIM i aplikacija, bez ugovorne obaveze.",
 };
 
 export default function NarudzbaPage() {

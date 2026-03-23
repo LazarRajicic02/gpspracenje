@@ -27,7 +27,7 @@ export default function Hero() {
         }}
       />
       {/* Route line + pins (light mode) */}
-      <div className="absolute inset-0 flex items-end justify-center overflow-hidden pointer-events-none dark:hidden">
+      <div className="pointer-events-none absolute inset-0 flex items-end justify-center overflow-hidden dark:hidden">
         <svg
           viewBox="0 0 1200 400"
           className="w-full max-w-5xl translate-y-[15%] scale-110 opacity-50"
@@ -50,7 +50,7 @@ export default function Hero() {
         </svg>
       </div>
       {/* Route line + pins (dark mode) */}
-      <div className="absolute inset-0 hidden items-end justify-center overflow-hidden pointer-events-none dark:flex">
+      <div className="pointer-events-none absolute inset-0 hidden items-end justify-center overflow-hidden dark:flex">
         <svg
           viewBox="0 0 1200 400"
           className="w-full max-w-5xl translate-y-[15%] scale-110 opacity-40"
@@ -65,14 +65,14 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-4xl pt-8 text-center">
-        <h1 className="animate-fade-in-up text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl dark:text-slate-100 min-h-[1em]">
-          Potpuna kontrola vozila sa Cyber Tracking GPS sistemom
+        <h1 className="animate-fade-in-up min-h-[1em] text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl dark:text-slate-100">
+          Preuzmite potpunu kontrolu nad vozilima u realnom vremenu
         </h1>
         <p className="animate-fade-in-up animation-delay-75 mx-auto mt-4 max-w-2xl text-lg font-semibold text-teal-600 dark:text-teal-400">
-          GPS sistem spreman za odmah korišćenje u Srbiji i Evropi
+          Smanjite troškove, zaštitite vozila od krađe i sprečite zloupotrebu
         </p>
         <p className="animate-fade-in-up animation-delay-150 mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-          GPS Tracker dolazi unapred podešen sa EURO41 SIM karticom i radi u preko 40 zemalja. Pogodan za sve vrste vozila (8V–32V). Potrebno je samo instalirati aplikaciju i početi praćenje.
+          GPS Praćenje vozila u Srbiji i preko 40 zemalja Evrope, uz mogućnost daljinskog gašenja vozila jednim klikom putem aplikacije. Sistem je dostupan po promotivnoj ceni od samo 6.50€ mesečno po vozilu, a ponuda je vremenski ograničena.
         </p>
 
         <div className="animate-fade-in-up animation-delay-225 mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-4">
@@ -86,11 +86,11 @@ export default function Hero() {
             href="/narudzba"
             className="transition-smooth w-full rounded-xl border-2 border-slate-300 bg-white px-8 py-4 text-center text-sm font-bold uppercase tracking-wide text-slate-700 shadow-md hover:border-teal-400 hover:bg-slate-50 hover:-translate-y-0.5 sm:w-auto dark:border-white/20 dark:bg-white/[0.08] dark:text-white dark:hover:border-[#00ff9d]/50 dark:hover:bg-white/10"
           >
-            Naručite
+            Započni odmah
           </Link>
         </div>
         <p className="animate-fade-in-up animation-delay-300 mt-4 text-center text-sm text-slate-500 dark:text-slate-300">
-          Pratite vozila u bilo kom trenutku, bez ugovora i skrivenih troškova.
+          Bez ugovorne obaveze, bez skrivenih troškova i uz potpunu tehničku podršku.
         </p>
         <Link
           href="/aplikacija"

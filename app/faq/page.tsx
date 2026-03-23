@@ -1,8 +1,9 @@
 import FAQ from "../components/FAQ";
 
 export const metadata = {
-  title: "Česta pitanja – Cyber Tracking",
-  description: "Odgovori na najčešća pitanja o GPS praćenju vozila i Cyber Tracking uslugama.",
+  title: "Imate pitanje? – FAQ | Cyber Tracking",
+  description:
+    "Pronađite odgovore na najčešća pitanja o instalaciji, aplikaciji, uređaju i pretplati za GPS praćenje vozila.",
 };
 
 export default function FAQPage() {

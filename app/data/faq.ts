@@ -183,7 +183,7 @@ export const faqItems: FaqItem[] = [
     categoryId: "pretplata",
     question: "Na koliko meseci mogu da kupim pretplatu?",
     answer:
-      "Pretplata se može kupiti na period od 3, 6 ili 12 meseci. Ukoliko se pretplata kupuje na 12 meseci, korisnik dobija dodatnih mesec dana gratis.",
+      "Pretplata se može kupiti na period od 3, 6 ili 12 meseci. Duži period (12 meseci) nudi najpovoljniju mesečnu cenu pretplate.",
   },
   {
     id: "q23",
@@ -213,7 +213,7 @@ export const faqItems: FaqItem[] = [
     categoryId: "cenovnik",
     question: "Koja je cena i šta pretplata uključuje?",
     answer:
-      "Za aktuelnu cenu pretplate možete nas kontaktirati pozivom na broj telefona 061 4030 888 ili posetiti naš sajt gpspracenje.rs. Pretplata uključuje kompletnu tehničku podršku tokom njenog trajanja, kao i sve vrste tehničkih konsultacija vezane za GPS sistem.",
+      "PRO GPS sistem: GPS lokator 59,95€, pretplata od 6,5€ mesečno. Smart GPS sistem: GPS lokator 49,95€, pretplata od 6,5€ mesečno. Pretplata na 3, 6 ili 12 meseci (npr. 24€ / 45€ / 78€ za izabrani period). Bez ugovorne obaveze i skrivenih troškova. Pretplata uključuje kompletnu tehničku podršku tokom trajanja i konsultacije vezane za GPS sistem. Za tačnu ponudu pozovite 061 4030 888.",
   },
   {
     id: "q27",

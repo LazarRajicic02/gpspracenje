@@ -16,7 +16,7 @@ export default function Contact() {
     const name = (form.elements.namedItem("name") as HTMLInputElement).value.trim();
     const phone = (form.elements.namedItem("phone") as HTMLInputElement).value.trim();
     if (!name || !phone) {
-      setValidationError("Molimo popunite obavezna polja: Ime i prezime / Kompanija i Telefon.");
+      setValidationError("Molimo popunite obavezna polja: Ime i Prezime / Ime Firme i Telefon.");
       return;
     }
     setSent(true);
@@ -33,10 +33,10 @@ export default function Contact() {
           <div>
             <div className="max-w-xl">
               <h2 className="animate-fade-in-up text-3xl font-bold tracking-tight sm:text-4xl">
-                Kontakt – upit za GPS praćenje vozila
+                Zainteresovani ste za GPS praćenje?
               </h2>
               <p className="animate-fade-in-up animation-delay-75 mt-4 text-lg text-slate-600 dark:text-slate-200/90">
-                Upit za praćenje flote ili pojedinačnog vozila? Pošaljite poruku – odgovaramo u najkraćem roku.
+                Pošaljite upit i kontaktiraćemo vas u najkraćem roku.
               </p>
             </div>
 
@@ -68,7 +68,7 @@ export default function Contact() {
 
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-slate-700 dark:text-slate-200">
-                      Ime i prezime / Kompanija <span className="text-red-500 dark:text-red-400">*</span>
+                      Ime i Prezime / Ime Firme <span className="text-red-500 dark:text-red-400">*</span>
                     </label>
                     <input
                       id="name"
@@ -77,20 +77,6 @@ export default function Contact() {
                       onChange={() => setValidationError(null)}
                       className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 shadow-sm placeholder:text-slate-500 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/30 dark:border-white/10 dark:bg-white/[0.06] dark:text-white dark:placeholder:text-slate-400 dark:focus:border-[#00ff9d] dark:focus:ring-[#00ff9d]/30"
                       placeholder="Vaše ime ili naziv firme"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-200">
-                      Email <span className="text-slate-500 dark:text-slate-300">(opciono)</span>
-                    </label>
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      onChange={() => setValidationError(null)}
-                      className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 shadow-sm placeholder:text-slate-500 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/30 dark:border-white/10 dark:bg-white/[0.06] dark:text-white dark:placeholder:text-slate-400 dark:focus:border-[#00ff9d] dark:focus:ring-[#00ff9d]/30"
-                      placeholder="email@ primer.rs"
                     />
                   </div>
 
@@ -126,7 +112,7 @@ export default function Contact() {
                     type="submit"
                     className="transition-smooth w-full rounded-xl bg-[#00ff9d] px-6 py-4 font-semibold text-black shadow-[0_0_28px_rgba(0,255,157,0.25)] hover:bg-[#00e699] hover:shadow-[0_0_38px_rgba(0,255,157,0.35)]"
                   >
-                    Pošalji upit
+                    Zatraži ponudu
                   </button>
                 </form>
               )}

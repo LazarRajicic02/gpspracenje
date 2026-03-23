@@ -64,14 +64,14 @@ const features = [
 
 export default function Features() {
   return (
-    <section id="usluge" className="scroll-mt-20 bg-white px-4 py-20 dark:bg-black sm:px-6 lg:px-8">
+    <section id="prednosti" className="scroll-mt-20 bg-white px-4 py-20 dark:bg-black sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <div className="text-center">
           <h2 className="animate-fade-in-up text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
-            Usluge GPS praćenja vozila
+            Prednosti GPS sistema
           </h2>
           <p className="animate-fade-in-up animation-delay-75 mx-auto mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-300">
-            Multinetwork, gašenje vozila iz aplikacije, istorija 180 dana, geo-fence, alarm za brzinu, izveštaji – sve u jednom GPS sistemu.
+            Praćenje vozila u realnom vremenu, zaštita od krađe, kontrola zaposlenih, detaljni izveštaji i pouzdana mrežna pokrivenost - sve u jednom sistemu.
           </p>
         </div>
         <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">

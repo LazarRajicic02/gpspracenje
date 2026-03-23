@@ -68,9 +68,7 @@ function ReviewCard({
   rating: number;
 }) {
   return (
-    <div
-      className="transition-smooth flex h-full w-[min(340px,85vw)] shrink-0 flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-md hover:border-teal-200 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.06] dark:hover:border-[#00ff9d]/40"
-    >
+    <div className="transition-smooth flex h-full w-[min(340px,85vw)] shrink-0 flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-md hover:border-teal-200 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.06] dark:hover:border-[#00ff9d]/40">
       <StarRating n={rating} />
       <p className="mt-4 flex-1 text-slate-600 dark:text-slate-300">{text}</p>
       <div className="mt-4 border-t border-slate-100 pt-4 dark:border-white/10">

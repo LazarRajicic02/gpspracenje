@@ -19,9 +19,7 @@ function FaqAccordionItem({
   onToggle: () => void;
 }) {
   return (
-    <li
-      className="transition-smooth overflow-hidden rounded-xl border border-slate-200 bg-slate-50/80 hover:border-slate-300 dark:border-white/10 dark:bg-white/[0.06] dark:hover:border-white/20"
-    >
+    <li className="transition-smooth overflow-hidden rounded-xl border border-slate-200 bg-slate-50/80 hover:border-slate-300 dark:border-white/10 dark:bg-white/[0.06] dark:hover:border-white/20">
       <button
         type="button"
         onClick={onToggle}
@@ -86,12 +84,16 @@ export default function FAQ({ variant = "landing" }: FAQProps) {
           <div className={isLanding ? "" : "flex-1"}>
             <div className={isLanding ? "text-center" : "text-left"}>
               <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
-                {isLanding ? "Najčešća pitanja" : "Često postavljana pitanja"}
+                Imate pitanje?
               </h2>
               <p className="mt-4 text-lg text-slate-600 dark:text-slate-300">
-                {isLanding
-                  ? "Kratki odgovori na najčešća pitanja o GPS uređajima i pretplati."
-                  : "Pretražite odgovore po kategorijama o instalaciji, aplikaciji, bezbednosti i pretplati."}
+                Pronađite odgovore na najčešća pitanja o instalaciji, aplikaciji, uređaju i pretplati.
+                {!isLanding && (
+                  <>
+                    {" "}
+                    Koristite pretragu i kategorije da brže pronađete odgovor.
+                  </>
+                )}
               </p>
             </div>
 

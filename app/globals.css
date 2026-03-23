@@ -38,6 +38,11 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Logo u headeru/futeru: uvek ista narandžasta nijansa (PNG u SVG-u) */
+.logo-brand-orange {
+  filter: brightness(0) saturate(100%) invert(53%) sepia(95%) saturate(2100%) hue-rotate(359deg) brightness(102%) contrast(97%);
+}
+
 /* Animations */
 @keyframes fade-in-up {
   from {

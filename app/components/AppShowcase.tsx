@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
-
 type ShowcaseItem = {
   id: string;
   title: string;

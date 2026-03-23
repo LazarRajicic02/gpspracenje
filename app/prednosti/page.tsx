@@ -1,10 +1,11 @@
-import WhyUs from "../components/WhyUs";
+import Features from "../components/Features";
 
 export const metadata = {
   title: "Prednosti – Cyber Tracking",
-  description: "Zašto izabrati Cyber Tracking za GPS praćenje vaše flote.",
+  description:
+    "Prednosti GPS sistema: multinetwork, gašenje vozila, istorija kretanja, geo-fence, izveštaji i jednostavna instalacija.",
 };
 
 export default function PrednostiPage() {
-  return <WhyUs />;
+  return <Features />;
 }
