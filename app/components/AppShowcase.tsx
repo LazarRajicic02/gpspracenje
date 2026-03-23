@@ -10,27 +10,55 @@ type ShowcaseItem = {
   imageSrc: string;
 };
 
+/** Slike iz /public (001–006); tekstovi 001–005 po PDF-u „APLIKACIJA“. */
 const showcaseItems: ShowcaseItem[] = [
   {
-    id: "mapa",
-    title: "Pregled na mapi",
-    description: "Sva vozila na jednoj mapi u realnom vremenu. Zoom, istorija ruta i brzi detalji.",
+    id: "001-uzivo",
+    title: "Precizno praćenje svakog vozila",
+    description:
+      "Na mapi pratite vozilo u realnom vremenu, uz prikaz pravca kretanja, trenutne brzine i ostalih parametara.",
     type: "image",
-    imageSrc: "/phone1.png",
+    imageSrc: "/001 uzivo pracenje.png",
   },
   {
-    id: "vozila",
-    title: "Vozila i rute",
-    description: "Lista vozila, status, trenutna lokacija i pregled pređene rute za svako vozilo.",
+    id: "002-istorija",
+    title: "Detaljna istorija kretanja vozila",
+    description:
+      "Pregledajte kompletnu rutu kretanja kroz animaciju, sa mestima i vremenom zadržavanja, istorijom brzine i podacima dostupnim do 180 dana unazad.",
     type: "image",
-    imageSrc: "/phone2.png",
+    imageSrc: "/002 istorija kretanja.png",
   },
   {
-    id: "izvestaji",
-    title: "Izveštaji i obaveštenja",
-    description: "Geofencing alarmi, izveštaji o vožnji i push obaveštenja na telefon.",
+    id: "003-mapa",
+    title: "Sva vozila na mapi u realnom vremenu",
+    description:
+      "Na mapi vidite tačnu lokaciju svakog vozila, pravac kretanja, trenutnu brzinu i status vozila, sa jasnim prikazom da li je u pokretu ili parkirano.",
     type: "image",
-    imageSrc: "/phone3.png",
+    imageSrc: "/003 sva vozila na mapi.png",
+  },
+  {
+    id: "004-lista",
+    title: "Kontrola svih vozila na jednom ekranu",
+    description:
+      "Na listi vozila odmah vidite da li se vozilo kreće, miruje i koliko dugo je parkirano.",
+    type: "image",
+    imageSrc: "/004 lista vozila (promena 23.03).jpg",
+  },
+  {
+    id: "005-dnevni",
+    title: "Dnevni izveštaj vožnje",
+    description:
+      "Grafikon kretanja, vreme vožnje, pređena kilometraža i tačan pregled svih vožnji tokom dana.",
+    type: "image",
+    imageSrc: "/006 grafikon i prikaz.png",
+  },
+  {
+    id: "005-gasenje",
+    title: "Daljinska kontrola i zaštita vozila",
+    description:
+      "Daljinska blokada pumpe za gorivo jednim klikom u aplikaciji, uz bezbedno aktiviranje kada vozilo miruje ili se kreće malom brzinom.",
+    type: "image",
+    imageSrc: "/005 gasenje vozila.png",
   },
 ];
 
@@ -43,11 +71,10 @@ function PhoneFrame({
 }) {
   return (
     <div
-      className={`relative mx-auto w-full max-w-[280px] overflow-hidden rounded-[2.5rem] border-[10px] border-slate-700 bg-slate-800 shadow-2xl dark:border-slate-700 dark:bg-black ${className}`}
-      style={{ aspectRatio: "9/19.5" }}
+      className={`relative mx-auto w-fit max-w-[min(100%,320px)] overflow-hidden rounded-[2.25rem] border-[8px] border-slate-800 bg-slate-900 shadow-2xl dark:border-slate-700 dark:bg-black ${className}`}
     >
-      <div className="absolute left-1/2 top-0 z-10 h-6 w-32 -translate-x-1/2 rounded-b-2xl bg-slate-800 dark:bg-black" />
-      <div className="absolute inset-0 overflow-hidden rounded-[1.5rem] bg-slate-100 dark:bg-black">
+
+      <div className="relative min-h-[280px] overflow-hidden rounded-[1.35rem] bg-slate-950 sm:min-h-[420px]">
         {children}
       </div>
     </div>
@@ -62,7 +89,7 @@ function ShowcaseContent({ item }: { item: ShowcaseItem }) {
         <img
           src={item.imageSrc}
           alt={`GPS praćenje vozila – ${item.title}`}
-          className="h-full w-full  object-top"
+          className="h-full w-full max-h-[min(72vh,560px)] object-contain object-top"
           onError={(e) => {
             const target = e.currentTarget;
             target.style.display = "none";
@@ -112,10 +139,10 @@ export default function AppShowcase() {
       <div className="mx-auto max-w-4xl">
         <div className="text-center">
           <h2 className="animate-fade-in-up text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
-            Aplikacija za GPS praćenje vozila
+            Kontrola svih vozila u jednoj aplikaciji
           </h2>
           <p className="animate-fade-in-up animation-delay-75 mt-4 text-lg text-slate-600 dark:text-slate-300">
-            Pratite flotu sa telefona – mapa vozila u realnom vremenu, istorija ruta i geofencing u džepu.
+            Praćenje vozila u realnom vremenu sa prikazom na Google mapama, istorijom kretanja, alarmima i izveštajima u jednoj aplikaciji.
           </p>
         </div>
 
@@ -139,7 +166,7 @@ export default function AppShowcase() {
             </div>
             <div className="text-center">
               <h3 className="font-semibold text-slate-900 dark:text-white">{item.title}</h3>
-              <p className="mt-2 max-w-sm text-sm text-slate-600 dark:text-slate-300">
+              <p className="mt-2 max-w-md text-sm leading-relaxed text-slate-600 dark:text-slate-300">
                 {item.description}
               </p>
             </div>
