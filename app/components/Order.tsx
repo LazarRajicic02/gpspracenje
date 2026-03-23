@@ -58,6 +58,7 @@ function OrderModal({ type, onClose }: OrderModalProps) {
   const [paymentMethod, setPaymentMethod] = useState<"pouzece" | "racun">("pouzece");
   const [fulfillment, setFulfillment] = useState<"dostava" | "preuzimanje" | null>(null);
   const [validationError, setValidationError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
 
   const selectedType = ORDER_TYPES.find((t) => t.id === type)!;
 
@@ -69,13 +70,17 @@ function OrderModal({ type, onClose }: OrderModalProps) {
     };
   }, []);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setValidationError(null);
     const form = e.currentTarget;
     const name = (form.elements.namedItem("name") as HTMLInputElement).value.trim();
     const phone = (form.elements.namedItem("phone") as HTMLInputElement).value.trim();
     const address = (form.elements.namedItem("address") as HTMLInputElement).value.trim();
+    const email = (form.elements.namedItem("email") as HTMLInputElement).value.trim();
+    const notes = (form.elements.namedItem("notes") as HTMLTextAreaElement).value.trim();
+    const qtyRaw = (form.elements.namedItem("quantity") as HTMLInputElement).value;
+    const quantity = Math.min(99, Math.max(1, Number.parseInt(qtyRaw, 10) || 1));
     if (!name || !phone || !address) {
       setValidationError("Molimo popunite obavezna polja: Ime i prezime / Naziv firme, Telefon i Ulica i grad.");
       return;
@@ -88,7 +93,36 @@ function OrderModal({ type, onClose }: OrderModalProps) {
       setValidationError("Izaberite način preuzimanja ili slanja porudžbine.");
       return;
     }
-    setSent(true);
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          orderType: type,
+          months,
+          name,
+          phone,
+          address,
+          email: email || undefined,
+          notes: notes || undefined,
+          quantity,
+          paymentMethod,
+          fulfillment,
+        }),
+      });
+      const data = (await res.json().catch(() => ({}))) as { error?: string; details?: string };
+      if (!res.ok) {
+        const base = data.error || "Slanje nije uspelo. Pokušajte ponovo.";
+        setValidationError(data.details ? `${base} (${data.details})` : base);
+        return;
+      }
+      setSent(true);
+    } catch {
+      setValidationError("Mrežna greška. Proverite vezu i pokušajte ponovo.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   function handleBackdropClick(e: React.MouseEvent) {
@@ -420,10 +454,10 @@ function OrderModal({ type, onClose }: OrderModalProps) {
 
               <button
                 type="submit"
-                disabled={!acceptedTerms}
+                disabled={!acceptedTerms || submitting}
                 className="w-full rounded-xl bg-teal-600 py-3 text-sm font-semibold text-white shadow-lg shadow-teal-500/25 transition hover:bg-teal-500 disabled:cursor-not-allowed disabled:opacity-45 dark:bg-[#00ff9d] dark:text-black dark:hover:bg-[#00e699] dark:disabled:opacity-40"
               >
-                Pošalji porudžbinu
+                {submitting ? "Šaljem…" : "Pošalji porudžbinu"}
               </button>
 
               <p className="text-center text-xs text-slate-500 dark:text-slate-400">

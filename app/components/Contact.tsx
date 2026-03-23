@@ -8,18 +8,38 @@ const CONTACT_IMAGE_SRC = "/contacthero.svg";
 export default function Contact() {
   const [sent, setSent] = useState(false);
   const [validationError, setValidationError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setValidationError(null);
     const form = e.currentTarget;
     const name = (form.elements.namedItem("name") as HTMLInputElement).value.trim();
     const phone = (form.elements.namedItem("phone") as HTMLInputElement).value.trim();
+    const message = (form.elements.namedItem("message") as HTMLTextAreaElement).value.trim();
     if (!name || !phone) {
       setValidationError("Molimo popunite obavezna polja: Ime i Prezime / Ime Firme i Telefon.");
       return;
     }
-    setSent(true);
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, phone, message }),
+      });
+      const data = (await res.json().catch(() => ({}))) as { error?: string; details?: string };
+      if (!res.ok) {
+        const base = data.error || "Slanje nije uspelo. Pokušajte ponovo ili nas pozovite.";
+        setValidationError(data.details ? `${base} (${data.details})` : base);
+        return;
+      }
+      setSent(true);
+    } catch {
+      setValidationError("Mrežna greška. Proverite vezu i pokušajte ponovo.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -110,9 +130,10 @@ export default function Contact() {
 
                   <button
                     type="submit"
-                    className="transition-smooth w-full rounded-xl bg-[#00ff9d] px-6 py-4 font-semibold text-black shadow-[0_0_28px_rgba(0,255,157,0.25)] hover:bg-[#00e699] hover:shadow-[0_0_38px_rgba(0,255,157,0.35)]"
+                    disabled={submitting}
+                    className="transition-smooth w-full rounded-xl bg-[#00ff9d] px-6 py-4 font-semibold text-black shadow-[0_0_28px_rgba(0,255,157,0.25)] hover:bg-[#00e699] hover:shadow-[0_0_38px_rgba(0,255,157,0.35)] disabled:cursor-not-allowed disabled:opacity-50"
                   >
-                    Zatraži ponudu
+                    {submitting ? "Šaljem…" : "Zatraži ponudu"}
                   </button>
                 </form>
               )}
