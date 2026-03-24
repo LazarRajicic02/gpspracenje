@@ -26,7 +26,7 @@ export default function PolitikaPrivatnostiPage() {
         </h1>
         <p className="mt-4 text-slate-600 dark:text-slate-400">
           Poslednja izmena:{" "}
-          {new Date().toLocaleDateString("sr-RS", { year: "numeric", month: "long", day: "numeric" })}
+          {new Date().toLocaleDateString("sr-en", { year: "numeric", month: "long", day: "numeric" })}
         </p>
       </header>
 
@@ -44,7 +44,7 @@ export default function PolitikaPrivatnostiPage() {
           <h2 className="text-xl font-semibold text-slate-900 dark:text-white">2. Ko prikuplja podatke</h2>
           <p>
             Podatke prikuplja i obrađuje Cyber Tracking, vlasnik sajta gpspracenje.rs. Za pitanja u vezi sa podacima
-            možete nas kontaktirati putem emaila info@gpspracenje.rs ili telefona navedenog na sajtu.
+            možete nas kontaktirati putem emaila podrska@gpspracenje.rs ili telefona navedenog na sajtu.
           </p>
         </section>
 
@@ -110,7 +110,7 @@ export default function PolitikaPrivatnostiPage() {
             <li>Uložite prigovor nadležnom organu za zaštitu podataka ako smatrate da je obrada nezakonita.</li>
           </ul>
           <p className="mt-4">
-            Za ostvarivanje ovih prava pošaljite nam zahtev na info@gpspracenje.rs. Odgovorićemo u roku propisanom
+            Za ostvarivanje ovih prava pošaljite nam zahtev na podrska@gpspracenje.rs. Odgovorićemo u roku propisanom
             zakonom.
           </p>
         </section>
@@ -147,10 +147,10 @@ export default function PolitikaPrivatnostiPage() {
           <p>
             Za sva pitanja u vezi sa ovom politikom privatnosti i vašim podacima kontaktirajte nas na{" "}
             <a
-              href="mailto:info@gpspracenje.rs"
+              href="mailto:podrska@gpspracenje.rs"
               className="text-teal-600 underline hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
             >
-              info@gpspracenje.rs
+              podrska@gpspracenje.rs
             </a>{" "}
             ili putem telefona navedenog na sajtu.
           </p>

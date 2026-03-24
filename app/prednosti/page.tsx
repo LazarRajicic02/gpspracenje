@@ -3,7 +3,7 @@ import Features from "../components/Features";
 export const metadata = {
   title: "Prednosti – Cyber Tracking",
   description:
-    "Prednosti GPS sistema: multinetwork, gašenje vozila, istorija kretanja, geo-fence, izveštaji i jednostavna instalacija.",
+    "Prednosti GPS sistema: kontrola zaposlenih, zaštita vozila blokadom pumpe, manji troškovi goriva, istorija do 180 dana, izveštaji i multinetwork SIM bez rominga.",
 };
 
 export default function PrednostiPage() {

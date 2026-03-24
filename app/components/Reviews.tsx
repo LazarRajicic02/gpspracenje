@@ -86,10 +86,10 @@ export default function Reviews() {
     <section className="scroll-mt-20 bg-slate-50 px-4 py-20 dark:bg-black sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <div className="text-center">
-          <h2 className="animate-fade-in-up text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
             Šta kažu korisnici
           </h2>
-          <p className="animate-fade-in-up animation-delay-75 mx-auto mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-300">
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-300">
             Recenzije korisnika koji koriste Cyber Tracking za praćenje vozila i flote.
           </p>
         </div>

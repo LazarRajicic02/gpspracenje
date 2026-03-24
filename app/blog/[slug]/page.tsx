@@ -103,7 +103,7 @@ export default async function BlogPostPage({ params }: Props) {
               Kontaktirajte nas
             </Link>
             {" · "}
-            <Link href="/narudzba" className="font-medium text-orange-600 hover:underline dark:text-orange-400">
+            <Link href="/porucivanje" className="font-medium text-orange-600 hover:underline dark:text-orange-400">
               Poručite sistem
             </Link>
           </p>

@@ -213,7 +213,7 @@ export const faqItems: FaqItem[] = [
     categoryId: "cenovnik",
     question: "Koja je cena i šta pretplata uključuje?",
     answer:
-      "PRO GPS sistem: GPS lokator 59,95€, pretplata od 6,5€ mesečno. Smart GPS sistem: GPS lokator 49,95€, pretplata od 6,5€ mesečno. Pretplata na 3, 6 ili 12 meseci (npr. 24€ / 45€ / 78€ za izabrani period). Bez ugovorne obaveze i skrivenih troškova. Pretplata uključuje kompletnu tehničku podršku tokom trajanja i konsultacije vezane za GPS sistem. Za tačnu ponudu pozovite 061 4030 888.",
+      "PRO GPS sistem: GPS lokator 59,95€, pretplata u dinarima (najpovoljnije 770 rsd. / mesečno uz 12 meseci). Smart GPS sistem: GPS lokator 49,95€, ista struktura pretplate. Pretplata na 3, 6 ili 12 meseci: 3 meseca 3.150 rsd. (1.050 rsd. / mesečno), 6 meseci 5.340 rsd. (890 rsd. / mesečno), 12 meseci 9.240 rsd. (770 rsd. / mesečno). Bez ugovorne obaveze i skrivenih troškova. Pretplata uključuje kompletnu tehničku podršku tokom trajanja i konsultacije vezane za GPS sistem. Za tačnu ponudu pozovite 061 4030 888.",
   },
   {
     id: "q27",

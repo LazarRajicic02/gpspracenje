@@ -9,7 +9,6 @@
   --accent-hover: #0f766e;
   --muted: #64748b;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --duration: 0.35s;
 }
 
@@ -39,42 +38,9 @@ html {
 }
 
 /* Logo u headeru/futeru: uvek ista narandžasta nijansa (PNG u SVG-u) */
-.logo-brand-orange {
-  filter: brightness(0) saturate(100%) invert(53%) sepia(95%) saturate(2100%) hue-rotate(359deg) brightness(102%) contrast(97%);
-}
+
 
 /* Animations */
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
 @keyframes reviews-scroll {
   from {
     transform: translateX(0);
@@ -84,19 +50,6 @@ html {
   }
 }
 
-.animate-fade-in-up {
-  animation: fade-in-up var(--duration) var(--ease-out) forwards;
-}
-
-.animate-fade-in {
-  animation: fade-in var(--duration) var(--ease-out) forwards;
-}
-
-.animate-scale-in {
-  animation: scale-in var(--duration) var(--ease-spring) forwards;
-}
-
-/* Stagger children (use .stagger-children on parent, then animation-delay on children) */
 .transition-smooth {
   transition: color var(--duration) var(--ease-out),
     background-color var(--duration) var(--ease-out),
@@ -104,13 +57,6 @@ html {
     box-shadow var(--duration) var(--ease-out),
     transform var(--duration) var(--ease-out);
 }
-
-.animation-delay-75 { animation-delay: 75ms; }
-.animation-delay-150 { animation-delay: 150ms; }
-.animation-delay-225 { animation-delay: 225ms; }
-.animation-delay-300 { animation-delay: 300ms; }
-.animation-delay-400 { animation-delay: 400ms; }
-.animation-delay-500 { animation-delay: 500ms; }
 
 /* Orbit animation (Reviews/WhyUs) */
 @keyframes orbit-spin {

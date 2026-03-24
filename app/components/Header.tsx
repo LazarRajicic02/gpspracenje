@@ -11,7 +11,7 @@ const navLinks = [
   { href: "/aplikacija", label: "Aplikacija" },
   { href: "/faq", label: "FAQ" },
   { href: "/blog", label: "Blog" },
-  { href: "/narudzba", label: "Narudžba" },
+  { href: "/porucivanje", label: "Poručivanje" },
   { href: "/kontakt", label: "Kontakt" },
 ];
 
@@ -32,7 +32,7 @@ export default function Header() {
             alt="Cyber Tracking – GPS praćenje vozila u realnom vremenu"
             width={360}
             height={103}
-            className="logo-brand-orange h-16 w-auto sm:h-[4.5rem] md:h-20 lg:h-[5.25rem]"
+            className=" h-16 w-auto sm:h-[4.5rem] md:h-20 lg:h-[5.25rem]"
             priority
           />
         </Link>

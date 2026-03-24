@@ -52,10 +52,10 @@ export default function Contact() {
           {/* Left: form */}
           <div>
             <div className="max-w-xl">
-              <h2 className="animate-fade-in-up text-3xl font-bold tracking-tight sm:text-4xl">
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
                 Zainteresovani ste za GPS praćenje?
               </h2>
-              <p className="animate-fade-in-up animation-delay-75 mt-4 text-lg text-slate-600 dark:text-slate-200/90">
+              <p className="mt-4 text-lg text-slate-600 dark:text-slate-200/90">
                 Pošaljite upit i kontaktiraćemo vas u najkraćem roku.
               </p>
             </div>
@@ -140,7 +140,7 @@ export default function Contact() {
             </div>
 
             <div className="mt-8 flex flex-wrap gap-6 text-slate-600 dark:text-slate-200/90">
-              <a href="mailto:info@gpspracenje.rs" className="flex items-center gap-2 transition hover:text-teal-600 dark:hover:text-[#00ff9d]">
+              <a href="mailto:podrska@gpspracenje.rs" className="flex items-center gap-2 transition hover:text-teal-600 dark:hover:text-[#00ff9d]">
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     strokeLinecap="round"
@@ -149,7 +149,7 @@ export default function Contact() {
                     d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                   />
                 </svg>
-                info@gpspracenje.rs
+                podrska@gpspracenje.rs
               </a>
               <a href="tel:+381614030888" className="flex items-center gap-2 transition hover:text-teal-600 dark:hover:text-[#00ff9d]">
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

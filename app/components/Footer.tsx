@@ -16,7 +16,7 @@ export default function Footer() {
                 alt="Cyber Tracking – GPS praćenje vozila Srbija"
                 width={320}
                 height={92}
-                className="logo-brand-orange mx-auto h-14 w-auto md:mx-0 md:h-16 lg:h-[4.5rem]"
+                className=" mx-auto h-14 w-auto md:mx-0 md:h-16 lg:h-[4.5rem]"
               />
             </Link>
             <p className="text-sm text-slate-400">
@@ -53,8 +53,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/narudzba" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
-                  Narudžba
+                <Link href="/porucivanje" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
+                  Poručivanje
                 </Link>
               </li>
               <li>
@@ -69,8 +69,8 @@ export default function Footer() {
             <h3 className="mb-3 font-semibold text-white">Kontakt</h3>
             <ul className="space-y-2 text-sm mx-auto md:mx-0">
               <li>
-                <a href="mailto:info@gpspracenje.rs" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
-                  info@gpspracenje.rs
+                <a href="mailto:podrska@gpspracenje.rs" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
+                  podrska@gpspracenje.rs
                 </a>
               </li>
               <li>
@@ -90,9 +90,6 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 rounded-xl border border-slate-700/80 bg-slate-800/35 px-4 py-5 sm:px-6 dark:border-white/10 dark:bg-white/[0.04]">
-          <h3 className="mb-4 text-center text-sm font-semibold tracking-wide text-white md:text-left">
-            Podaci o firmi
-          </h3>
           <dl className="mx-auto grid max-w-2xl gap-x-10 gap-y-3 text-sm text-slate-400 md:mx-0 md:max-w-none md:grid-cols-2 lg:grid-cols-3">
             <div className="text-center md:text-left">
               <dt className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-500">

@@ -137,10 +137,10 @@ export default function AppShowcase() {
     <section id="aplikacija" className="scroll-mt-20 bg-slate-100 px-4 py-20 dark:bg-black sm:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl">
         <div className="text-center">
-          <h2 className="animate-fade-in-up text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
             Kontrola svih vozila u jednoj aplikaciji
           </h2>
-          <p className="animate-fade-in-up animation-delay-75 mt-4 text-lg text-slate-600 dark:text-slate-300">
+          <p className="mt-4 text-lg text-slate-600 dark:text-slate-300">
             Praćenje vozila u realnom vremenu sa prikazom na Google mapama, istorijom kretanja, alarmima i izveštajima u jednoj aplikaciji.
           </p>
         </div>

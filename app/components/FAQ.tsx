@@ -182,7 +182,7 @@ export default function FAQ({ variant = "landing" }: FAQProps) {
             <div className="mt-10 lg:mt-0 lg:w-[640px] lg:sticky lg:top-24 lg:self-start">
               <div className="w-full overflow-hidden rounded-2xl">
                 <Image
-                  src="/f.png"
+                  src="/faq.png"
                   alt="Ilustracija – FAQ"
                   width={1400}
                   height={700}
