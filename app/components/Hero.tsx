@@ -1,8 +1,9 @@
 import Link from "next/link";
+import HeroRouteVansAnimated from "./HeroRouteVansAnimated";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[90vh] overflow-hidden px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+    <section className="relative min-h-[calc(100dvh-7rem)] overflow-hidden px-4 pb-10 pt-4 sm:px-6 sm:pb-16 sm:pt-6 lg:px-8">
       {/* Light: gradient + subtle grid */}
       <div
         className="absolute inset-0 bg-gradient-to-b from-slate-50 via-white to-slate-100 dark:hidden"
@@ -26,15 +27,107 @@ export default function Hero() {
           backgroundSize: "40px 40px",
         }}
       />
-      {/* Route line + pins (light mode) */}
-      <div className="pointer-events-none absolute inset-0 flex items-end justify-center overflow-hidden dark:hidden">
+      {/* GPS: ruta, sateliti, isprekidana trasa, radar (light) — bez SVG na telefonu */}
+      <div className="pointer-events-none absolute inset-0 hidden items-end justify-center overflow-hidden dark:hidden md:flex">
         <svg
-          viewBox="0 0 1200 400"
-          className="w-full max-w-5xl translate-y-[15%] scale-110 opacity-50"
+          viewBox="0 0 1200 420"
+          className="w-full max-w-5xl translate-y-[12%] scale-110 opacity-[0.55]"
           preserveAspectRatio="xMidYMax meet"
+          aria-hidden
         >
-          <path d="M 120 320 Q 280 200 450 260 T 800 220 T 1080 280" fill="none" stroke="#64748b" strokeWidth="14" strokeLinecap="round" />
-          <path d="M 120 320 Q 280 200 450 260 T 800 220 T 1080 280" fill="none" stroke="#475569" strokeWidth="8" strokeLinecap="round" />
+          <defs>
+            <linearGradient id="hero-gps-route-light" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#0d9488" stopOpacity="0.35" />
+              <stop offset="50%" stopColor="#14b8a6" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="#0d9488" stopOpacity="0.45" />
+            </linearGradient>
+            <linearGradient id="hero-gps-radar-wedge-light" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#14b8a6" stopOpacity="0.35" />
+              <stop offset="100%" stopColor="#14b8a6" stopOpacity="0" />
+            </linearGradient>
+            <pattern id="hero-gps-hex-light" width="28" height="48" patternUnits="userSpaceOnUse" patternTransform="scale(1)">
+              <path
+                d="M14 4 L24 12 L24 24 L14 32 L4 24 L4 12 Z"
+                fill="none"
+                stroke="#64748b"
+                strokeWidth="0.35"
+                opacity="0.35"
+              />
+            </pattern>
+            {/* Nevidljive putanje za animateMotion (tri segmenta iste rute kao glavni path) */}
+            <path id="hero-van-seg-1-light" d="M 120 320 Q 280 200 450 260" fill="none" stroke="none" />
+            <path id="hero-van-seg-2-light" d="M 450 260 Q 620 320 800 220" fill="none" stroke="none" />
+            <path id="hero-van-seg-3-light" d="M 800 220 Q 980 120 1080 280" fill="none" stroke="none" />
+          </defs>
+          <rect x="0" y="120" width="1200" height="300" fill="url(#hero-gps-hex-light)" opacity="0.22" />
+          {/* „Sateliti“ / fix tačke na nebu */}
+          <g fill="#94a3b8" opacity="0.45">
+            <circle cx="180" cy="95" r="2.5" />
+            <circle cx="320" cy="68" r="2" />
+            <circle cx="520" cy="110" r="2" />
+            <circle cx="720" cy="72" r="2.5" />
+            <circle cx="900" cy="98" r="2" />
+            <circle cx="1040" cy="55" r="2" />
+            {/* Jednostavan satelit */}
+            <g transform="translate(1020, 88)">
+              <rect x="-14" y="-5" width="28" height="10" rx="2" fill="#64748b" opacity="0.7" />
+              <rect x="-22" y="-4" width="6" height="8" rx="1" fill="#94a3b8" opacity="0.6" />
+              <rect x="16" y="-4" width="6" height="8" rx="1" fill="#94a3b8" opacity="0.6" />
+            </g>
+          </g>
+          {/* GPS isprekidana istorija trase */}
+          <path
+            d="M 120 320 Q 280 200 450 260 T 800 220 T 1080 280"
+            fill="none"
+            stroke="url(#hero-gps-route-light)"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeDasharray="10 18"
+            strokeDashoffset="0"
+            className="hero-gps-dash-flow"
+            opacity="0.85"
+          />
+          {/* Puna „trenutna“ ruta */}
+          <path
+            d="M 120 320 Q 280 200 450 260 T 800 220 T 1080 280"
+            fill="none"
+            stroke="#64748b"
+            strokeWidth="12"
+            strokeLinecap="round"
+            opacity="0.55"
+          />
+          <path
+            d="M 120 320 Q 280 200 450 260 T 800 220 T 1080 280"
+            fill="none"
+            stroke="#475569"
+            strokeWidth="6"
+            strokeLinecap="round"
+            opacity="0.65"
+          />
+          {/* Među-fix tačke duž rute */}
+          <g fill="#0d9488" opacity="0.75">
+            <circle cx="285" cy="238" r="5" />
+            <circle cx="620" cy="232" r="5" />
+            <circle cx="935" cy="252" r="5" />
+          </g>
+          {/* Smer kretanja duž rute (chevron markeri) */}
+          <g fill="#14b8a6" opacity="0.55">
+            <polygon points="248,262 256,256 248,250" transform="rotate(-28 252 256)" />
+            <polygon points="410,248 418,242 410,236" transform="rotate(-8 414 242)" />
+            <polygon points="560,228 568,222 560,216" transform="rotate(12 564 222)" />
+            <polygon points="720,218 728,212 720,206" transform="rotate(-18 724 212)" />
+            <polygon points="900,248 908,242 900,236" transform="rotate(22 904 242)" />
+          </g>
+          {/* Blok „ulice“ / dashboard mapa */}
+          <g fill="none" stroke="#64748b" strokeWidth="0.8" opacity="0.12">
+            <rect x="160" y="268" width="100" height="64" rx="2" />
+            <rect x="380" y="248" width="88" height="52" rx="2" />
+            <rect x="640" y="228" width="96" height="58" rx="2" />
+            <rect x="860" y="258" width="110" height="48" rx="2" />
+            <path d="M 260 300 H 340 M 200 292 V 332 M 700 242 H 780" />
+          </g>
+          <HeroRouteVansAnimated theme="light" />
+          {/* Glavni pinovi */}
           <g transform="translate(120, 320)">
             <circle r="14" fill="#0d9488" className="drop-shadow-md" />
             <path d="M0 18 L-8 32 L0 28 L8 32 Z" fill="#0f766e" className="drop-shadow-sm" />
@@ -43,28 +136,203 @@ export default function Hero() {
             <circle r="14" fill="#0d9488" className="drop-shadow-md" />
             <path d="M0 18 L-8 32 L0 28 L8 32 Z" fill="#0f766e" className="drop-shadow-sm" />
           </g>
+          {/* Aktivno vozilo: HUD + radar + pulsirajući signal */}
           <g transform="translate(1080, 280)">
+            <circle
+              r="36"
+              fill="none"
+              stroke="#0d9488"
+              strokeWidth="1.2"
+              className="hero-gps-ring-pulse"
+              opacity="0.5"
+            />
+            <circle
+              r="36"
+              fill="none"
+              stroke="#14b8a6"
+              strokeWidth="1"
+              className="hero-gps-ring-pulse hero-gps-ring-pulse-delay"
+              opacity="0.45"
+            />
+            <g className="hero-gps-radar-sweep">
+              <path d="M 0 0 L 0 -56 A 56 56 0 0 1 39.6 -39.6 Z" fill="url(#hero-gps-radar-wedge-light)" />
+            </g>
+            <circle r="38" fill="none" stroke="#0d9488" strokeWidth="1.5" opacity="0.22" />
+            <circle r="58" fill="none" stroke="#0d9488" strokeWidth="1" opacity="0.12" />
+            <g stroke="#0d9488" strokeWidth="1.1" fill="none" opacity="0.42">
+              <path d="M-52,-52 L-40,-52 L-40,-40" />
+              <path d="M52,-52 L40,-52 L40,-40" />
+              <path d="M-52,52 L-40,52 L-40,40" />
+              <path d="M52,52 L40,52 L40,40" />
+            </g>
+            <line x1="-32" y1="0" x2="32" y2="0" stroke="#0d9488" strokeWidth="1" opacity="0.35" />
+            <line x1="0" y1="-32" x2="0" y2="32" stroke="#0d9488" strokeWidth="1" opacity="0.35" />
             <circle r="14" fill="#0d9488" className="drop-shadow-md" />
             <path d="M0 18 L-8 32 L0 28 L8 32 Z" fill="#0f766e" className="drop-shadow-sm" />
           </g>
+          {/* Mini kompas (N) */}
+          <g transform="translate(1050, 118)" opacity="0.4">
+            <circle r="18" fill="none" stroke="#64748b" strokeWidth="1" />
+            <text
+              x="0"
+              y="5"
+              textAnchor="middle"
+              className="fill-slate-500 text-[11px] font-bold"
+              style={{ fontFamily: "system-ui, sans-serif" }}
+            >
+              N
+            </text>
+            <polygon points="0,-11 -3,-2 3,-2" fill="#0d9488" opacity="0.85" />
+          </g>
         </svg>
       </div>
-      {/* Route line + pins (dark mode) */}
-      <div className="pointer-events-none absolute inset-0 hidden items-end justify-center overflow-hidden dark:flex">
+      {/* GPS art (dark) — bez SVG na telefonu */}
+      <div className="pointer-events-none absolute inset-0 hidden items-end justify-center overflow-hidden md:dark:flex">
         <svg
-          viewBox="0 0 1200 400"
-          className="w-full max-w-5xl translate-y-[15%] scale-110 opacity-40"
+          viewBox="0 0 1200 420"
+          className="w-full max-w-5xl translate-y-[12%] scale-110 opacity-[0.42]"
           preserveAspectRatio="xMidYMax meet"
+          aria-hidden
         >
-          <path d="M 120 320 Q 280 200 450 260 T 800 220 T 1080 280" fill="none" stroke="currentColor" strokeWidth="14" strokeLinecap="round" className="text-slate-500" />
-          <path d="M 120 320 Q 280 200 450 260 T 800 220 T 1080 280" fill="none" stroke="currentColor" strokeWidth="8" strokeLinecap="round" className="text-slate-400" />
-          <g transform="translate(120, 320)"><circle r="14" fill="rgba(255,255,255,0.9)" className="drop-shadow-md" /><path d="M0 18 L-8 32 L0 28 L8 32 Z" fill="rgba(255,255,255,0.95)" className="drop-shadow-sm" /></g>
-          <g transform="translate(450, 260)"><circle r="14" fill="rgba(255,255,255,0.9)" className="drop-shadow-md" /><path d="M0 18 L-8 32 L0 28 L8 32 Z" fill="rgba(255,255,255,0.95)" className="drop-shadow-sm" /></g>
-          <g transform="translate(1080, 280)"><circle r="14" fill="rgba(255,255,255,0.9)" className="drop-shadow-md" /><path d="M0 18 L-8 32 L0 28 L8 32 Z" fill="rgba(255,255,255,0.95)" className="drop-shadow-sm" /></g>
+          <defs>
+            <linearGradient id="hero-gps-route-dark" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#5eead4" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="#2dd4bf" stopOpacity="0.4" />
+            </linearGradient>
+            <linearGradient id="hero-gps-radar-wedge-dark" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#2dd4bf" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#2dd4bf" stopOpacity="0" />
+            </linearGradient>
+            <pattern id="hero-gps-hex-dark" width="28" height="48" patternUnits="userSpaceOnUse">
+              <path
+                d="M14 4 L24 12 L24 24 L14 32 L4 24 L4 12 Z"
+                fill="none"
+                stroke="rgba(148,163,184,0.5)"
+                strokeWidth="0.35"
+              />
+            </pattern>
+            <path id="hero-van-seg-1-dark" d="M 120 320 Q 280 200 450 260" fill="none" stroke="none" />
+            <path id="hero-van-seg-2-dark" d="M 450 260 Q 620 320 800 220" fill="none" stroke="none" />
+            <path id="hero-van-seg-3-dark" d="M 800 220 Q 980 120 1080 280" fill="none" stroke="none" />
+          </defs>
+          <rect x="0" y="120" width="1200" height="300" fill="url(#hero-gps-hex-dark)" opacity="0.18" />
+          <g fill="rgba(255,255,255,0.35)">
+            <circle cx="180" cy="95" r="2.5" />
+            <circle cx="320" cy="68" r="2" />
+            <circle cx="520" cy="110" r="2" />
+            <circle cx="720" cy="72" r="2.5" />
+            <circle cx="900" cy="98" r="2" />
+            <circle cx="1040" cy="55" r="2" />
+            <g transform="translate(1020, 88)">
+              <rect x="-14" y="-5" width="28" height="10" rx="2" fill="rgba(148,163,184,0.55)" />
+              <rect x="-22" y="-4" width="6" height="8" rx="1" fill="rgba(148,163,184,0.45)" />
+              <rect x="16" y="-4" width="6" height="8" rx="1" fill="rgba(148,163,184,0.45)" />
+            </g>
+          </g>
+          <path
+            d="M 120 320 Q 280 200 450 260 T 800 220 T 1080 280"
+            fill="none"
+            stroke="url(#hero-gps-route-dark)"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeDasharray="10 18"
+            strokeDashoffset="0"
+            className="hero-gps-dash-flow"
+          />
+          <path
+            d="M 120 320 Q 280 200 450 260 T 800 220 T 1080 280"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="12"
+            strokeLinecap="round"
+            className="text-slate-500"
+            opacity="0.5"
+          />
+          <path
+            d="M 120 320 Q 280 200 450 260 T 800 220 T 1080 280"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="6"
+            strokeLinecap="round"
+            className="text-slate-400"
+            opacity="0.55"
+          />
+          <g fill="rgba(45,212,191,0.85)">
+            <circle cx="285" cy="238" r="5" />
+            <circle cx="620" cy="232" r="5" />
+            <circle cx="935" cy="252" r="5" />
+          </g>
+          <g fill="rgba(45,212,191,0.5)">
+            <polygon points="248,262 256,256 248,250" transform="rotate(-28 252 256)" />
+            <polygon points="410,248 418,242 410,236" transform="rotate(-8 414 242)" />
+            <polygon points="560,228 568,222 560,216" transform="rotate(12 564 222)" />
+            <polygon points="720,218 728,212 720,206" transform="rotate(-18 724 212)" />
+            <polygon points="900,248 908,242 900,236" transform="rotate(22 904 242)" />
+          </g>
+          <g fill="none" stroke="rgba(148,163,184,0.22)" strokeWidth="0.8">
+            <rect x="160" y="268" width="100" height="64" rx="2" />
+            <rect x="380" y="248" width="88" height="52" rx="2" />
+            <rect x="640" y="228" width="96" height="58" rx="2" />
+            <rect x="860" y="258" width="110" height="48" rx="2" />
+            <path d="M 260 300 H 340 M 200 292 V 332 M 700 242 H 780" />
+          </g>
+          <HeroRouteVansAnimated theme="dark" />
+          <g transform="translate(120, 320)">
+            <circle r="14" fill="rgba(255,255,255,0.92)" className="drop-shadow-md" />
+            <path d="M0 18 L-8 32 L0 28 L8 32 Z" fill="rgba(255,255,255,0.95)" className="drop-shadow-sm" />
+          </g>
+          <g transform="translate(450, 260)">
+            <circle r="14" fill="rgba(255,255,255,0.92)" className="drop-shadow-md" />
+            <path d="M0 18 L-8 32 L0 28 L8 32 Z" fill="rgba(255,255,255,0.95)" className="drop-shadow-sm" />
+          </g>
+          <g transform="translate(1080, 280)">
+            <circle
+              r="36"
+              fill="none"
+              stroke="rgba(45,212,191,0.55)"
+              strokeWidth="1.2"
+              className="hero-gps-ring-pulse"
+            />
+            <circle
+              r="36"
+              fill="none"
+              stroke="rgba(94,234,212,0.45)"
+              strokeWidth="1"
+              className="hero-gps-ring-pulse hero-gps-ring-pulse-delay"
+            />
+            <g className="hero-gps-radar-sweep">
+              <path d="M 0 0 L 0 -56 A 56 56 0 0 1 39.6 -39.6 Z" fill="url(#hero-gps-radar-wedge-dark)" />
+            </g>
+            <circle r="38" fill="none" stroke="rgba(45,212,191,0.35)" strokeWidth="1.5" />
+            <circle r="58" fill="none" stroke="rgba(45,212,191,0.2)" strokeWidth="1" />
+            <g stroke="rgba(45,212,191,0.45)" strokeWidth="1.1" fill="none">
+              <path d="M-52,-52 L-40,-52 L-40,-40" />
+              <path d="M52,-52 L40,-52 L40,-40" />
+              <path d="M-52,52 L-40,52 L-40,40" />
+              <path d="M52,52 L40,52 L40,40" />
+            </g>
+            <line x1="-32" y1="0" x2="32" y2="0" stroke="rgba(45,212,191,0.4)" strokeWidth="1" />
+            <line x1="0" y1="-32" x2="0" y2="32" stroke="rgba(45,212,191,0.4)" strokeWidth="1" />
+            <circle r="14" fill="rgba(255,255,255,0.92)" className="drop-shadow-md" />
+            <path d="M0 18 L-8 32 L0 28 L8 32 Z" fill="rgba(255,255,255,0.95)" className="drop-shadow-sm" />
+          </g>
+          <g transform="translate(1050, 118)" opacity="0.45">
+            <circle r="18" fill="none" stroke="rgba(148,163,184,0.5)" strokeWidth="1" />
+            <text
+              x="0"
+              y="5"
+              textAnchor="middle"
+              fill="rgba(203,213,225,0.85)"
+              style={{ fontFamily: "system-ui, sans-serif", fontSize: "11px", fontWeight: 700 }}
+            >
+              N
+            </text>
+            <polygon points="0,-11 -3,-2 3,-2" fill="rgba(45,212,191,0.9)" />
+          </g>
         </svg>
       </div>
 
-      <div className="relative z-10 mx-auto max-w-4xl pt-8 text-center">
+      <div className="relative z-10 mx-auto max-w-4xl pt-4 text-center sm:pt-6">
         <h1 className="min-h-[1em] text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl dark:text-slate-100">
           Preuzmite potpunu kontrolu nad vozilima u realnom vremenu
         </h1>
@@ -72,7 +340,7 @@ export default function Hero() {
           Smanjite troškove, zaštitite vozila od krađe i sprečite zloupotrebu
         </p>
         <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-          GPS Praćenje vozila u Srbiji i preko 40 zemalja Evrope, uz mogućnost daljinskog gašenja vozila jednim klikom putem aplikacije. Sistem je dostupan po promotivnoj ceni pretplate od 770 rsd. mesečno po vozilu (uz 12 meseci), a ponuda je vremenski ograničena.
+          GPS Praćenje vozila u Srbiji i preko 40 zemalja Evrope, uz mogućnost daljinskog gašenja vozila jednim klikom putem aplikacije. Sistem je dostupan po promotivnoj ceni pretplate od 780 rsd. mesečno po vozilu (uz 12 meseci), a ponuda je vremenski ograničena.
         </p>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-4">
@@ -86,7 +354,7 @@ export default function Hero() {
             href="/porucivanje"
             className="transition-smooth w-full rounded-xl border-2 border-slate-300 bg-white px-8 py-4 text-center text-sm font-bold uppercase tracking-wide text-slate-700 shadow-md hover:border-teal-400 hover:bg-slate-50 hover:-translate-y-0.5 sm:w-auto dark:border-white/20 dark:bg-white/[0.08] dark:text-white dark:hover:border-[#00ff9d]/50 dark:hover:bg-white/10"
           >
-            Započni odmah
+            Poruči odmah
           </Link>
         </div>
         <p className="mt-4 text-center text-sm text-slate-500 dark:text-slate-300">

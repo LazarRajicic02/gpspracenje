@@ -159,9 +159,9 @@ export function buildOrderEmailHtml(input: {
           ),
         ]
       : []),
-    sectionTitle("Plaćanje i preuzimanje"),
+    sectionTitle("Plaćanje i isporuka"),
     kvRow("Način plaćanja", escapeHtml(input.payLabel)),
-    kvRow("Preuzimanje", escapeHtml(input.fullLabel)),
+    kvRow("Preuzimanje / dostava", escapeHtml(input.fullLabel)),
     ...(input.notes.trim() ? [messageBlock("Napomena kupca", input.notes)] : []),
   ].join("");
 

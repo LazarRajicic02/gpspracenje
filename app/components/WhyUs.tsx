@@ -93,19 +93,18 @@ function OrbitVisual() {
   }
 
   return (
-    <div className="relative mx-auto flex aspect-square max-w-[420px] items-center justify-center lg:max-w-[480px]">
+    <div className="relative mx-auto flex aspect-square w-full max-w-[min(100%,42rem)] items-center justify-center sm:max-w-[min(100%,48rem)] lg:max-w-[min(100%,52rem)]">
       {/* Central hub – mapa vozila */}
-      <div className="relative z-10 flex h-72 w-72 shrink-0 items-center justify-center sm:h-80 sm:w-80">
+      <div className="relative z-10 flex h-[28rem] w-[28rem] shrink-0 items-center justify-center xs:h-[32rem] xs:w-[32rem] sm:h-[38rem] sm:w-[38rem] lg:h-[42rem] lg:w-[42rem]">
         <div className="flex flex-col items-center justify-center text-center text-slate-900 dark:text-white">
           <Image
-            src="/tracking.png"
+            src="/gpssistem.svg"
             alt="Mapa vozila"
-            width={420}
-            height={420}
-            className="h-56 w-56 object-contain sm:h-64 sm:w-64"
+            width={1024}
+            height={1024}
+            className="h-[23rem] w-[23rem] object-contain xs:h-[27rem] xs:w-[27rem] sm:h-[32rem] sm:w-[32rem] lg:h-[36rem] lg:w-[36rem]"
             priority
           />
-
         </div>
       </div>
 
@@ -113,7 +112,7 @@ function OrbitVisual() {
       {orbitItems.map((item, i) => {
         // Two rings: inner and outer. Radius scales with viewport so cards won't overlap as easily.
         const isOuter = i % 2 === 0;
-        const radius = isOuter ? "clamp(175px, 26vw, 260px)" : "clamp(130px, 20vw, 210px)";
+        const radius = isOuter ? "clamp(210px, 30vw, 320px)" : "clamp(165px, 24vw, 265px)";
         // Stagger phases so cards are visible at different positions along the circles.
         const delay = -(i * (orbitDurationSec / orbitItems.length));
 
@@ -148,9 +147,9 @@ function OrbitVisual() {
 
 export default function WhyUs() {
   return (
-    <section id="gps-sistem" className="scroll-mt-20 bg-slate-50 px-4 py-20 dark:bg-black sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-6xl">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 lg:items-center">
+    <section id="gps-sistem" className="scroll-mt-20 bg-slate-50 px-4 py-12 dark:bg-black sm:px-6 sm:py-14 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:gap-14 lg:items-center xl:gap-16">
           <div>
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
               GPS sistemi za privatnu i poslovnu upotrebu
@@ -177,7 +176,7 @@ export default function WhyUs() {
               Transport i logistika • Auto-škole • Taxi vozila • Plovila • Ostala vozila i prevozna sredstva
             </p>
           </div>
-          <div className="flex items-center justify-center min-h-[380px] sm:min-h-[440px]">
+          <div className="hidden min-h-[460px] items-center justify-center md:flex lg:min-h-[540px] xl:min-h-[580px]">
             <OrbitVisual />
           </div>
         </div>

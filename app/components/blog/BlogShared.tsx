@@ -22,7 +22,7 @@ export function BlogAuthorAvatar({ author }: { author: BlogAuthor }) {
     .toUpperCase();
   return (
     <span
-      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-orange-100 text-sm font-bold text-orange-800 ring-2 ring-white dark:bg-orange-500/25 dark:text-orange-100 dark:ring-slate-900"
+      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-orange-soft text-sm font-bold text-brand-orange-ink ring-2 ring-white dark:bg-brand-orange/25 dark:text-brand-orange-muted dark:ring-slate-900"
       aria-hidden
     >
       {initials}
@@ -32,7 +32,7 @@ export function BlogAuthorAvatar({ author }: { author: BlogAuthor }) {
 
 export function BlogCategoryPill({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex items-center rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-900 dark:bg-orange-500/20 dark:text-orange-100">
+    <span className="inline-flex items-center rounded-full bg-brand-orange-soft px-3 py-1 text-xs font-semibold text-brand-orange-ink dark:bg-brand-orange/20 dark:text-brand-orange-muted">
       {children}
     </span>
   );

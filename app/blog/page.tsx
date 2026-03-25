@@ -39,7 +39,7 @@ export default function BlogPage() {
       <div className="mx-auto max-w-6xl">
         <Link
           href="/"
-          className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-orange-600 hover:text-orange-500 dark:text-orange-400 dark:hover:text-orange-300"
+          className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-brand-orange-deep hover:text-brand-orange dark:text-brand-orange-muted dark:hover:text-brand-orange-bright"
         >
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -70,7 +70,7 @@ export default function BlogPage() {
                       priority
                     />
                   </div>
-                  <h2 className="mt-6 text-2xl font-bold leading-tight tracking-tight text-slate-900 transition group-hover:text-orange-600 dark:text-white dark:group-hover:text-orange-400 sm:text-3xl lg:text-[1.75rem] lg:leading-snug xl:text-3xl">
+                  <h2 className="mt-6 text-2xl font-bold leading-tight tracking-tight text-slate-900 transition group-hover:text-brand-orange-deep dark:text-white dark:group-hover:text-brand-orange-muted sm:text-3xl lg:text-[1.75rem] lg:leading-snug xl:text-3xl">
                     {featured.title}
                   </h2>
                 </Link>
@@ -96,7 +96,7 @@ export default function BlogPage() {
 
                 <Link
                   href={`/blog/${featured.slug}`}
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-orange-600 hover:text-orange-500 dark:text-orange-400 dark:hover:text-orange-300"
+                  className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-orange-deep hover:text-brand-orange dark:text-brand-orange-muted dark:hover:text-brand-orange-bright"
                 >
                   Pročitaj ceo članak
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -109,23 +109,23 @@ export default function BlogPage() {
 
           {/* Bočna traka */}
           <aside className="lg:col-span-5 xl:col-span-4">
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 via-slate-900 to-orange-950 px-5 py-6 shadow-lg dark:from-black dark:via-slate-950 dark:to-orange-950/90">
+            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 via-slate-900 to-brand-orange-950 px-5 py-6 shadow-lg dark:from-black dark:via-slate-950 dark:to-brand-orange-950/90">
               <div className="relative z-10 max-w-[70%]">
-                <p className="text-xs font-semibold uppercase tracking-wider text-orange-300/90">Blog</p>
+                <p className="text-xs font-semibold uppercase tracking-wider text-brand-orange-muted/90">Blog</p>
                 <p className="mt-2 text-lg font-bold leading-snug text-white sm:text-xl">
                   U trendu na {companyLegal.brand}
                 </p>
               </div>
               <div
-                className="pointer-events-none absolute -right-4 -top-4 h-24 w-24 rounded-full bg-orange-500/20 blur-2xl"
+                className="pointer-events-none absolute -right-4 -top-4 h-24 w-24 rounded-full bg-brand-orange/20 blur-2xl"
                 aria-hidden
               />
               <div
-                className="pointer-events-none absolute -bottom-8 right-8 h-32 w-32 rounded-full border-2 border-orange-400/30"
+                className="pointer-events-none absolute -bottom-8 right-8 h-32 w-32 rounded-full border-2 border-brand-orange-bright/30"
                 aria-hidden
               />
               <div
-                className="pointer-events-none absolute right-4 top-1/2 h-16 w-16 -translate-y-1/2 rounded-lg bg-orange-500/15"
+                className="pointer-events-none absolute right-4 top-1/2 h-16 w-16 -translate-y-1/2 rounded-lg bg-brand-orange/15"
                 aria-hidden
               />
             </div>
@@ -147,7 +147,7 @@ export default function BlogPage() {
                     />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h3 className="text-sm font-bold leading-snug text-slate-900 transition group-hover:text-orange-600 dark:text-white dark:group-hover:text-orange-400">
+                    <h3 className="text-sm font-bold leading-snug text-slate-900 transition group-hover:text-brand-orange-deep dark:text-white dark:group-hover:text-brand-orange-muted">
                       {post.title}
                     </h3>
                     <p className="mt-2 flex flex-wrap items-center gap-2 text-xs text-slate-500 dark:text-slate-400">

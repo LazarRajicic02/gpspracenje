@@ -54,15 +54,18 @@ export async function POST(request: Request) {
   }
 
   const paymentMethod = b.paymentMethod === "pouzece" || b.paymentMethod === "racun" ? b.paymentMethod : null;
+
+  if (!paymentMethod) {
+    return NextResponse.json({ error: "Izaberite način plaćanja." }, { status: 400 });
+  }
+
   const fulfillment =
     b.fulfillment === "dostava" || b.fulfillment === "preuzimanje" ? b.fulfillment : null;
-
-  if (!paymentMethod || !fulfillment) {
-    return NextResponse.json(
-      { error: "Izaberite način plaćanja i preuzimanja." },
-      { status: 400 },
-    );
-  }
+  const fullLabel = fulfillment
+    ? fulfillment === "dostava"
+      ? "Dostava na adresu"
+      : "Lično preuzimanje"
+    : "U dogovoru";
 
   let quantity = typeof b.quantity === "number" ? b.quantity : Number(b.quantity);
   if (!Number.isFinite(quantity) || quantity < 1) quantity = 1;
@@ -80,7 +83,6 @@ export async function POST(request: Request) {
         : "Produžavanje pretplate";
 
   const payLabel = paymentMethod === "pouzece" ? "Pouzećem prilikom isporuke" : "Uplata na račun po predračunu";
-  const fullLabel = fulfillment === "dostava" ? "Dostava na adresu" : "Lično preuzimanje";
 
   const sentAtIso = new Date().toISOString();
   const text = [
@@ -97,7 +99,7 @@ export async function POST(request: Request) {
     notesStr ? `\nNapomena:\n${notesStr}` : "",
     "",
     `Plaćanje: ${payLabel}`,
-    `Preuzimanje: ${fullLabel}`,
+    `Preuzimanje / dostava: ${fullLabel}`,
     "",
     `--- ${sentAtIso} ---`,
   ]

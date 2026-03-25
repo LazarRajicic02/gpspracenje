@@ -20,11 +20,11 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur-md dark:border-white/[0.08] dark:bg-black">
-      <nav className="relative mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
+      <nav className="relative mx-auto flex max-w-6xl items-center justify-between gap-6 py-4 pl-3 pr-4 sm:pl-4 sm:pr-6 lg:pl-5 lg:pr-8">
         {/* Logo – left */}
         <Link
           href="/"
-          className="flex shrink-0 items-center"
+          className="-ml-1 flex shrink-0 items-center sm:-ml-2"
           aria-label="Cyber Tracking – GPS praćenje vozila, početna"
         >
           <Image
@@ -32,7 +32,7 @@ export default function Header() {
             alt="Cyber Tracking – GPS praćenje vozila u realnom vremenu"
             width={360}
             height={103}
-            className=" h-16 w-auto sm:h-[4.5rem] md:h-20 lg:h-[5.25rem]"
+            className="h-14 w-auto sm:h-16 md:h-[4.25rem] lg:h-[4.75rem]"
             priority
           />
         </Link>

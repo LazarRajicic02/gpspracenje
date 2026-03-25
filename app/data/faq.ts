@@ -30,7 +30,7 @@ export const faqItems: FaqItem[] = [
     categoryId: "instalacija",
     question: "Da li je potrebna profesionalna montaža ili je mogu sam izvršiti?",
     answer:
-      "Ugradnja GPS lokatora zahteva osnovno znanje iz auto-elektrike, pa ukoliko ga imate, možete sami postaviti uređaj. Najvažnije je da uređaj bude pravilno i bezbedno povezan na konstantan izvor napajanja vozila.",
+      "Ugradnja GPS sistema zahteva osnovno znanje iz auto-elektrike, pa ukoliko ga imate, možete sami postaviti uređaj. Najvažnije je da uređaj bude pravilno i bezbedno povezan na konstantan izvor napajanja vozila.",
   },
   {
     id: "q3",
@@ -213,7 +213,7 @@ export const faqItems: FaqItem[] = [
     categoryId: "cenovnik",
     question: "Koja je cena i šta pretplata uključuje?",
     answer:
-      "PRO GPS sistem: GPS lokator 59,95€, pretplata u dinarima (najpovoljnije 770 rsd. / mesečno uz 12 meseci). Smart GPS sistem: GPS lokator 49,95€, ista struktura pretplate. Pretplata na 3, 6 ili 12 meseci: 3 meseca 3.150 rsd. (1.050 rsd. / mesečno), 6 meseci 5.340 rsd. (890 rsd. / mesečno), 12 meseci 9.240 rsd. (770 rsd. / mesečno). Bez ugovorne obaveze i skrivenih troškova. Pretplata uključuje kompletnu tehničku podršku tokom trajanja i konsultacije vezane za GPS sistem. Za tačnu ponudu pozovite 061 4030 888.",
+      "PRO GPS sistem: uređaj 6.850 rsd., pretplata u dinarima (najpovoljnije 780 rsd. / mesečno uz 12 meseci). Smart GPS sistem: uređaj 5.850 rsd., ista struktura pretplate. Pretplata na 3, 6 ili 12 meseci: 3 meseca 3.150 rsd. (1.050 rsd. / mesečno), 6 meseci 5.340 rsd. (890 rsd. / mesečno), 12 meseci 9.360 rsd. (780 rsd. / mesečno). Bez ugovorne obaveze i skrivenih troškova. Pretplata uključuje kompletnu tehničku podršku tokom trajanja i konsultacije vezane za GPS sistem. Za tačnu ponudu pozovite 061 4030 888.",
   },
   {
     id: "q27",

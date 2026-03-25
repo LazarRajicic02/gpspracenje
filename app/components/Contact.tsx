@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 
-const CONTACT_IMAGE_SRC = "/contacthero.svg";
+const CONTACT_IMAGE_SRC = "/kontakt.svg";
 
 export default function Contact() {
   const [sent, setSent] = useState(false);

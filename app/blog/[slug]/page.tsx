@@ -41,7 +41,7 @@ export default async function BlogPostPage({ params }: Props) {
       <div className="mx-auto max-w-3xl">
         <Link
           href="/blog"
-          className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-orange-600 hover:text-orange-500 dark:text-orange-400 dark:hover:text-orange-300"
+          className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-brand-orange-deep hover:text-brand-orange dark:text-brand-orange-muted dark:hover:text-brand-orange-bright"
         >
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -99,11 +99,11 @@ export default async function BlogPostPage({ params }: Props) {
         <div className="mt-14 border-t border-slate-200 pt-8 dark:border-white/10">
           <p className="text-sm text-slate-600 dark:text-slate-400">
             Imate pitanje u vezi GPS praćenja?{" "}
-            <Link href="/kontakt" className="font-medium text-orange-600 hover:underline dark:text-orange-400">
+            <Link href="/kontakt" className="font-medium text-brand-orange-deep hover:underline dark:text-brand-orange-muted">
               Kontaktirajte nas
             </Link>
             {" · "}
-            <Link href="/porucivanje" className="font-medium text-orange-600 hover:underline dark:text-orange-400">
+            <Link href="/porucivanje" className="font-medium text-brand-orange-deep hover:underline dark:text-brand-orange-muted">
               Poručite sistem
             </Link>
           </p>

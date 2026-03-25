@@ -62,7 +62,7 @@ const reasons = [
       "bg-emerald-100 text-emerald-600 dark:bg-[#00ff9d]/20 dark:text-[#00ff9d]",
   },
   {
-    title: "Startujte odmah — sistem isporučujemo u roku od 24h",
+    title: "Startujte odmah",
     description:
       "Brza isporuka i jasni koraci za aktivaciju, da što pre krenete sa praćenjem vozila na mapi.",
     icon: (
@@ -71,30 +71,30 @@ const reasons = [
       </svg>
     ),
     iconWrap:
-      "bg-amber-100 text-amber-700 dark:bg-[#00ff9d]/20 dark:text-[#00ff9d]",
+      "bg-brand-orange-soft text-brand-orange-deep dark:bg-[#00ff9d]/20 dark:text-[#00ff9d]",
   },
 ];
 
-const SECTION_IMAGE = "/hero2.png";
+const SECTION_IMAGE = "/zbogcega.svg";
 
 export default function WhyChooseCyberTracking() {
   return (
     <section
       id="zasto-cyber-tracking"
-      className="scroll-mt-20 bg-white px-4 py-20 dark:bg-black sm:px-6 lg:px-8"
+      className="scroll-mt-20 bg-white px-4 py-12 dark:bg-black sm:px-6 sm:py-14 lg:px-8"
     >
       <div className="mx-auto max-w-6xl">
         <header className="text-center">
-          <h2 className="text-balance text-lg font-bold uppercase leading-snug tracking-wide text-slate-900 dark:text-white sm:text-xl md:text-2xl lg:text-3xl">
+          <h2 className="text-balance text-xl font-bold uppercase leading-snug tracking-wide text-slate-900 dark:text-white sm:text-2xl md:text-2xl lg:text-3xl">
             Zbog čega odabrati Cyber Tracking
             <span
-              className={`${whyQuestionFont.className} ms-0.5 inline-block bg-gradient-to-br from-orange-500 via-orange-600 to-amber-500 bg-clip-text text-[1.35em] font-extrabold leading-none text-transparent align-baseline drop-shadow-[0_0_12px_rgba(249,115,22,0.45)] dark:from-orange-300 dark:via-orange-400 dark:to-amber-300 dark:drop-shadow-[0_0_16px_rgba(251,146,60,0.4)]`}
+              className={`${whyQuestionFont.className} ms-0.5 inline-block bg-gradient-to-br from-brand-orange via-brand-orange-deep to-brand-orange-bright bg-clip-text text-[1.35em] font-extrabold leading-none text-transparent align-baseline drop-shadow-[0_0_12px_rgba(240,127,28,0.45)] dark:from-brand-orange-muted dark:via-brand-orange-bright dark:to-brand-orange-soft dark:drop-shadow-[0_0_16px_rgba(240,127,28,0.4)]`}
             >
               ?
             </span>
           </h2>
           <div
-            className="mx-auto mt-4 h-1.5 w-16 rounded-full bg-orange-500 dark:bg-orange-400"
+            className="mx-auto mt-4 h-1.5 w-16 rounded-full bg-brand-orange dark:bg-brand-orange-bright"
             aria-hidden
           />
         </header>
@@ -108,19 +108,23 @@ export default function WhyChooseCyberTracking() {
                 className="transition-smooth flex gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-md shadow-slate-200/60 hover:border-teal-300 hover:shadow-lg hover:shadow-teal-500/10 dark:border-white/10 dark:bg-white/[0.06] dark:shadow-none dark:hover:border-[#00ff9d]/40 dark:hover:shadow-teal-500/10 sm:p-5"
               >
                 <div
-                  className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl sm:h-14 sm:w-14 ${item.iconWrap}`}
+                  className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-xl sm:h-14 sm:w-14 md:h-16 md:w-16 ${item.iconWrap}`}
                 >
                   {item.icon}
                 </div>
                 <div className="min-w-0">
-                  <h3 className="text-base font-bold text-slate-900 dark:text-white sm:text-lg">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">{item.description}</p>
+                  <h3 className="text-lg font-bold leading-snug text-slate-900 dark:text-white sm:text-lg md:text-xl">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-base leading-relaxed text-slate-600 dark:text-slate-300 lg:text-sm lg:leading-relaxed">
+                    {item.description}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Slika — hero2, bez dekorativnog okvira */}
+          {/* Slika */}
           <div className="order-1 flex justify-center lg:order-2 lg:justify-end">
             <div className="w-full max-w-lg lg:max-w-none">
               <Image
@@ -128,7 +132,7 @@ export default function WhyChooseCyberTracking() {
                 alt="Cyber Tracking — GPS praćenje vozila"
                 width={1920}
                 height={1080}
-                className="h-auto w-full rounded-2xl border border-slate-200/80 shadow-lg shadow-slate-200/40 dark:border-white/10 dark:shadow-none"
+                className="h-auto w-full rounded-2xl"
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 priority={false}
               />

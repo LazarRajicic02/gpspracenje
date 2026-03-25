@@ -35,7 +35,7 @@ const reviews = [
 
 function StarRating({ n }: { n: number }) {
   return (
-    <div className="flex gap-0.5 text-amber-500" aria-hidden>
+    <div className="flex gap-0.5 text-brand-orange" aria-hidden>
       {Array.from({ length: 5 }).map((_, i) => (
         <svg
           key={i}
