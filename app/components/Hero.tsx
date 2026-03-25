@@ -360,12 +360,6 @@ export default function Hero() {
         <p className="mt-4 text-center text-sm text-slate-500 dark:text-slate-300">
           Bez ugovorne obaveze, bez skrivenih troškova i uz potpunu tehničku podršku.
         </p>
-        <Link
-          href="/aplikacija"
-          className="transition-smooth mt-2 inline-block rounded-xl border-2 border-slate-300 bg-white/90 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-slate-800 backdrop-blur-sm hover:border-teal-400 hover:bg-white hover:shadow-md dark:border-white/20 dark:bg-white/[0.08] dark:text-white dark:hover:border-[#00ff9d]/50 dark:hover:bg-white/10"
-        >
-          Live demo
-        </Link>
       </div>
     </section>
   );
