@@ -104,7 +104,7 @@ export default function WhyChooseCyberTracking() {
           />
         </header>
 
-        <div className="mt-12 grid items-center gap-12 lg:grid-cols-2 lg:gap-14 xl:gap-20">
+        <div className="mt-0 grid items-center gap-0 sm:mt-12 sm:gap-12 lg:grid-cols-2 lg:gap-14 xl:gap-20">
           {/* Kartice */}
           <div className="order-2 flex flex-col gap-7 lg:order-1 lg:gap-5">
             {reasons.map((item) => (
