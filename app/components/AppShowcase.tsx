@@ -259,7 +259,7 @@ export default function AppShowcase({ showDesktopPreview = false }: { showDeskto
   }
 
   return (
-    <section id="aplikacija" className="scroll-mt-20 bg-slate-100 px-4 py-0 dark:bg-black sm:px-6 sm:py-14 lg:px-8">
+    <section id="aplikacija" className="scroll-mt-20 bg-slate-100 px-4 py-8 dark:bg-black sm:px-6 sm:py-14 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-center sm:justify-center sm:gap-4 lg:gap-6">
           {/* Leva / desna strelica — skrivene ispod sm (telefon), vidljive od tableta navise */}

@@ -83,7 +83,7 @@ export default function Reviews() {
   const duplicated = [...reviews, ...reviews];
 
   return (
-    <section className="scroll-mt-20 bg-slate-50 px-4 py-0 dark:bg-black sm:px-6 sm:py-14 lg:px-8">
+    <section className="scroll-mt-20 bg-slate-50 px-4 py-8 dark:bg-black sm:px-6 sm:py-14 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">

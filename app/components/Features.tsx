@@ -93,11 +93,11 @@ const features = [
 
 export default function Features() {
   return (
-    <section id="prednosti" className="scroll-mt-20 bg-white px-4 py-0 dark:bg-black sm:px-6 sm:py-14 lg:px-8">
+    <section id="prednosti" className="scroll-mt-20 bg-white px-4 py-8 dark:bg-black sm:px-6 sm:py-14 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
-            prednosti gps sistema
+            Prednosti gps sistema
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-300">
             praćenje vozila u realnom vremenu, zaštita od krađe, kontrola zaposlenih, detaljni izveštaji i pouzdana

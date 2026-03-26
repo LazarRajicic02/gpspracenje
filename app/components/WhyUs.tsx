@@ -94,7 +94,7 @@ function OrbitVisual() {
 
 export default function WhyUs() {
   return (
-    <section id="gps-sistem" className="scroll-mt-20 bg-slate-50 px-4 py-0 dark:bg-black sm:px-6 sm:py-14 lg:px-8">
+    <section id="gps-sistem" className="scroll-mt-20 bg-slate-50 px-4 py-8 dark:bg-black sm:px-6 sm:py-14 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:gap-14 lg:items-center xl:gap-16">
           <div>

@@ -77,7 +77,7 @@ export default function FAQ({ variant = "landing" }: FAQProps) {
   const categories = faqCategories;
 
   return (
-    <section id="faq" className="scroll-mt-20 bg-white px-4 py-0 dark:bg-black sm:px-6 sm:py-14 lg:px-8">
+    <section id="faq" className="scroll-mt-20 bg-white px-4 py-8 dark:bg-black sm:px-6 sm:py-14 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <div className={isLanding ? "" : "flex flex-col lg:flex-row lg:items-start lg:gap-12"}>
           {/* Left: pitanja + search */}

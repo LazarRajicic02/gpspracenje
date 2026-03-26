@@ -86,7 +86,7 @@ export default function WhyChooseCyberTracking() {
   return (
     <section
       id="zasto-cyber-tracking"
-      className="scroll-mt-20 bg-white px-4 py-0 dark:bg-black sm:px-6 sm:py-14 lg:px-8"
+      className="scroll-mt-20 bg-white px-4 py-8 dark:bg-black sm:px-6 sm:py-14 lg:px-8"
     >
       <div className="mx-auto max-w-6xl">
         <header className="text-center">
