@@ -100,7 +100,7 @@ export default function Features() {
             Prednosti gps sistema
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-300">
-            praćenje vozila u realnom vremenu, zaštita od krađe, kontrola zaposlenih, detaljni izveštaji i pouzdana
+            Praćenje vozila u realnom vremenu, zaštita od krađe, kontrola zaposlenih, detaljni izveštaji i pouzdana
             mrežna pokrivenost – sve u jednom sistemu.
           </p>
         </div>
