@@ -645,7 +645,7 @@ function OrderInner() {
 
   return (
     <>
-      <section id="porucivanje" className="scroll-mt-20 bg-white px-4 py-0 dark:bg-black sm:px-6 sm:py-14 lg:px-8">
+      <section id="porucivanje" className="scroll-mt-20 bg-white px-4 pt-0 pb-8 dark:bg-black sm:px-6 sm:py-14 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="text-center">
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">

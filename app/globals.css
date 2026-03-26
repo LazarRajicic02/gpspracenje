@@ -58,6 +58,12 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (max-width: 639px) {
+  html {
+    font-size: 17px;
+  }
+}
+
 /* Logo u headeru/futeru: uvek ista narandžasta nijansa (PNG u SVG-u) */
 
 
