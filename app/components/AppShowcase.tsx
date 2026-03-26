@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import Image from "next/image";
+import { useState, useCallback, useEffect, useRef } from "react";
 type ShowcaseItem = {
   id: string;
   title: string;
   description: string;
-  type: "image";
+  type: "image" | "desktop";
   imageSrc: string;
 };
 
@@ -61,6 +62,15 @@ const showcaseItems: ShowcaseItem[] = [
   },
 ];
 
+const desktopShowcaseItem: ShowcaseItem = {
+  id: "desktop-prikaz",
+  title: "Desktop pregled svih vozila",
+  description:
+    "Pregled svih vozila i lokacija na velikom ekranu, sa jasnim prikazom mape i statusa vozila u realnom vremenu.",
+  type: "desktop",
+  imageSrc: "/slika komp pracenje (1).jpg",
+};
+
 function PhoneFrame({
   children,
   className = "",
@@ -70,10 +80,10 @@ function PhoneFrame({
 }) {
   return (
     <div
-      className={`relative mx-auto w-fit max-w-[min(100%,320px)] overflow-hidden rounded-[2.25rem] border-[8px] border-slate-800 bg-slate-900 shadow-2xl dark:border-slate-700 dark:bg-black ${className}`}
+      className={`anim-phone-frame relative mx-auto w-fit overflow-hidden rounded-[2.25rem] border-[8px] border-slate-800 bg-slate-900 shadow-2xl dark:border-slate-700 dark:bg-black ${className}`}
     >
 
-      <div className="relative min-h-[280px] overflow-hidden rounded-[1.35rem] bg-slate-950 sm:min-h-[420px]">
+      <div className="anim-phone-screen relative overflow-hidden rounded-[1.35rem] bg-slate-950">
         {children}
       </div>
     </div>
@@ -83,11 +93,8 @@ function PhoneFrame({
 function ShowcaseSectionHeader({ className = "" }: { className?: string }) {
   return (
     <header className={className}>
-      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal-600 dark:text-[#00ff9d]">
-        Aplikacija
-      </p>
-      <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-900 dark:text-white sm:mt-3 sm:text-3xl lg:text-4xl">
-        Kontrola svih vozila u jednoj aplikaciji
+      <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-3xl lg:text-4xl">
+        Kontrola svih vozila u naprednoj aplikaciji
       </h2>
       <p className="mt-3 text-base leading-relaxed text-slate-600 dark:text-slate-300 sm:mt-4 sm:text-lg">
         Praćenje vozila u realnom vremenu sa prikazom na Google mapama, istorijom kretanja, alarmima i izveštajima u
@@ -98,10 +105,12 @@ function ShowcaseSectionHeader({ className = "" }: { className?: string }) {
 }
 
 function ShowcaseSlideCaption({ item, className = "" }: { item: ShowcaseItem; className?: string }) {
+  if (item.type === "desktop") return null;
+
   return (
     <div className={className}>
       <p className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">
-        Prikaz iz aplikacije
+        PRIKAZ NA EKRANU
       </p>
       <h3 className="mt-1.5 text-lg font-semibold leading-snug text-slate-900 dark:text-white sm:text-xl">
         {item.title}
@@ -114,11 +123,13 @@ function ShowcaseSlideCaption({ item, className = "" }: { item: ShowcaseItem; cl
 }
 
 function ShowcasePhoneColumn({
+  items,
   item,
   index,
   setIndex,
   className = "",
 }: {
+  items: ShowcaseItem[];
   item: ShowcaseItem;
   index: number;
   setIndex: (i: number) => void;
@@ -128,9 +139,9 @@ function ShowcasePhoneColumn({
     <div className={className}>
       <ShowcaseContent item={item} />
       <div className="flex w-full justify-center gap-0.5 sm:gap-1">
-        {showcaseItems.map((_, i) => (
+        {items.map((_, i) => (
           <button
-            key={showcaseItems[i].id}
+            key={items[i].id}
             type="button"
             onClick={() => setIndex(i)}
             className="transition-smooth group flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900"
@@ -152,6 +163,25 @@ function ShowcasePhoneColumn({
 }
 
 function ShowcaseContent({ item }: { item: ShowcaseItem }) {
+  if (item.type === "desktop") {
+    return (
+      <div className="w-full overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 shadow-xl dark:border-white/10 dark:bg-slate-900/30 sm:p-3">
+        <h3 className="mb-3 text-center text-lg font-semibold leading-snug text-slate-900 dark:text-white sm:text-xl">
+          {item.title}
+        </h3>
+        <Image
+          src={item.imageSrc}
+          alt={`GPS desktop prikaz – ${item.title}`}
+          width={1920}
+          height={1080}
+          className="h-auto w-full rounded-xl object-cover"
+          sizes="(max-width: 640px) 100vw, 960px"
+          priority={false}
+        />
+      </div>
+    );
+  }
+
   return (
     <PhoneFrame>
       <div className="relative h-full w-full">
@@ -159,7 +189,7 @@ function ShowcaseContent({ item }: { item: ShowcaseItem }) {
         <img
           src={item.imageSrc}
           alt={`GPS praćenje vozila – ${item.title}`}
-          className="h-full w-full max-h-[min(72vh,560px)] object-contain object-top"
+          className="anim-phone-image h-full w-full object-contain object-top"
           onError={(e) => {
             const target = e.currentTarget;
             target.style.display = "none";
@@ -185,9 +215,12 @@ function ShowcaseContent({ item }: { item: ShowcaseItem }) {
   );
 }
 
-export default function AppShowcase() {
+export default function AppShowcase({ showDesktopPreview = false }: { showDesktopPreview?: boolean }) {
+  const items = showDesktopPreview ? [...showcaseItems, desktopShowcaseItem] : showcaseItems;
   const [index, setIndex] = useState(0);
-  const total = showcaseItems.length;
+  const total = items.length;
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
 
   const goPrev = useCallback(() => {
     setIndex((i) => (i - 1 + total) % total);
@@ -202,10 +235,31 @@ export default function AppShowcase() {
     return () => clearInterval(t);
   }, [goNext]);
 
-  const item = showcaseItems[index];
+  const item = items[index];
+
+  function handleTouchStart(e: React.TouchEvent<HTMLDivElement>) {
+    const t = e.changedTouches[0];
+    touchStartX.current = t.clientX;
+    touchStartY.current = t.clientY;
+  }
+
+  function handleTouchEnd(e: React.TouchEvent<HTMLDivElement>) {
+    if (touchStartX.current == null || touchStartY.current == null) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStartX.current;
+    const dy = t.clientY - touchStartY.current;
+
+    touchStartX.current = null;
+    touchStartY.current = null;
+
+    // Swipe should be clearly horizontal to avoid fighting vertical scroll.
+    if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+    if (dx < 0) goNext();
+    else goPrev();
+  }
 
   return (
-    <section id="aplikacija" className="scroll-mt-20 bg-slate-100 px-4 py-12 dark:bg-black sm:px-6 sm:py-14 lg:px-8">
+    <section id="aplikacija" className="scroll-mt-20 bg-slate-100 px-4 py-0 dark:bg-black sm:px-6 sm:py-14 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-center sm:justify-center sm:gap-4 lg:gap-6">
           {/* Leva / desna strelica — skrivene ispod sm (telefon), vidljive od tableta navise */}
@@ -221,31 +275,49 @@ export default function AppShowcase() {
           </button>
 
           {/* Samo uski ekran (telefon): naslov → telefon → opis slajda */}
-          <div className="flex w-full min-w-0 max-w-4xl flex-col items-stretch gap-6 transition-opacity duration-300 sm:hidden">
-            <ShowcaseSectionHeader className="border-b border-slate-200 pb-6 text-center dark:border-white/10" />
+          <div
+            className="motion-medium flex w-full min-w-0 max-w-4xl flex-col items-stretch gap-6 transition-opacity sm:hidden"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
+            {item.type !== "desktop" && (
+              <ShowcaseSectionHeader className="border-b border-slate-200 pb-6 text-center dark:border-white/10" />
+            )}
             <ShowcasePhoneColumn
+              items={items}
               item={item}
               index={index}
               setIndex={setIndex}
-              className="mx-auto flex w-fit max-w-[min(100%,320px)] flex-col items-center gap-2"
+              className={
+                item.type === "desktop"
+                  ? "mx-auto flex w-full max-w-5xl flex-col items-center gap-2"
+                  : "mx-auto flex w-fit max-w-[min(100%,320px)] flex-col items-center gap-2"
+              }
             />
             <ShowcaseSlideCaption item={item} className="text-center" />
           </div>
 
           {/* sm+ kao ranije: telefon levo, desno naslov sekcije + opis slajda */}
-          <div className="hidden w-full min-w-0 max-w-4xl flex-1 transition-opacity duration-300 sm:flex sm:flex-row sm:items-start sm:justify-center sm:gap-6 lg:gap-8">
+          <div className="motion-medium hidden w-full min-w-0 max-w-4xl flex-1 transition-opacity sm:flex sm:flex-row sm:items-start sm:justify-center sm:gap-6 lg:gap-8">
             <ShowcasePhoneColumn
+              items={items}
               item={item}
               index={index}
               setIndex={setIndex}
-              className="flex w-fit max-w-[min(100%,320px)] shrink-0 flex-col items-center gap-2 sm:gap-2.5"
+              className={
+                item.type === "desktop"
+                  ? "flex w-full max-w-[62rem] shrink-0 flex-col items-center gap-2 sm:gap-2.5"
+                  : "flex w-fit max-w-[min(100%,320px)] shrink-0 flex-col items-center gap-2 sm:gap-2.5"
+              }
             />
-            <div className="flex w-full min-w-0 max-w-md flex-1 flex-col justify-start text-center sm:max-w-lg sm:text-left">
-              <ShowcaseSectionHeader className="border-b border-slate-200 pb-6 dark:border-white/10 sm:pb-7" />
-              <div className="pt-6 sm:pt-8">
-                <ShowcaseSlideCaption item={item} />
+            {item.type !== "desktop" && (
+              <div className="flex w-full min-w-0 max-w-md flex-1 flex-col justify-start text-center sm:max-w-lg sm:text-left">
+                <ShowcaseSectionHeader className="border-b border-slate-200 pb-6 dark:border-white/10 sm:pb-7" />
+                <div className="pt-6 sm:pt-8">
+                  <ShowcaseSlideCaption item={item} />
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           <button
@@ -259,6 +331,7 @@ export default function AppShowcase() {
             </svg>
           </button>
         </div>
+
       </div>
     </section>
   );

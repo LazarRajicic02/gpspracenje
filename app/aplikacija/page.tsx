@@ -6,5 +6,5 @@ export const metadata = {
 };
 
 export default function AplikacijaPage() {
-  return <AppShowcase />;
+  return <AppShowcase showDesktopPreview />;
 }

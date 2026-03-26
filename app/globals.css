@@ -10,6 +10,12 @@
   --muted: #64748b;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --duration: 0.35s;
+  --motion-fast: 0.2s;
+  --motion-medium: 0.3s;
+  --anim-orbit-duration: 42s;
+  --anim-hero-dash-duration: 22s;
+  --anim-hero-pulse-duration: 2.6s;
+  --anim-hero-radar-duration: 10s;
   /* Brend narandžasta (jedinstvena na sajtu) */
   --brand-orange: #f07f1c;
   --brand-orange-bright: #ff9a42;
@@ -73,6 +79,111 @@ html {
     transform var(--duration) var(--ease-out);
 }
 
+.motion-fast {
+  transition-duration: var(--motion-fast);
+}
+
+.motion-medium {
+  transition-duration: var(--motion-medium);
+}
+
+.card-title {
+  font-size: 1.125rem;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.card-body {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+}
+
+@media (min-width: 640px) {
+  .card-title {
+    font-size: 1.25rem;
+  }
+
+  .card-body {
+    font-size: 1rem;
+  }
+}
+
+/* Shared dimensions for animated/image visuals */
+.anim-visual-shell {
+  width: 100%;
+  max-width: min(100%, 42rem);
+}
+
+.anim-visual-hub {
+  width: 28rem;
+  height: 28rem;
+}
+
+.anim-visual-image {
+  width: 23rem;
+  height: 23rem;
+}
+
+.anim-phone-frame {
+  max-width: min(100%, 320px);
+}
+
+.anim-phone-screen {
+  min-height: 280px;
+}
+
+.anim-phone-image {
+  max-height: min(72vh, 560px);
+}
+
+@media (min-width: 480px) {
+  .anim-visual-hub {
+    width: 32rem;
+    height: 32rem;
+  }
+
+  .anim-visual-image {
+    width: 27rem;
+    height: 27rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .anim-visual-shell {
+    max-width: min(100%, 48rem);
+  }
+
+  .anim-visual-hub {
+    width: 38rem;
+    height: 38rem;
+  }
+
+  .anim-visual-image {
+    width: 32rem;
+    height: 32rem;
+  }
+
+  .anim-phone-screen {
+    min-height: 420px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .anim-visual-shell {
+    max-width: min(100%, 52rem);
+  }
+
+  .anim-visual-hub {
+    width: 42rem;
+    height: 42rem;
+  }
+
+  .anim-visual-image {
+    width: 36rem;
+    height: 36rem;
+  }
+}
+
 /* Orbit animation (Reviews/WhyUs) */
 @keyframes orbit-spin {
   from {
@@ -93,11 +204,11 @@ html {
 }
 
 .orbit-spin {
-  animation: orbit-spin var(--orbit-duration, 18s) linear infinite;
+  animation: orbit-spin var(--orbit-duration, var(--anim-orbit-duration)) linear infinite;
 }
 
 .orbit-counter {
-  animation: orbit-counter var(--orbit-duration, 18s) linear infinite;
+  animation: orbit-counter var(--orbit-duration, var(--anim-orbit-duration)) linear infinite;
 }
 
 /* Hero GPS: animirana isprekidana linija + radar + pulsirajući prsten */
@@ -108,7 +219,7 @@ html {
 }
 
 .hero-gps-dash-flow {
-  animation: hero-gps-dash-flow 22s linear infinite;
+  animation: hero-gps-dash-flow var(--anim-hero-dash-duration) linear infinite;
 }
 
 @keyframes hero-gps-ring-pulse {
@@ -125,7 +236,7 @@ html {
 .hero-gps-ring-pulse {
   transform-box: fill-box;
   transform-origin: center;
-  animation: hero-gps-ring-pulse 2.6s ease-out infinite;
+  animation: hero-gps-ring-pulse var(--anim-hero-pulse-duration) ease-out infinite;
 }
 
 .hero-gps-ring-pulse-delay {
@@ -144,7 +255,7 @@ html {
 .hero-gps-radar-sweep {
   transform-box: fill-box;
   transform-origin: center;
-  animation: hero-gps-radar-sweep 10s linear infinite;
+  animation: hero-gps-radar-sweep var(--anim-hero-radar-duration) linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

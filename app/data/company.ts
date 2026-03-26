@@ -7,8 +7,9 @@ export const companyLegal = {
   address: "Čačak, Srbija",
   pib: "115037196",
   maticni: "68042453",
+  racun: "155-0000000093194-79",
   phone: "+381 60 4030 888",
-  email: "cybermaster381@gmail.com",
+  email: "podrska@gpspracenje.rs",
 } as const;
 
 /** Datum poslednje izmene dokumenta „uslovi korišćenja“. */

@@ -192,14 +192,6 @@ export const faqItems: FaqItem[] = [
     answer:
       "Najmanje sedam dana pre isteka pretplate kontaktiraćemo vas na broj telefona koji ste ostavili prilikom kupovine i dati uputstva za produženje. Pretplatu možete produžiti i ranije, ali najkasnije 48 sati pre njenog isteka.",
   },
-  {
-    id: "q24",
-    categoryId: "pretplata",
-    question: "Šta se dešava kada ne produžim pretplatu na vreme?",
-    answer:
-      "Ukoliko se pretplata ne produži, SIM kartica u GPS uređaju se automatski i trajno deaktivira na dan isteka pretplate u 23:59. Ukoliko kasnije budete želeli da nastavite sa pretplatom, potrebno je skinuti GPS uređaj sa vozila i poslati ga na našu adresu kako bi se postavila nova SIM kartica. Troškove poštanskih usluga i nove SIM kartice snosi korisnik.",
-  },
-
   // Cenovnik i način plaćanja (25-27)
   {
     id: "q25",

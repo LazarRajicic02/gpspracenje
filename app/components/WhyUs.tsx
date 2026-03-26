@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import type { CSSProperties } from "react";
 
 const whatYouGet = [
   {
@@ -74,80 +73,28 @@ const whatYouGet = [
 ];
 
 function OrbitVisual() {
-  const orbitDurationSec = 42;
-  const orbitItems = whatYouGet;
-
-  function getOrbitSpinStyle(delay: number): CSSProperties & Record<"--orbit-duration", string> {
-    return {
-      "--orbit-duration": `${orbitDurationSec}s`,
-      animationDelay: `${delay}s`,
-    };
-  }
-
-  function getOrbitCounterStyle(delay: number, radius: string): CSSProperties & Record<"--orbit-duration" | "--r", string> {
-    return {
-      "--orbit-duration": `${orbitDurationSec}s`,
-      "--r": radius,
-      animationDelay: `${delay}s`,
-    };
-  }
-
   return (
-    <div className="relative mx-auto flex aspect-square w-full max-w-[min(100%,42rem)] items-center justify-center sm:max-w-[min(100%,48rem)] lg:max-w-[min(100%,52rem)]">
+    <div className="anim-visual-shell relative mx-auto flex aspect-square scale-110 items-center justify-center lg:scale-125">
       {/* Central hub – mapa vozila */}
-      <div className="relative z-10 flex h-[28rem] w-[28rem] shrink-0 items-center justify-center xs:h-[32rem] xs:w-[32rem] sm:h-[38rem] sm:w-[38rem] lg:h-[42rem] lg:w-[42rem]">
+      <div className="anim-visual-hub relative z-10 flex shrink-0 items-center justify-center">
         <div className="flex flex-col items-center justify-center text-center text-slate-900 dark:text-white">
           <Image
             src="/gpssistem.svg"
             alt="Mapa vozila"
             width={1024}
             height={1024}
-            className="h-[23rem] w-[23rem] object-contain xs:h-[27rem] xs:w-[27rem] sm:h-[32rem] sm:w-[32rem] lg:h-[36rem] lg:w-[36rem]"
+            className="anim-visual-image object-contain"
             priority
           />
         </div>
       </div>
-
-      {/* Orbiting feature cards */}
-      {orbitItems.map((item, i) => {
-        // Two rings: inner and outer. Radius scales with viewport so cards won't overlap as easily.
-        const isOuter = i % 2 === 0;
-        const radius = isOuter ? "clamp(210px, 30vw, 320px)" : "clamp(165px, 24vw, 265px)";
-        // Stagger phases so cards are visible at different positions along the circles.
-        const delay = -(i * (orbitDurationSec / orbitItems.length));
-
-        return (
-          <div key={item.orbitLabel} className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-            <div
-              className="orbit-spin"
-              style={getOrbitSpinStyle(delay)}
-            >
-              <div
-                className="orbit-counter"
-                style={getOrbitCounterStyle(delay, radius)}
-              >
-                <div className="transition-smooth rounded-xl border border-slate-200/80 bg-white px-3 py-2.5 shadow-lg shadow-slate-200/50 dark:border-white/10 dark:bg-white/[0.08] dark:shadow-none dark:backdrop-blur-sm sm:px-4 sm:py-3">
-                  <div className="flex items-center gap-2 sm:gap-2.5">
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-teal-500/15 text-teal-600 dark:bg-[#00ff9d]/20 dark:text-[#00ff9d]">
-                      {item.icon}
-                    </span>
-                    <span className="text-xs font-medium leading-snug text-slate-700 dark:text-slate-200 sm:text-sm">
-                      {item.orbitLabel}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-      })}
     </div>
   );
 }
 
 export default function WhyUs() {
   return (
-    <section id="gps-sistem" className="scroll-mt-20 bg-slate-50 px-4 py-12 dark:bg-black sm:px-6 sm:py-14 lg:px-8">
+    <section id="gps-sistem" className="scroll-mt-20 bg-slate-50 px-4 py-0 dark:bg-black sm:px-6 sm:py-14 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:gap-14 lg:items-center xl:gap-16">
           <div>
@@ -176,7 +123,7 @@ export default function WhyUs() {
               Transport i logistika • Auto-škole • Taxi vozila • Plovila • Ostala vozila i prevozna sredstva
             </p>
           </div>
-          <div className="hidden min-h-[460px] items-center justify-center md:flex lg:min-h-[540px] xl:min-h-[580px]">
+          <div className="hidden min-h-[520px] items-center justify-center md:flex lg:min-h-[640px] xl:min-h-[700px]">
             <OrbitVisual />
           </div>
         </div>

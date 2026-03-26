@@ -39,7 +39,7 @@ function FaqAccordionItem({
       </button>
 
       <div
-        className={`grid transition-[grid-template-rows] duration-200 ease-out ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+        className={`motion-fast grid transition-[grid-template-rows] ease-out ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
       >
         <div className="overflow-hidden">
           <div className="border-t border-slate-200 px-5 pb-4 pt-2 text-slate-600 dark:border-white/10 dark:text-slate-300">
@@ -77,7 +77,7 @@ export default function FAQ({ variant = "landing" }: FAQProps) {
   const categories = faqCategories;
 
   return (
-    <section id="faq" className="scroll-mt-20 bg-white px-4 py-12 dark:bg-black sm:px-6 sm:py-14 lg:px-8">
+    <section id="faq" className="scroll-mt-20 bg-white px-4 py-0 dark:bg-black sm:px-6 sm:py-14 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <div className={isLanding ? "" : "flex flex-col lg:flex-row lg:items-start lg:gap-12"}>
           {/* Left: pitanja + search */}
@@ -182,7 +182,7 @@ export default function FAQ({ variant = "landing" }: FAQProps) {
             <div className="mt-10 lg:mt-0 lg:w-[640px] lg:sticky lg:top-24 lg:self-start">
               <div className="w-full overflow-hidden rounded-2xl">
                 <Image
-                  src="/faq.png"
+                  src="/faq.svg"
                   alt="Ilustracija – FAQ"
                   width={1400}
                   height={700}

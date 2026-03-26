@@ -70,9 +70,9 @@ function ReviewCard({
   return (
     <div className="transition-smooth flex h-full w-[min(340px,85vw)] shrink-0 flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-md hover:border-teal-200 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.06] dark:hover:border-[#00ff9d]/40">
       <StarRating n={rating} />
-      <p className="mt-4 flex-1 text-slate-600 dark:text-slate-300">{text}</p>
+      <p className="card-body mt-4 flex-1 text-slate-600 dark:text-slate-300">{text}</p>
       <div className="mt-4 border-t border-slate-100 pt-4 dark:border-white/10">
-        <p className="font-semibold text-slate-900 dark:text-white">{name}</p>
+        <p className="card-title text-slate-900 dark:text-white">{name}</p>
         <p className="text-sm text-slate-500 dark:text-slate-300">{role}</p>
       </div>
     </div>
@@ -83,7 +83,7 @@ export default function Reviews() {
   const duplicated = [...reviews, ...reviews];
 
   return (
-    <section className="scroll-mt-20 bg-slate-50 px-4 py-20 dark:bg-black sm:px-6 lg:px-8">
+    <section className="scroll-mt-20 bg-slate-50 px-4 py-0 dark:bg-black sm:px-6 sm:py-14 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">

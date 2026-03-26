@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "./context/ThemeContext";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
@@ -36,39 +35,19 @@ export const metadata: Metadata = {
   },
 };
 
-const themeScript = `
-(function() {
-  var key = 'gpspracenje-theme';
-  try {
-    var stored = localStorage.getItem(key);
-    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    var dark;
-    if (stored === 'dark') dark = true;
-    else if (stored === 'light') dark = false;
-    else dark = !!prefersDark;
-    var el = document.documentElement;
-    if (dark) { el.classList.add('dark'); el.setAttribute('data-theme', 'dark'); }
-    else { el.classList.remove('dark'); el.setAttribute('data-theme', 'light'); }
-  } catch (e) {}
-})();
-`;
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="sr" suppressHydrationWarning>
+    <html lang="sr" data-theme="light">
       <body className={`${plusJakarta.variable} font-sans antialiased bg-[var(--background)] text-[var(--foreground)]`}>
-        <ThemeProvider>
-          <div className="flex min-h-screen flex-col">
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
-        </ThemeProvider>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <div className="flex min-h-screen flex-col">
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

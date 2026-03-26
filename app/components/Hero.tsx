@@ -1,9 +1,8 @@
-import Link from "next/link";
 import HeroRouteVansAnimated from "./HeroRouteVansAnimated";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[calc(100dvh-7rem)] overflow-hidden px-4 pb-10 pt-4 sm:px-6 sm:pb-16 sm:pt-6 lg:px-8">
+    <section className="relative min-h-[calc(100dvh-7rem)] overflow-hidden px-4 pb-0 pt-4 sm:px-6 sm:pb-16 sm:pt-6 lg:px-8">
       {/* Light: gradient + subtle grid */}
       <div
         className="absolute inset-0 bg-gradient-to-b from-slate-50 via-white to-slate-100 dark:hidden"
@@ -40,10 +39,6 @@ export default function Hero() {
               <stop offset="0%" stopColor="#0d9488" stopOpacity="0.35" />
               <stop offset="50%" stopColor="#14b8a6" stopOpacity="0.5" />
               <stop offset="100%" stopColor="#0d9488" stopOpacity="0.45" />
-            </linearGradient>
-            <linearGradient id="hero-gps-radar-wedge-light" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#14b8a6" stopOpacity="0.35" />
-              <stop offset="100%" stopColor="#14b8a6" stopOpacity="0" />
             </linearGradient>
             <pattern id="hero-gps-hex-light" width="28" height="48" patternUnits="userSpaceOnUse" patternTransform="scale(1)">
               <path
@@ -136,53 +131,10 @@ export default function Hero() {
             <circle r="14" fill="#0d9488" className="drop-shadow-md" />
             <path d="M0 18 L-8 32 L0 28 L8 32 Z" fill="#0f766e" className="drop-shadow-sm" />
           </g>
-          {/* Aktivno vozilo: HUD + radar + pulsirajući signal */}
+          {/* Aktivno vozilo: čist, statičan pin */}
           <g transform="translate(1080, 280)">
-            <circle
-              r="36"
-              fill="none"
-              stroke="#0d9488"
-              strokeWidth="1.2"
-              className="hero-gps-ring-pulse"
-              opacity="0.5"
-            />
-            <circle
-              r="36"
-              fill="none"
-              stroke="#14b8a6"
-              strokeWidth="1"
-              className="hero-gps-ring-pulse hero-gps-ring-pulse-delay"
-              opacity="0.45"
-            />
-            <g className="hero-gps-radar-sweep">
-              <path d="M 0 0 L 0 -56 A 56 56 0 0 1 39.6 -39.6 Z" fill="url(#hero-gps-radar-wedge-light)" />
-            </g>
-            <circle r="38" fill="none" stroke="#0d9488" strokeWidth="1.5" opacity="0.22" />
-            <circle r="58" fill="none" stroke="#0d9488" strokeWidth="1" opacity="0.12" />
-            <g stroke="#0d9488" strokeWidth="1.1" fill="none" opacity="0.42">
-              <path d="M-52,-52 L-40,-52 L-40,-40" />
-              <path d="M52,-52 L40,-52 L40,-40" />
-              <path d="M-52,52 L-40,52 L-40,40" />
-              <path d="M52,52 L40,52 L40,40" />
-            </g>
-            <line x1="-32" y1="0" x2="32" y2="0" stroke="#0d9488" strokeWidth="1" opacity="0.35" />
-            <line x1="0" y1="-32" x2="0" y2="32" stroke="#0d9488" strokeWidth="1" opacity="0.35" />
             <circle r="14" fill="#0d9488" className="drop-shadow-md" />
             <path d="M0 18 L-8 32 L0 28 L8 32 Z" fill="#0f766e" className="drop-shadow-sm" />
-          </g>
-          {/* Mini kompas (N) */}
-          <g transform="translate(1050, 118)" opacity="0.4">
-            <circle r="18" fill="none" stroke="#64748b" strokeWidth="1" />
-            <text
-              x="0"
-              y="5"
-              textAnchor="middle"
-              className="fill-slate-500 text-[11px] font-bold"
-              style={{ fontFamily: "system-ui, sans-serif" }}
-            >
-              N
-            </text>
-            <polygon points="0,-11 -3,-2 3,-2" fill="#0d9488" opacity="0.85" />
           </g>
         </svg>
       </div>
@@ -198,10 +150,6 @@ export default function Hero() {
             <linearGradient id="hero-gps-route-dark" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#5eead4" stopOpacity="0.25" />
               <stop offset="100%" stopColor="#2dd4bf" stopOpacity="0.4" />
-            </linearGradient>
-            <linearGradient id="hero-gps-radar-wedge-dark" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#2dd4bf" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#2dd4bf" stopOpacity="0" />
             </linearGradient>
             <pattern id="hero-gps-hex-dark" width="28" height="48" patternUnits="userSpaceOnUse">
               <path
@@ -286,48 +234,8 @@ export default function Hero() {
             <path d="M0 18 L-8 32 L0 28 L8 32 Z" fill="rgba(255,255,255,0.95)" className="drop-shadow-sm" />
           </g>
           <g transform="translate(1080, 280)">
-            <circle
-              r="36"
-              fill="none"
-              stroke="rgba(45,212,191,0.55)"
-              strokeWidth="1.2"
-              className="hero-gps-ring-pulse"
-            />
-            <circle
-              r="36"
-              fill="none"
-              stroke="rgba(94,234,212,0.45)"
-              strokeWidth="1"
-              className="hero-gps-ring-pulse hero-gps-ring-pulse-delay"
-            />
-            <g className="hero-gps-radar-sweep">
-              <path d="M 0 0 L 0 -56 A 56 56 0 0 1 39.6 -39.6 Z" fill="url(#hero-gps-radar-wedge-dark)" />
-            </g>
-            <circle r="38" fill="none" stroke="rgba(45,212,191,0.35)" strokeWidth="1.5" />
-            <circle r="58" fill="none" stroke="rgba(45,212,191,0.2)" strokeWidth="1" />
-            <g stroke="rgba(45,212,191,0.45)" strokeWidth="1.1" fill="none">
-              <path d="M-52,-52 L-40,-52 L-40,-40" />
-              <path d="M52,-52 L40,-52 L40,-40" />
-              <path d="M-52,52 L-40,52 L-40,40" />
-              <path d="M52,52 L40,52 L40,40" />
-            </g>
-            <line x1="-32" y1="0" x2="32" y2="0" stroke="rgba(45,212,191,0.4)" strokeWidth="1" />
-            <line x1="0" y1="-32" x2="0" y2="32" stroke="rgba(45,212,191,0.4)" strokeWidth="1" />
             <circle r="14" fill="rgba(255,255,255,0.92)" className="drop-shadow-md" />
             <path d="M0 18 L-8 32 L0 28 L8 32 Z" fill="rgba(255,255,255,0.95)" className="drop-shadow-sm" />
-          </g>
-          <g transform="translate(1050, 118)" opacity="0.45">
-            <circle r="18" fill="none" stroke="rgba(148,163,184,0.5)" strokeWidth="1" />
-            <text
-              x="0"
-              y="5"
-              textAnchor="middle"
-              fill="rgba(203,213,225,0.85)"
-              style={{ fontFamily: "system-ui, sans-serif", fontSize: "11px", fontWeight: 700 }}
-            >
-              N
-            </text>
-            <polygon points="0,-11 -3,-2 3,-2" fill="rgba(45,212,191,0.9)" />
           </g>
         </svg>
       </div>
@@ -340,25 +248,20 @@ export default function Hero() {
           Smanjite troškove, zaštitite vozila od krađe i sprečite zloupotrebu
         </p>
         <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-          GPS Praćenje vozila u Srbiji i preko 40 zemalja Evrope, uz mogućnost daljinskog gašenja vozila jednim klikom putem aplikacije. Sistem je dostupan po promotivnoj ceni pretplate od 780 rsd. mesečno po vozilu (uz 12 meseci), a ponuda je vremenski ograničena.
+          Rešenje za firme i privatna vozila, uz daljinsko gašenje vozila putem aplikacije. Već od 780 RSD mesečno po
+          vozilu.
         </p>
 
-        <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-4">
+        <div className="mt-10 flex flex-col items-center justify-center gap-4">
           <a
             href="tel:+381614030888"
             className="transition-smooth w-full rounded-xl bg-teal-600 px-8 py-4 text-center text-sm font-bold uppercase tracking-wide text-white shadow-lg shadow-teal-500/30 hover:bg-teal-500 hover:shadow-teal-500/40 hover:-translate-y-0.5 sm:w-auto dark:bg-[#00ff9d] dark:text-black dark:hover:bg-[#00e699] dark:hover:shadow-[0_0_24px_rgba(0,255,157,0.35)]"
           >
             Pozovite: 061 4030 888
           </a>
-          <Link
-            href="/porucivanje"
-            className="transition-smooth w-full rounded-xl border-2 border-slate-300 bg-white px-8 py-4 text-center text-sm font-bold uppercase tracking-wide text-slate-700 shadow-md hover:border-teal-400 hover:bg-slate-50 hover:-translate-y-0.5 sm:w-auto dark:border-white/20 dark:bg-white/[0.08] dark:text-white dark:hover:border-[#00ff9d]/50 dark:hover:bg-white/10"
-          >
-            Poruči odmah
-          </Link>
         </div>
         <p className="mt-4 text-center text-sm text-slate-500 dark:text-slate-300">
-          Bez ugovorne obaveze, bez skrivenih troškova i uz potpunu tehničku podršku.
+          Bez ugovorne obaveze i uz potpunu tehničku podršku.
         </p>
       </div>
     </section>

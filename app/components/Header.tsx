@@ -3,15 +3,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
   { href: "/prednosti", label: "Prednosti" },
   { href: "/gps-sistem", label: "GPS sistem" },
   { href: "/aplikacija", label: "Aplikacija" },
+  { href: "/porucivanje", label: "Poručivanje" },
   { href: "/faq", label: "FAQ" },
   { href: "/blog", label: "Blog" },
-  { href: "/porucivanje", label: "Poručivanje" },
   { href: "/kontakt", label: "Kontakt" },
 ];
 
@@ -52,9 +51,8 @@ export default function Header() {
           ))}
         </ul>
 
-        {/* Right: theme + CTA */}
+        {/* Right: CTA */}
         <div className="flex shrink-0 items-center gap-2">
-          <ThemeToggle />
           <Link
             href="/kontakt"
             className="transition-smooth hidden rounded-lg bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-teal-500 hover:-translate-y-0.5 md:inline-block dark:bg-[#00ff9d] dark:text-black dark:hover:bg-[#00e699] dark:hover:shadow-[0_0_20px_rgba(0,255,157,0.3)]"

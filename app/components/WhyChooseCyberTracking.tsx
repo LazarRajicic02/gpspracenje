@@ -8,9 +8,20 @@ const whyQuestionFont = Unbounded({
 
 const reasons = [
   {
+    title: "12 godina iskustva u GPS praćenju",
+    description:
+      "Proveren sistem sa velikim brojem zadovoljnih korisnika, i stabilnim radom.",
+    icon: (
+      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+    iconWrap: "bg-violet-100 text-violet-600 dark:bg-[#00ff9d]/20 dark:text-[#00ff9d]",
+  },
+  {
     title: "Neograničena tehnička podrška",
     description:
-      "Tu smo za pitanja o uređaju, aplikaciji i podešavanjima — bez skrivenog ograničenja broja kontakata dok koristite naš sistem.",
+      "Besplatna tehnička podrška tokom celog perioda korišćenja sistema, bez dodatnih troškova.",
     icon: (
       <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path
@@ -23,55 +34,49 @@ const reasons = [
     iconWrap: "bg-sky-100 text-sky-600 dark:bg-[#00ff9d]/20 dark:text-[#00ff9d]",
   },
   {
-    title: "12 godina iskustva u GPS praćenju",
+    title: "Brza isporuka sistema",
     description:
-      "Dugogodišnji rad na praćenju vozila i flota u Srbiji — poznajemo izazove terena, mreže i očekivanja korisnika.",
-    icon: (
-      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
-    iconWrap:
-      "bg-violet-100 text-violet-600 dark:bg-[#00ff9d]/20 dark:text-[#00ff9d]",
-  },
-  {
-    title: "10 dana besplatnog korišćenja",
-    description:
-      "Isprobajte sistem u miru pre odluke — bez obaveze, da vidite da li vam odgovara praćenje i aplikacija.",
-    icon: (
-      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
-    iconWrap: "bg-rose-100 text-rose-600 dark:bg-[#00ff9d]/20 dark:text-[#00ff9d]",
-  },
-  {
-    title: "Proveren sistem sa velikim brojem zadovoljnih korisnika",
-    description:
-      "Uređaji, SIM i aplikacija u praksi kod firmi i pojedinaca — stabilnost i podrška koje možete da očekujete.",
+      "Sisteme najčešće isporučujemo u roku od 24h od trenutka porudžbine.",
     icon: (
       <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
-          d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+          d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0zM13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1"
         />
       </svg>
     ),
-    iconWrap:
-      "bg-emerald-100 text-emerald-600 dark:bg-[#00ff9d]/20 dark:text-[#00ff9d]",
+    iconWrap: "bg-amber-100 text-amber-600 dark:bg-[#00ff9d]/20 dark:text-[#00ff9d]",
   },
   {
-    title: "Startujte odmah",
+    title: "Jednostavno korišćenje",
     description:
-      "Brza isporuka i jasni koraci za aktivaciju, da što pre krenete sa praćenjem vozila na mapi.",
+      "Praćenje vozila preko računara ili mobilnog telefona, putem jednostavne aplikacije i web pristupa.",
     icon: (
       <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
+        />
       </svg>
     ),
-    iconWrap:
-      "bg-brand-orange-soft text-brand-orange-deep dark:bg-[#00ff9d]/20 dark:text-[#00ff9d]",
+    iconWrap: "bg-rose-100 text-rose-600 dark:bg-[#00ff9d]/20 dark:text-[#00ff9d]",
+  },
+  {
+    title: "Bez ugovorne obaveze",
+    description:
+      "Sistem koristite koliko želite, bez ugovorne obaveze.",
+    icon: (
+      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+        />
+      </svg>
+    ),
+    iconWrap: "bg-emerald-100 text-emerald-600 dark:bg-[#00ff9d]/20 dark:text-[#00ff9d]",
   },
 ];
 
@@ -81,7 +86,7 @@ export default function WhyChooseCyberTracking() {
   return (
     <section
       id="zasto-cyber-tracking"
-      className="scroll-mt-20 bg-white px-4 py-12 dark:bg-black sm:px-6 sm:py-14 lg:px-8"
+      className="scroll-mt-20 bg-white px-4 py-0 dark:bg-black sm:px-6 sm:py-14 lg:px-8"
     >
       <div className="mx-auto max-w-6xl">
         <header className="text-center">
@@ -101,7 +106,7 @@ export default function WhyChooseCyberTracking() {
 
         <div className="mt-12 grid items-center gap-12 lg:grid-cols-2 lg:gap-14 xl:gap-20">
           {/* Kartice */}
-          <div className="order-2 flex flex-col gap-5 lg:order-1">
+          <div className="order-2 flex flex-col gap-7 lg:order-1 lg:gap-5">
             {reasons.map((item) => (
               <div
                 key={item.title}
@@ -113,10 +118,10 @@ export default function WhyChooseCyberTracking() {
                   {item.icon}
                 </div>
                 <div className="min-w-0">
-                  <h3 className="text-lg font-bold leading-snug text-slate-900 dark:text-white sm:text-lg md:text-xl">
+                  <h3 className="card-title text-slate-900 dark:text-white">
                     {item.title}
                   </h3>
-                  <p className="mt-2 text-base leading-relaxed text-slate-600 dark:text-slate-300 lg:text-sm lg:leading-relaxed">
+                  <p className="card-body mt-2 text-slate-600 dark:text-slate-300">
                     {item.description}
                   </p>
                 </div>

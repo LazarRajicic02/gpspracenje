@@ -12,13 +12,13 @@ const ORDER_TYPES = [
     id: "pro" as const,
     title: "PRO GPS Sistem",
     description: "Napredni GPS sistem sa mogućnošću daljinskog gašenja vozila i potpunom kontrolom u realnom vremenu.",
-    price: "GPS sistem 6.850 rsd. • Pretplata od 780 rsd.",
+    price: "GPS sistem 6.850 rsd. jednokratno • Pretplata od 780 rsd.",
   },
   {
     id: "smart" as const,
     title: "Smart GPS Sistem",
     description: "Standardni GPS sistem za praćenje vozila u realnom vremenu sa svim osnovnim funkcijama.",
-    price: "GPS sistem 5.850 rsd. • Pretplata od 780 rsd.",
+    price: "GPS sistem 5.850 rsd. jednokratno • Pretplata od 780 rsd.",
   },
   {
     id: "renewal" as const,
@@ -56,10 +56,11 @@ type OrderFormBodyProps = {
 };
 
 export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) {
+  const isRenewal = type === "renewal";
   const [months, setMonths] = useState<3 | 6 | 12>(12);
   const [sent, setSent] = useState(false);
   const [acceptedTerms, setAcceptedTerms] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState<"pouzece" | "racun">("pouzece");
+  const [paymentMethod, setPaymentMethod] = useState<"pouzece" | "racun">(isRenewal ? "racun" : "pouzece");
   const [validationError, setValidationError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -72,13 +73,22 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
     const form = e.currentTarget;
     const name = (form.elements.namedItem("name") as HTMLInputElement).value.trim();
     const phone = (form.elements.namedItem("phone") as HTMLInputElement).value.trim();
-    const address = (form.elements.namedItem("address") as HTMLInputElement).value.trim();
+    const addressEl = form.elements.namedItem("address") as HTMLInputElement | null;
+    const address = addressEl?.value.trim() ?? "";
     const email = (form.elements.namedItem("email") as HTMLInputElement).value.trim();
     const notes = (form.elements.namedItem("notes") as HTMLTextAreaElement).value.trim();
     const qtyRaw = (form.elements.namedItem("quantity") as HTMLInputElement).value;
     const quantity = Math.min(99, Math.max(1, Number.parseInt(qtyRaw, 10) || 1));
-    if (!name || !phone || !address) {
-      setValidationError("Molimo popunite obavezna polja: ime i prezime ili naziv firme, telefon i ulica sa gradom.");
+    if (!name || !phone || (!isRenewal && !address)) {
+      setValidationError(
+        isRenewal
+          ? "Molimo popunite obavezna polja: ime i prezime ili naziv firme i telefon."
+          : "Molimo popunite obavezna polja: ime i prezime ili naziv firme, telefon i ulica sa gradom.",
+      );
+      return;
+    }
+    if (isRenewal && !notes) {
+      setValidationError("Napomena je obavezna. Unesite količinu pretplata i serijske brojeve uređaja.");
       return;
     }
     if (!acceptedTerms) {
@@ -95,7 +105,7 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
           months,
           name,
           phone,
-          address,
+          address: isRenewal ? undefined : address,
           email: email || undefined,
           notes: notes || undefined,
           quantity,
@@ -137,7 +147,7 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
     : null;
 
   const fieldInputClass = pageForm
-    ? "mt-1.5 block w-full rounded-lg border border-slate-300 bg-white px-3 py-3 text-base text-slate-900 shadow-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20 dark:border-white/10 dark:bg-white/[0.08] dark:text-white max-lg:min-h-[48px] lg:mt-1 lg:px-2.5 lg:py-1.5 lg:text-sm"
+    ? "mt-1.5 block w-full rounded-lg border border-slate-300 bg-white px-3.5 py-3.5 text-base text-slate-900 shadow-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20 dark:border-white/10 dark:bg-white/[0.08] dark:text-white max-lg:min-h-[54px] lg:mt-1 lg:px-3 lg:py-2 lg:text-base"
     : "mt-1.5 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20 dark:border-white/10 dark:bg-white/[0.08] dark:text-white";
 
   const sectionCardClass = pageForm
@@ -159,8 +169,8 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
         <p
           className={
             pageForm
-              ? "mt-1.5 text-sm leading-relaxed text-slate-600 dark:text-slate-300 lg:mt-1 lg:text-xs lg:leading-snug"
-              : "mt-0.5 text-sm text-slate-600 dark:text-slate-300"
+              ? "mt-1.5 text-base leading-relaxed text-slate-600 dark:text-slate-300 lg:mt-1 lg:text-sm lg:leading-snug"
+              : "mt-0.5 text-base text-slate-600 dark:text-slate-300"
           }
         >
           {selectedType.description}
@@ -211,19 +221,19 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
               )}
 
               <div className={`${sectionCardClass} ${pageGrid?.pretplata ?? ""}`}>
-                <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 max-lg:text-sm">
                   Pretplata
                 </h4>
                 <span
                   className={
                     pageForm
-                      ? "mt-3 block text-sm font-medium text-slate-800 dark:text-slate-200 lg:mt-1.5 lg:text-xs"
+                      ? "mt-3 block text-base font-medium text-slate-800 dark:text-slate-200 lg:mt-1.5 lg:text-xs"
                       : "mt-3 block text-sm font-medium text-slate-800 dark:text-slate-200"
                   }
                 >
                   Izaberite trajanje pretplate
                 </span>
-                <div className="mt-2 flex flex-col gap-2 sm:flex-row sm:flex-nowrap lg:mt-1.5">
+                <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:flex-nowrap lg:mt-1.5">
                   {SUBSCRIPTION_MONTHS.map((m) => {
                     const selected = months === m;
                     const isTwelve = m === 12;
@@ -243,7 +253,7 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
                     return (
                       <label
                         key={m}
-                        className={`flex w-full cursor-pointer flex-col items-center rounded-lg border-2 px-1.5 py-2.5 text-center transition sm:min-w-0 sm:flex-1 sm:px-2 lg:py-1.5 ${cardClass}`}
+                        className={`relative overflow-visible flex w-full cursor-pointer flex-col items-center rounded-lg border-2 px-2.5 py-3.5 text-center transition sm:min-w-0 sm:flex-1 sm:px-2.5 lg:py-2 ${cardClass}`}
                       >
                         <input
                           type="radio"
@@ -253,20 +263,20 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
                           onChange={() => setMonths(m)}
                           className="sr-only"
                         />
-                        <span className="text-[11px] font-semibold leading-tight sm:text-sm">{MONTH_LABELS[m]}</span>
-                        <span className="mt-1 text-[11px] font-semibold text-teal-600 dark:text-teal-400 sm:text-xs">
+                        <span className="text-lg font-semibold leading-tight sm:text-lg lg:text-base">{MONTH_LABELS[m]}</span>
+                        <span className="mt-1 text-lg font-semibold text-teal-600 dark:text-teal-400 sm:text-lg lg:text-base">
                           {SUBSCRIPTION_PRICES[m]}
                         </span>
-                        <span className="mt-0.5 block text-[10px] font-medium leading-tight text-slate-500 dark:text-slate-400">
+                        <span className="mt-0.5 block text-base font-medium leading-tight text-slate-500 dark:text-slate-400 sm:text-base lg:text-sm">
                           {MONTHLY_PRICE[m]} / mes.
                         </span>
                         {m === 6 && (
-                          <span className="mt-1.5 rounded-full bg-sky-200 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-sky-950 dark:bg-sky-500/35 dark:text-sky-100 sm:px-2 sm:text-[10px]">
+                          <span className="absolute -top-3.5 right-0 rounded-full bg-sky-200 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-sky-950 shadow-sm dark:bg-sky-500 dark:text-sky-50 sm:px-2.5 sm:text-[11px]">
                             Najčešći izbor
                           </span>
                         )}
                         {m === 12 && (
-                          <span className="mt-1.5 rounded-full bg-brand-orange/25 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-brand-orange-ink dark:bg-brand-orange/35 dark:text-brand-orange-soft sm:px-2 sm:text-[10px]">
+                          <span className="absolute -top-3.5 right-0 rounded-full bg-brand-orange px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-white shadow-sm dark:bg-brand-orange-bright dark:text-black sm:px-2.5 sm:text-[11px]">
                             Najbolja cena
                           </span>
                         )}
@@ -345,27 +355,29 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
                       />
                     </div>
                   </div>
-                  <div>
-                    <label
-                      htmlFor={`order-address${suffix}`}
-                      className={
-                        pageForm
-                          ? "block text-sm font-medium text-slate-700 dark:text-slate-300 max-lg:text-base"
-                          : "block text-sm font-medium text-slate-700 dark:text-slate-300"
-                      }
-                    >
-                      Ulica i grad <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      id={`order-address${suffix}`}
-                      name="address"
-                      type="text"
-                      required
-                      onChange={() => setValidationError(null)}
-                      className={fieldInputClass}
-                      placeholder="Unesite ulicu i grad"
-                    />
-                  </div>
+                  {!isRenewal && (
+                    <div>
+                      <label
+                        htmlFor={`order-address${suffix}`}
+                        className={
+                          pageForm
+                            ? "block text-sm font-medium text-slate-700 dark:text-slate-300 max-lg:text-base"
+                            : "block text-sm font-medium text-slate-700 dark:text-slate-300"
+                        }
+                      >
+                        Ulica i grad <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        id={`order-address${suffix}`}
+                        name="address"
+                        type="text"
+                        required
+                        onChange={() => setValidationError(null)}
+                        className={fieldInputClass}
+                        placeholder="Unesite ulicu i grad"
+                      />
+                    </div>
+                  )}
                   <div>
                     <label
                       htmlFor={`order-notes${suffix}`}
@@ -375,12 +387,19 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
                           : "block text-sm font-medium text-slate-700 dark:text-slate-300"
                       }
                     >
-                      Napomena <span className="text-slate-400 dark:text-slate-300">(opciono)</span>
+                      Napomena{" "}
+                      {isRenewal ? (
+                        <span className="text-red-500">*</span>
+                      ) : (
+                        <span className="text-slate-400 dark:text-slate-300">(opciono)</span>
+                      )}
                     </label>
                     <textarea
                       id={`order-notes${suffix}`}
                       name="notes"
                       rows={pageForm ? 3 : 2}
+                      required={isRenewal}
+                      placeholder={isRenewal ? "Unesite količinu pretplata i serijske brojeve uređaja" : "Unesite napomenu"}
                       onChange={() => setValidationError(null)}
                       className={`${fieldInputClass} max-lg:min-h-[5.5rem] lg:min-h-[3.25rem] lg:resize-none lg:py-1.5`}
                     />
@@ -394,7 +413,7 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
                           : "block text-sm font-medium text-slate-700 dark:text-slate-300"
                       }
                     >
-                      Broj željenih sistema za kupovinu
+                      {isRenewal ? "Broj uređaja za produženje" : "Količina sistema"}
                     </label>
                     <input
                       id={`order-quantity${suffix}`}
@@ -415,45 +434,38 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
                 </h4>
                 <div className={pageForm ? "mt-4 space-y-5 lg:mt-2 lg:space-y-2" : "mt-4 space-y-5"}>
                   <div>
-                    <span
-                      className={
-                        pageForm
-                          ? "text-sm font-medium text-slate-800 dark:text-slate-200 max-lg:text-base lg:text-xs"
-                          : "text-sm font-medium text-slate-800 dark:text-slate-200"
-                      }
-                    >
-                      Način plaćanja
-                    </span>
                     <div
-                      className={`mt-2 divide-y divide-slate-200 overflow-hidden rounded-lg border border-slate-200 bg-white dark:divide-white/10 dark:border-white/10 dark:bg-white/[0.06] ${pageForm ? "max-lg:mt-2 lg:mt-1.5 lg:flex lg:flex-col lg:divide-x-0 lg:divide-y" : ""}`}
+                      className={`divide-y divide-slate-200 overflow-hidden rounded-lg border border-slate-200 bg-white dark:divide-white/10 dark:border-white/10 dark:bg-white/[0.06] ${pageForm ? "lg:mt-1.5 lg:flex lg:flex-col lg:divide-x-0 lg:divide-y" : ""}`}
                     >
-                      <label
-                        className={`group flex cursor-pointer items-center gap-3 px-3 py-3 transition hover:bg-slate-50 dark:hover:bg-white/[0.04] ${pageForm ? "lg:py-2 lg:pl-3 lg:pr-3" : ""}`}
-                      >
-                        <input
-                          type="radio"
-                          name="paymentMethod"
-                          value="pouzece"
-                          checked={paymentMethod === "pouzece"}
-                          onChange={() => {
-                            setPaymentMethod("pouzece");
-                            setValidationError(null);
-                          }}
-                          className="sr-only"
-                        />
-                        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-slate-300 bg-white transition dark:border-white/20 dark:bg-white/[0.06] group-has-[:checked]:border-teal-600 group-has-[:checked]:bg-teal-600 dark:group-has-[:checked]:border-[#00ff9d] dark:group-has-[:checked]:bg-[#00ff9d]">
-                          <span className="h-2 w-2 rounded-full bg-white opacity-0 transition group-has-[:checked]:opacity-100 dark:bg-slate-950 dark:group-has-[:checked]:bg-black" />
-                        </span>
-                        <span
-                          className={
-                            pageForm
-                              ? "text-sm font-medium text-slate-800 dark:text-slate-200 max-lg:text-base lg:text-xs lg:leading-snug"
-                              : "text-sm font-medium text-slate-800 dark:text-slate-200"
-                          }
+                      {!isRenewal && (
+                        <label
+                          className={`group flex cursor-pointer items-center gap-3 px-3 py-3 transition hover:bg-slate-50 dark:hover:bg-white/[0.04] ${pageForm ? "lg:py-2 lg:pl-3 lg:pr-3" : ""}`}
                         >
-                          Pouzećem prilikom isporuke
-                        </span>
-                      </label>
+                          <input
+                            type="radio"
+                            name="paymentMethod"
+                            value="pouzece"
+                            checked={paymentMethod === "pouzece"}
+                            onChange={() => {
+                              setPaymentMethod("pouzece");
+                              setValidationError(null);
+                            }}
+                            className="sr-only"
+                          />
+                          <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-slate-300 bg-white transition dark:border-white/20 dark:bg-white/[0.06] group-has-[:checked]:border-teal-600 group-has-[:checked]:bg-teal-600 dark:group-has-[:checked]:border-[#00ff9d] dark:group-has-[:checked]:bg-[#00ff9d]">
+                            <span className="h-2 w-2 rounded-full bg-white opacity-0 transition group-has-[:checked]:opacity-100 dark:bg-slate-950 dark:group-has-[:checked]:bg-black" />
+                          </span>
+                          <span
+                            className={
+                              pageForm
+                                ? "text-sm font-medium text-slate-800 dark:text-slate-200 max-lg:text-base lg:text-xs lg:leading-snug"
+                                : "text-sm font-medium text-slate-800 dark:text-slate-200"
+                            }
+                          >
+                            Pouzećem prilikom isporuke
+                          </span>
+                        </label>
+                      )}
                       <label
                         className={`group flex cursor-pointer items-center gap-3 px-3 py-3 transition hover:bg-slate-50 dark:hover:bg-white/[0.04] ${pageForm ? "lg:py-2 lg:pl-3 lg:pr-3" : ""}`}
                       >
@@ -487,7 +499,7 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
               </div>
 
               <label
-                className={`group flex cursor-pointer items-start gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3.5 text-xs text-slate-600 shadow-sm transition hover:border-teal-200/80 hover:bg-teal-50/30 focus-within:ring-2 focus-within:ring-teal-500/30 focus-within:ring-offset-2 focus-within:ring-offset-white dark:border-white/10 dark:bg-white/[0.05] dark:text-slate-300 dark:hover:border-[#00ff9d]/25 dark:hover:bg-[#00ff9d]/[0.06] dark:focus-within:ring-[#00ff9d]/40 dark:focus-within:ring-offset-black ${pageForm ? "max-lg:px-4 max-lg:py-4 max-lg:text-sm lg:px-3 lg:py-2 lg:text-[11px] lg:leading-snug" : ""} ${pageGrid?.terms ?? ""}`}
+                className={`group flex cursor-pointer items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3.5 text-xs text-slate-600 shadow-sm transition hover:border-teal-200/80 hover:bg-teal-50/30 focus-within:ring-2 focus-within:ring-teal-500/30 focus-within:ring-offset-2 focus-within:ring-offset-white dark:border-white/10 dark:bg-white/[0.05] dark:text-slate-300 dark:hover:border-[#00ff9d]/25 dark:hover:bg-[#00ff9d]/[0.06] dark:focus-within:ring-[#00ff9d]/40 dark:focus-within:ring-offset-black ${pageForm ? "max-lg:px-4 max-lg:py-4 max-lg:text-sm lg:px-3 lg:py-2 lg:text-[11px] lg:leading-snug" : ""} ${pageGrid?.terms ?? ""}`}
               >
                 <input
                   type="checkbox"
@@ -498,7 +510,7 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
                   }}
                   className="sr-only"
                 />
-                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border-2 border-slate-300 bg-white transition dark:border-white/25 dark:bg-white/[0.06] group-has-[:checked]:border-teal-600 group-has-[:checked]:bg-teal-600 dark:group-has-[:checked]:border-[#00ff9d] dark:group-has-[:checked]:bg-[#00ff9d]">
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md border-2 border-slate-300 bg-white transition dark:border-white/25 dark:bg-white/[0.06] group-has-[:checked]:border-teal-600 group-has-[:checked]:bg-teal-600 dark:group-has-[:checked]:border-[#00ff9d] dark:group-has-[:checked]:bg-[#00ff9d]">
                   <svg
                     className="h-3 w-3 text-white opacity-0 transition group-has-[:checked]:opacity-100 dark:text-black"
                     fill="none"
@@ -539,17 +551,10 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
                 {submitting ? "Šaljem…" : "Pošalji porudžbinu"}
               </button>
 
-              <p
-                className={`text-center text-xs text-slate-500 dark:text-slate-400 ${pageForm ? "max-lg:text-sm lg:text-[11px]" : ""} ${pageGrid?.foot ?? ""}`}
-              >
-                Ili pišite na{" "}
-                <a
-                  href="mailto:cybermaster381@gmail.com"
-                  className="font-medium text-teal-600 hover:underline dark:text-teal-400"
-                >
-                  cybermaster381@gmail.com
-                </a>
+              <p className={`text-center text-xs text-slate-500 dark:text-slate-400 ${pageForm ? "max-lg:text-sm lg:text-[11px]" : ""} ${pageGrid?.foot ?? ""}`}>
+                Bez ugovornih obaveza i skrivenih troškova
               </p>
+
         </form>
       )}
     </>
@@ -640,7 +645,7 @@ function OrderInner() {
 
   return (
     <>
-      <section id="porucivanje" className="scroll-mt-20 bg-white px-4 py-12 dark:bg-black sm:px-6 sm:py-14 lg:px-8">
+      <section id="porucivanje" className="scroll-mt-20 bg-white px-4 py-0 dark:bg-black sm:px-6 sm:py-14 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="text-center">
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
@@ -651,13 +656,9 @@ function OrderInner() {
             </p>
           </div>
 
-          <p className="mt-10 text-center text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400 lg:mt-12">
-            Novi GPS uređaj + pretplata
-          </p>
-
           <div className="mt-4 flex flex-col gap-8 lg:mt-5 lg:flex-row lg:items-stretch lg:justify-center lg:gap-5 xl:gap-7">
             {/* Smart — levo, manji */}
-            <div className="mx-auto w-full max-w-sm lg:mx-0 lg:flex lg:w-[26%] lg:min-w-0 lg:max-w-none lg:self-center">
+            <div className="order-2 mx-auto w-full max-w-lg lg:order-1 lg:mx-0 lg:flex lg:w-[26%] lg:min-w-0 lg:max-w-none lg:self-center">
               <button
                 type="button"
                 onClick={() => selectPlan("smart")}
@@ -673,12 +674,12 @@ function OrderInner() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
-                <h3 className="mt-4 text-base font-semibold text-white group-hover:text-teal-200 dark:group-hover:text-[#00ff9d] sm:text-lg">
+                <h3 className="mt-4 text-xl font-semibold text-white group-hover:text-teal-200 dark:group-hover:text-[#00ff9d] sm:text-lg">
                   {smartPlan.title}
                 </h3>
-                <p className="mt-2 flex-1 text-xs text-slate-300 dark:text-slate-400 sm:text-sm">{smartPlan.description}</p>
-                <p className="mt-4 text-xs font-medium text-[#4ade80] dark:text-[#00ff9d] sm:text-sm">{smartPlan.price}</p>
-                <span className="mt-3 inline-flex items-center text-sm font-medium text-teal-300 dark:text-[#00ff9d]">
+                <p className="mt-2 flex-1 text-sm text-slate-300 dark:text-slate-400 sm:text-sm">{smartPlan.description}</p>
+                <p className="mt-4 text-sm font-medium leading-relaxed text-[#4ade80] dark:text-[#00ff9d] sm:text-sm">{smartPlan.price}</p>
+                <span className="mt-3 inline-flex items-center text-base font-medium text-teal-300 dark:text-[#00ff9d]">
                   Poruči
                   <svg className="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -688,7 +689,7 @@ function OrderInner() {
             </div>
 
             {/* PRO — centar, najveći */}
-            <div className="mx-auto w-full max-w-md lg:mx-0 lg:flex lg:w-[38%] lg:min-w-0 lg:max-w-none lg:self-center">
+            <div className="order-1 mx-auto w-full max-w-md lg:order-2 lg:mx-0 lg:flex lg:w-[38%] lg:min-w-0 lg:max-w-none lg:self-center">
               <button
                 type="button"
                 onClick={() => selectPlan("pro")}
@@ -718,17 +719,17 @@ function OrderInner() {
 
             {/* Produžavanje — desno, drugačiji vizuelni jezik */}
             <div
-              className="mx-auto flex w-full max-w-sm flex-col border-t border-dashed border-slate-300 pt-8 dark:border-white/20 lg:mx-0 lg:w-[24%] lg:min-w-0 lg:max-w-none lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0 xl:pl-8"
+              className="order-3 mx-auto flex w-full max-w-sm flex-col border-t border-dashed border-slate-300 pt-8 dark:border-white/20 lg:mx-0 lg:w-[24%] lg:min-w-0 lg:max-w-none lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0 xl:pl-8"
               aria-labelledby="order-renewal-heading"
             >
               <p
                 id="order-renewal-heading"
-                className="mb-1 text-center text-[11px] font-bold uppercase tracking-[0.2em] text-teal-700 dark:text-[#00ff9d] lg:text-left"
+                className="mb-1 text-center text-xs font-bold uppercase tracking-[0.2em] text-teal-700 dark:text-[#00ff9d] lg:text-left"
               >
                 Produžavanje pretplate
               </p>
-              <p className="mb-4 text-center text-xs text-slate-600 dark:text-slate-400 lg:text-left">
-                Za postojeće korisnike — bez novog uređaja.
+              <p className="mb-4 text-center text-sm text-slate-600 dark:text-slate-400 lg:text-left">
+                Za korisnike koji već imaju GPS sistem, produžite pretplatu i nastavite korišćenje bez prekida.
               </p>
               <button
                 type="button"
@@ -744,12 +745,12 @@ function OrderInner() {
                     />
                   </svg>
                 </div>
-                <h3 className="mt-3 text-sm font-semibold text-slate-900 group-hover:text-teal-700 dark:text-white dark:group-hover:text-[#00ff9d]">
+                <h3 className="mt-3 text-lg font-semibold text-slate-900 group-hover:text-teal-700 dark:text-white dark:group-hover:text-[#00ff9d]">
                   {renewalPlan.title}
                 </h3>
-                <p className="mt-1.5 flex-1 text-xs leading-relaxed text-slate-600 dark:text-slate-400">{renewalPlan.description}</p>
-                <p className="mt-3 text-xs font-medium text-teal-600 dark:text-teal-400">{renewalPlan.price}</p>
-                <span className="mt-2 inline-flex items-center text-xs font-semibold text-teal-600 group-hover:text-teal-500 dark:text-[#00ff9d]">
+                <p className="mt-1.5 flex-1 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{renewalPlan.description}</p>
+                <p className="mt-3 text-sm font-medium text-teal-600 dark:text-teal-400">Dostupno produženje na 3, 6 ili 12 meseci.</p>
+                <span className="mt-2 inline-flex items-center text-sm font-semibold text-teal-600 group-hover:text-teal-500 dark:text-[#00ff9d]">
                   Produži pretplatu
                   <svg className="ml-1 h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

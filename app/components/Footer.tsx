@@ -3,8 +3,6 @@ import Image from "next/image";
 import { companyLegal } from "../data/company";
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
   return (
     <footer className="border-t border-slate-200 bg-slate-900 text-slate-300 dark:border-white/10 dark:bg-black">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
@@ -70,10 +68,10 @@ export default function Footer() {
                   <ul className="space-y-1.5 text-sm">
                     <li>
                       <a
-                        href="mailto:podrska@gpspracenje.rs"
+                        href={`mailto:${companyLegal.email}`}
                         className="transition-smooth break-all hover:text-teal-400 dark:hover:text-[#00ff9d]"
                       >
-                        podrska@gpspracenje.rs
+                        {companyLegal.email}
                       </a>
                     </li>
                     <li>
@@ -92,29 +90,20 @@ export default function Footer() {
               </div>
 
               <div className="mt-5 border-t border-slate-700/70 pt-5 dark:border-white/10">
-                <dl className="space-y-3 text-sm text-slate-400">
-                  <div>
-                    <dt className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-500">Sedište</dt>
-                    <dd className="mt-0.5 text-slate-300">{companyLegal.address}</dd>
-                  </div>
-                  <div>
-                    <dt className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-500">
-                      PIB / Matični broj
-                    </dt>
-                    <dd className="mt-0.5 text-slate-300">
-                      {companyLegal.pib}
-                      <span className="text-slate-500"> · </span>
-                      {companyLegal.maticni}
-                    </dd>
-                  </div>
-                </dl>
+                <div className="space-y-1.5 text-sm text-slate-300">
+                  <p>{companyLegal.company}</p>
+                  <p>{companyLegal.address}</p>
+                  <p>PIB: {companyLegal.pib}</p>
+                  <p>MB: {companyLegal.maticni}</p>
+                  <p>{companyLegal.racun}</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         <div className="mt-10 border-t border-slate-700 pt-8 text-center text-sm text-slate-500 dark:border-white/10 dark:text-slate-400">
-          © {currentYear} Cyber Tracking – gpspracenje.rs.{" "}
+          © 2014-2026 Cyber Tracking – gpspracenje.rs.{" "}
           <Link href="/politika-privatnosti" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
             Politika privatnosti
           </Link>
