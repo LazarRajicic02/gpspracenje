@@ -60,12 +60,11 @@ export async function POST(request: Request) {
     });
   } catch (err) {
     console.error("[contact mail]", err);
-    const details =
-      process.env.NODE_ENV === "development" && err instanceof Error ? err.message : undefined;
+    const details = err instanceof Error ? err.message : String(err);
     return NextResponse.json(
       {
         error: "Slanje nije uspelo. Pokušajte ponovo ili nas pozovite.",
-        ...(details ? { details } : {}),
+        details,
       },
       { status: 502 },
     );

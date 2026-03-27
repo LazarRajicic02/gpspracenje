@@ -10,7 +10,6 @@ export function isMailConfigured(): boolean {
   const auth = Boolean(
     process.env.SMTP_USER?.trim() && process.env.SMTP_PASS?.trim() && process.env.MAIL_TO?.trim(),
   );
-  console.log(auth,'AUTH')
   if (!auth) return false;
   if (process.env.SMTP_SERVICE?.trim().toLowerCase() === "gmail") return true;
   return Boolean(process.env.SMTP_HOST?.trim());
@@ -20,7 +19,6 @@ function getTransporter() {
   const user = process.env.SMTP_USER!.trim();
   const pass = process.env.SMTP_PASS!.trim();
   const service = process.env.SMTP_SERVICE?.trim().toLowerCase();
-  console.log(user,pass,'PASSSS')
   if (service === "gmail") {
     return nodemailer.createTransport({
       service: "gmail",
