@@ -2,33 +2,33 @@
 
 const reviews = [
   {
-    name: "Marko P.",
-    role: "Vlasnik transportne firme",
-    text: "Koristimo Cyber Tracking za ceo vozni park. Aplikacija je odlična, sve na jednom mestu – mapa, istorija, alarmi. Preporučujem.",
+    name: "Nevena",
+    role: "Prevoznička firma",
+    text: "Kupila sam dva sistema PRO GPS i stvarno rade super. Neograničeno praćenje vozača, više ne razmišljam kuda se kreću.",
     rating: 5,
   },
   {
-    name: "Ana S.",
+    name: "Dzoni",
     role: "Rent a car",
-    text: "Jednostavna instalacija i pouzdan sistem. Geofencing nam mnogo pomaže da pratimo vozila. Odličan odnos cene i kvaliteta.",
+    text: "Kupili prvo 10, pa nakon toga još 15 sistema. Ubacili smo ih u grupu tako da imamo pregled i zaštitu svih vozila.",
     rating: 5,
   },
   {
-    name: "Nikola M.",
+    name: "Jelena S.",
     role: "Privatni korisnik",
-    text: "Kupio za lično vozilo – miran sam kada auto stoji negde. Podrška je brzo odgovorila na sva pitanja. Zadovoljan.",
+    text: "Ugradila sam na električni bicikl, vrhunska stvar!",
     rating: 5,
   },
   {
-    name: "Jelena K.",
-    role: "Kurirska služba",
-    text: "Pratimo preko 20 vozila. Izveštaji i notifikacije štede vreme. Nema ugovora, fleksibilno – baš ono što nam treba.",
-    rating: 5,
-  },
-  {
-    name: "Stefan D.",
+    name: "Stefan T.",
     role: "Građevinska firma",
-    text: "GPS uređaji rade i na terenu, multinetwork je zaista primetno bolji signal. Preporuka za sve koji imaju flotu.",
+    text: "Prezadovoljan sam. Kupio za dva bagera i jedan skip, nakačio relej na pumpu goriva i miran sam.",
+    rating: 5,
+  },
+  {
+    name: "Marko",
+    role: "Kurirska dostava",
+    text: "Imam 2 vozila u dostavi hrane. Znam kuda su se kretali vozači, i da li voze van radnog vremena. Preporuka!",
     rating: 5,
   },
 ];
@@ -87,10 +87,10 @@ export default function Reviews() {
       <div className="mx-auto max-w-6xl">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
-            Šta kažu korisnici
+            Šta kažu korisnici?
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-300">
-            Recenzije korisnika koji koriste Cyber Tracking za praćenje vozila i flote.
+            Mišljenja korisnika koji već koriste GPS praćenje u praksi
           </p>
         </div>
 

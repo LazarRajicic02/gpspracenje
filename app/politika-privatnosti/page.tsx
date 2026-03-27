@@ -26,7 +26,7 @@ export default function PolitikaPrivatnostiPage() {
         </h1>
         <p className="mt-4 text-slate-600 dark:text-slate-400">
           Poslednja izmena:{" "}
-          {new Date().toLocaleDateString("sr-en", { year: "numeric", month: "long", day: "numeric" })}
+          {new Date().toLocaleDateString("sr-Latn-RS", { year: "numeric", month: "long", day: "numeric" })}
         </p>
       </header>
 

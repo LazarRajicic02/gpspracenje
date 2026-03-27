@@ -12,7 +12,7 @@ export default function Home() {
     <main>
       <Hero />
       <Features />
-      <AppShowcase />
+      <AppShowcase showDesktopPreview />
       <WhyUs />
       <WhyChooseCyberTracking />
       <Reviews />

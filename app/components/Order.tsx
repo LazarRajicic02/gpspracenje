@@ -23,7 +23,7 @@ const ORDER_TYPES = [
   {
     id: "renewal" as const,
     title: "Produžavanje pretplate",
-    description: "Produžite postojeću pretplatu za 3, 6 ili 12 meseci bez ugovorne obaveze i dodatnih naknada.",
+    description: "Za korisnike koji već imaju GPS sistem, produžite pretplatu i nastavite korišćenje bez prekida.",
     price: "3 meseca 3.150 rsd. • 6 meseci 5.340 rsd. • 12 meseci 9.360 rsd.",
   },
 ];
@@ -722,15 +722,6 @@ function OrderInner() {
               className="order-3 mx-auto flex w-full max-w-sm flex-col border-t border-dashed border-slate-300 pt-8 dark:border-white/20 lg:mx-0 lg:w-[24%] lg:min-w-0 lg:max-w-none lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0 xl:pl-8"
               aria-labelledby="order-renewal-heading"
             >
-              <p
-                id="order-renewal-heading"
-                className="mb-1 text-center text-xs font-bold uppercase tracking-[0.2em] text-teal-700 dark:text-[#00ff9d] lg:text-left"
-              >
-                Produžavanje pretplate
-              </p>
-              <p className="mb-4 text-center text-sm text-slate-600 dark:text-slate-400 lg:text-left">
-                Za korisnike koji već imaju GPS sistem, produžite pretplatu i nastavite korišćenje bez prekida.
-              </p>
               <button
                 type="button"
                 onClick={() => selectPlan("renewal")}

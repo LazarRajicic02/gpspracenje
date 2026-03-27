@@ -30,7 +30,7 @@ export default function Hero() {
       <div className="pointer-events-none absolute inset-0 hidden items-end justify-center overflow-hidden dark:hidden md:flex">
         <svg
           viewBox="0 0 1200 420"
-          className="w-full max-w-5xl translate-y-[12%] scale-110 opacity-[0.55]"
+          className="w-full max-w-5xl translate-y-[2%] scale-110 opacity-[0.55]"
           preserveAspectRatio="xMidYMax meet"
           aria-hidden
         >
@@ -142,7 +142,7 @@ export default function Hero() {
       <div className="pointer-events-none absolute inset-0 hidden items-end justify-center overflow-hidden md:dark:flex">
         <svg
           viewBox="0 0 1200 420"
-          className="w-full max-w-5xl translate-y-[12%] scale-110 opacity-[0.42]"
+          className="w-full max-w-5xl translate-y-[2%] scale-110 opacity-[0.42]"
           preserveAspectRatio="xMidYMax meet"
           aria-hidden
         >
@@ -240,7 +240,7 @@ export default function Hero() {
         </svg>
       </div>
 
-      <div className="relative z-10 mx-auto max-w-4xl pt-4 text-center sm:pt-6">
+      <div className="relative z-10 mx-auto max-w-4xl pt-3 text-center sm:pt-6">
         <h1 className="min-h-[1em] text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl dark:text-slate-100">
           Preuzmite potpunu kontrolu nad vozilima u realnom vremenu
         </h1>
@@ -252,7 +252,7 @@ export default function Hero() {
           vozilu.
         </p>
 
-        <div className="mt-10 flex flex-col items-center justify-center gap-4">
+        <div className="mt-4 flex flex-col items-center justify-center gap-4 sm:mt-10">
           <a
             href="tel:+381614030888"
             className="transition-smooth w-full rounded-xl bg-teal-600 px-8 py-4 text-center text-sm font-bold uppercase tracking-wide text-white shadow-lg shadow-teal-500/30 hover:bg-teal-500 hover:shadow-teal-500/40 hover:-translate-y-0.5 sm:w-auto dark:bg-[#00ff9d] dark:text-black dark:hover:bg-[#00e699] dark:hover:shadow-[0_0_24px_rgba(0,255,157,0.35)]"

@@ -4,20 +4,9 @@ import Link from "next/link";
 import { blogPosts } from "../data/blog";
 
 export const metadata: Metadata = {
-  title: "Blog – Cyber Tracking",
-  description:
-    "Saveti i vesti o GPS praćenju vozila, kontroli flote i bezbednosti u saobraćaju. Cyber Tracking, Srbija.",
+  title: "Blog o GPS praćenju vozila – Cyber Tracking",
+  description: "Saveti, informacije i novosti o praćenju, zaštiti i kontroli vozila",
 };
-
-function formatCardDate(iso: string) {
-  return new Date(iso + "T12:00:00")
-    .toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    })
-    .toUpperCase();
-}
 
 export default function BlogPage() {
   const sorted = [...blogPosts].sort(
@@ -37,9 +26,11 @@ export default function BlogPage() {
         </Link>
 
         <header className="mb-10 lg:mb-12">
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">Blog</h1>
+          <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+            Blog o GPS praćenju vozila
+          </h1>
           <p className="mt-3 max-w-2xl text-base text-slate-600 dark:text-slate-400">
-            Saveti o GPS praćenju vozila, kontroli flote i bezbednosti. Izdvajamo najvažnije tekstove i aktuelne teme.
+            Saveti, informacije i novosti o praćenju, zaštiti i kontroli vozila
           </p>
         </header>
 
@@ -50,7 +41,7 @@ export default function BlogPage() {
               className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.04]"
             >
               <Link href={`/blog/${post.slug}`} className="group block">
-                <div className="relative aspect-[16/9] w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
+                <div className="relative aspect-[3/2] w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
                   <Image
                     src={post.coverImage}
                     alt=""
@@ -61,12 +52,9 @@ export default function BlogPage() {
                   />
                 </div>
                 <div className="px-5 pb-7 pt-5 text-center">
-                  <h2 className="line-clamp-2 text-[2rem] font-extrabold leading-[1.18] tracking-tight text-slate-900 underline decoration-2 underline-offset-2 transition group-hover:text-brand-orange-deep dark:text-white dark:group-hover:text-brand-orange-muted sm:text-3xl lg:text-[2rem]">
+                  <h2 className="line-clamp-2 text-2xl font-extrabold leading-[1.18] tracking-tight text-slate-900 underline decoration-2 underline-offset-2 transition group-hover:text-brand-orange-deep dark:text-white dark:group-hover:text-brand-orange-muted sm:text-3xl lg:text-2xl">
                     {post.title}
                   </h2>
-                  <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500 dark:text-slate-400">
-                    {formatCardDate(post.publishedAt)}
-                  </p>
                   <p className="mt-3 line-clamp-3 text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl lg:text-lg">
                     {post.excerpt}
                   </p>

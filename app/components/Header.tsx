@@ -11,7 +11,6 @@ const navLinks = [
   { href: "/porucivanje", label: "Poručivanje" },
   { href: "/faq", label: "FAQ" },
   { href: "/blog", label: "Blog" },
-  { href: "/kontakt", label: "Kontakt" },
 ];
 
 export default function Header() {

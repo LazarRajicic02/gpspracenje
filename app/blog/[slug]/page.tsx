@@ -2,21 +2,12 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { BlogAuthorAvatar, BlogCategoryPill } from "../../components/blog/BlogShared";
 import { getBlogPostBySlug, getAllBlogSlugs } from "../../data/blog";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
   return getAllBlogSlugs().map((slug) => ({ slug }));
-}
-
-function formatDate(iso: string) {
-  return new Date(iso + "T12:00:00").toLocaleDateString("sr-RS", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -63,24 +54,6 @@ export default async function BlogPostPage({ params }: Props) {
         <header className="mb-10 border-b border-slate-200 pb-8 dark:border-white/10">
           <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">{post.title}</h1>
           <p className="mt-4 text-lg leading-relaxed text-slate-600 dark:text-slate-300">{post.excerpt}</p>
-
-          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-4">
-            <div className="flex min-w-0 items-center gap-3">
-              <BlogAuthorAvatar author={post.author} />
-              <div className="min-w-0">
-                <p className="truncate text-sm font-semibold text-slate-900 dark:text-white">{post.author.name}</p>
-                <p className="truncate text-xs text-slate-500 dark:text-slate-400">{post.author.role}</p>
-              </div>
-            </div>
-            <div className="flex flex-wrap items-center gap-3 sm:ml-auto">
-              <BlogCategoryPill>{post.category}</BlogCategoryPill>
-              <span className="text-sm text-slate-500 dark:text-slate-400">
-                <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
-                <span className="mx-2 text-slate-300 dark:text-slate-600">•</span>
-                {post.readTimeMinutes} min čitanja
-              </span>
-            </div>
-          </div>
         </header>
 
         <div className="prose prose-slate dark:prose-invert prose-headings:font-semibold prose-p:text-slate-600 dark:prose-p:text-slate-400 max-w-none">
