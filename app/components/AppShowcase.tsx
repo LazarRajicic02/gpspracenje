@@ -64,7 +64,7 @@ const showcaseItems: ShowcaseItem[] = [
 
 const desktopShowcaseItem: ShowcaseItem = {
   id: "desktop-prikaz",
-  title: "Desktop pregled svih vozila",
+  title: "Prikaz svih vozila na računaru",
   description:
     "Pregled svih vozila i lokacija na velikom ekranu, sa jasnim prikazom mape i statusa vozila u realnom vremenu.",
   type: "desktop",
@@ -82,7 +82,6 @@ function PhoneFrame({
     <div
       className={`anim-phone-frame relative mx-auto w-fit overflow-hidden rounded-[2.25rem] border-[8px] border-slate-800 bg-slate-900 shadow-2xl dark:border-slate-700 dark:bg-black ${className}`}
     >
-
       <div className="anim-phone-screen relative overflow-hidden rounded-[1.35rem] bg-slate-950">
         {children}
       </div>
@@ -97,14 +96,20 @@ function ShowcaseSectionHeader({ className = "" }: { className?: string }) {
         Kontrola svih vozila u naprednoj aplikaciji
       </h2>
       <p className="mt-3 text-base leading-relaxed text-slate-600 dark:text-slate-300 sm:mt-4 sm:text-lg">
-        Praćenje vozila u realnom vremenu sa prikazom na Google mapama, istorijom kretanja, alarmima i izveštajima u
-        jednoj aplikaciji.
+        Praćenje vozila u realnom vremenu sa prikazom na Google mapama,
+        istorijom kretanja, alarmima i izveštajima u jednoj aplikaciji.
       </p>
     </header>
   );
 }
 
-function ShowcaseSlideCaption({ item, className = "" }: { item: ShowcaseItem; className?: string }) {
+function ShowcaseSlideCaption({
+  item,
+  className = "",
+}: {
+  item: ShowcaseItem;
+  className?: string;
+}) {
   if (item.type === "desktop") return null;
 
   return (
@@ -202,12 +207,25 @@ function ShowcaseContent({ item }: { item: ShowcaseItem }) {
           style={{ display: "none" }}
         >
           <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-teal-500/20">
-            <svg className="h-6 w-6 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14" />
+            <svg
+              className="h-6 w-6 text-teal-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14"
+              />
             </svg>
           </div>
           <p className="text-center text-xs text-slate-400">
-            Slika: <code className="rounded bg-slate-700/50 px-1">{item.imageSrc}</code>
+            Slika:{" "}
+            <code className="rounded bg-slate-700/50 px-1">
+              {item.imageSrc}
+            </code>
           </p>
         </div>
       </div>
@@ -215,8 +233,14 @@ function ShowcaseContent({ item }: { item: ShowcaseItem }) {
   );
 }
 
-export default function AppShowcase({ showDesktopPreview = false }: { showDesktopPreview?: boolean }) {
-  const items = showDesktopPreview ? [...showcaseItems, desktopShowcaseItem] : showcaseItems;
+export default function AppShowcase({
+  showDesktopPreview = false,
+}: {
+  showDesktopPreview?: boolean;
+}) {
+  const items = showDesktopPreview
+    ? [...showcaseItems, desktopShowcaseItem]
+    : showcaseItems;
   const [index, setIndex] = useState(0);
   const total = items.length;
   const touchStartX = useRef<number | null>(null);
@@ -259,7 +283,10 @@ export default function AppShowcase({ showDesktopPreview = false }: { showDeskto
   }
 
   return (
-    <section id="aplikacija" className="scroll-mt-20 bg-slate-100 px-4 py-8 dark:bg-black sm:px-6 sm:py-14 lg:px-8">
+    <section
+      id="aplikacija"
+      className="scroll-mt-20 bg-slate-100 px-4 py-8 dark:bg-black sm:px-6 sm:py-14 lg:px-8"
+    >
       <div className="mx-auto max-w-5xl">
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-center sm:justify-center sm:gap-4 lg:gap-6">
           {/* Leva / desna strelica — skrivene ispod sm (telefon), vidljive od tableta navise */}
@@ -269,8 +296,19 @@ export default function AppShowcase({ showDesktopPreview = false }: { showDeskto
             className="hidden h-12 w-12 shrink-0 place-items-center rounded-full border-2 border-slate-300 bg-white p-0 text-slate-600 shadow-md transition-smooth hover:border-teal-500 hover:bg-teal-50 hover:text-teal-600 hover:-translate-y-0.5 sm:grid dark:border-white/10 dark:bg-white/[0.06] dark:text-slate-200 dark:hover:border-[#00ff9d]/50 dark:hover:bg-[#00ff9d]/10 dark:hover:text-[#00ff9d]"
             aria-label="Prethodna slika"
           >
-            <svg className="col-start-1 row-start-1 h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            <svg
+              className="col-start-1 row-start-1 h-6 w-6 shrink-0"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+              aria-hidden
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15 19l-7-7 7-7"
+              />
             </svg>
           </button>
 
@@ -326,12 +364,22 @@ export default function AppShowcase({ showDesktopPreview = false }: { showDeskto
             className="hidden h-12 w-12 shrink-0 place-items-center rounded-full border-2 border-slate-300 bg-white p-0 text-slate-600 shadow-md transition-smooth hover:border-teal-500 hover:bg-teal-50 hover:text-teal-600 hover:-translate-y-0.5 sm:grid dark:border-white/10 dark:bg-white/[0.06] dark:text-slate-200 dark:hover:border-[#00ff9d]/50 dark:hover:bg-[#00ff9d]/10 dark:hover:text-[#00ff9d]"
             aria-label="Sledeća slika"
           >
-            <svg className="col-start-1 row-start-1 h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            <svg
+              className="col-start-1 row-start-1 h-6 w-6 shrink-0"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+              aria-hidden
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 5l7 7-7 7"
+              />
             </svg>
           </button>
         </div>
-
       </div>
     </section>
   );

@@ -23,37 +23,58 @@ export default function Footer() {
             <h3 className="mb-3 font-semibold text-white">Brzi linkovi</h3>
             <ul className="space-y-2 text-sm mx-auto md:mx-0">
               <li>
-                <Link href="/prednosti" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
+                <Link
+                  href="/prednosti"
+                  className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]"
+                >
                   Prednosti
                 </Link>
               </li>
               <li>
-                <Link href="/gps-sistem" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
+                <Link
+                  href="/gps-sistem"
+                  className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]"
+                >
                   GPS sistem
                 </Link>
               </li>
               <li>
-                <Link href="/aplikacija" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
+                <Link
+                  href="/aplikacija"
+                  className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]"
+                >
                   Aplikacija
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
+                <Link
+                  href="/faq"
+                  className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]"
+                >
                   FAQ
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
+                <Link
+                  href="/blog"
+                  className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]"
+                >
                   Blog
                 </Link>
               </li>
               <li>
-                <Link href="/porucivanje" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
+                <Link
+                  href="/porucivanje"
+                  className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]"
+                >
                   Poručivanje
                 </Link>
               </li>
               <li>
-                <Link href="/kontakt" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
+                <Link
+                  href="/kontakt"
+                  className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]"
+                >
                   Kontakt
                 </Link>
               </li>
@@ -75,16 +96,22 @@ export default function Footer() {
                       </a>
                     </li>
                     <li>
-                      <a href="tel:+381614030888" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
+                      <a
+                        href="tel:+381614030888"
+                        className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]"
+                      >
                         061 4030 888
                       </a>
                     </li>
                   </ul>
                 </div>
                 <div className="mx-auto w-full max-w-[13rem] shrink-0 sm:mx-0">
-                  <h3 className="mb-2 font-semibold text-white">Pratite nas</h3>
+                  <h3 className="mb-2 font-semibold text-white">
+                    Cyber Tracking
+                  </h3>
                   <p className="text-xs leading-relaxed text-slate-400 sm:text-sm">
-                    Praćenje flote i nadzor vozila – pouzdano GPS rešenje za kompanije.
+                    Profesionalni GPS sistem za praćenje i zaštitu vozila. 12
+                    godina iskustva u GPS praćenju i tehničkoj podršci.
                   </p>
                 </div>
               </div>
@@ -104,11 +131,17 @@ export default function Footer() {
 
         <div className="mt-10 border-t border-slate-700 pt-8 text-center text-sm text-slate-500 dark:border-white/10 dark:text-slate-400">
           © 2014-2026 Cyber Tracking – gpspracenje.rs.{" "}
-          <Link href="/politika-privatnosti" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
+          <Link
+            href="/politika-privatnosti"
+            className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]"
+          >
             Politika privatnosti
           </Link>
           {" · "}
-          <Link href="/uslovi-koriscenja" className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]">
+          <Link
+            href="/uslovi-koriscenja"
+            className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]"
+          >
             Uslovi korišćenja
           </Link>
           . Sva prava zadržana.
