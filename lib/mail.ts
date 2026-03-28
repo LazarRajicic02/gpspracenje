@@ -8,17 +8,21 @@ import nodemailer from "nodemailer";
 
 export function isMailConfigured(): boolean {
   const auth = Boolean(
-    process.env.SMTP_USER?.trim() && process.env.SMTP_PASS?.trim() && process.env.MAIL_TO?.trim(),
+    process.env.SMTP_USER && process.env.SMTP_PASS && process.env.MAIL_TO
   );
   if (!auth) return false;
-  if (process.env.SMTP_SERVICE?.trim().toLowerCase() === "gmail") return true;
-  return Boolean(process.env.SMTP_HOST?.trim());
+
+  if (process.env.SMTP_SERVICE?.toLowerCase() === "gmail") return true;
+
+  return Boolean(process.env.SMTP_HOST);
 }
 
 function getTransporter() {
-  const user = process.env.SMTP_USER!.trim();
-  const pass = process.env.SMTP_PASS!.trim();
-  const service = process.env.SMTP_SERVICE?.trim().toLowerCase();
+  const user = process.env.SMTP_USER!;
+  const pass = process.env.SMTP_PASS!;
+  const service = process.env.SMTP_SERVICE?.toLowerCase();
+
+  // ✅ Gmail shortcut
   if (service === "gmail") {
     return nodemailer.createTransport({
       service: "gmail",
@@ -26,19 +30,19 @@ function getTransporter() {
     });
   }
 
-  const host = process.env.SMTP_HOST!.trim();
-  const port = Number.parseInt(process.env.SMTP_PORT || "587", 10);
-  const secure = port === 465;
+  const host = process.env.SMTP_HOST!;
+  const port = Number(process.env.SMTP_PORT || 587);
 
   return nodemailer.createTransport({
     host,
     port,
-    secure,
+    secure: port === 465, // true samo za 465
     auth: { user, pass },
-    // Port 587 = STARTTLS; bez ovoga neki serveri odbiju ili „vise“ na konekciji
-    ...(!secure ? { requireTLS: true } : {}),
-    connectionTimeout: 20_000,
-    greetingTimeout: 20_000,
+    tls: {
+      rejectUnauthorized: false, // Loopia fix
+    },
+    connectionTimeout: 20000,
+    greetingTimeout: 20000,
   });
 }
 
@@ -46,29 +50,46 @@ export async function sendSiteMail(options: {
   subject: string;
   text: string;
   html?: string;
-  /** Ako je zadato (npr. email kupca), koristi se umesto MAIL_REPLY_TO */
   replyTo?: string;
 }): Promise<void> {
   if (!isMailConfigured()) {
     throw new Error("Mail is not configured");
   }
 
-  const to = process.env.MAIL_TO!.trim();
-  const from =
-    process.env.MAIL_FROM?.trim() || `"Cyber Tracking" <${process.env.SMTP_USER!.trim()}>`;
+  const to = process.env.MAIL_TO!;
+  
+  // ✅ Loopia-safe FROM (mora da matchuje SMTP_USER)
+  const from = process.env.SMTP_USER!;
 
   const replyTo =
-    options.replyTo?.trim() || process.env.MAIL_REPLY_TO?.trim() || undefined;
+    options.replyTo || process.env.MAIL_REPLY_TO || undefined;
 
   const transporter = getTransporter();
-  await transporter.sendMail({
-    from,
-    to,
-    replyTo,
-    subject: options.subject,
-    text: options.text,
-    ...(options.html ? { html: options.html } : {}),
-  });
+
+  // 🔍 DEBUG (možeš kasnije obrisati)
+  try {
+    await transporter.verify();
+    console.log("✅ SMTP connection OK");
+  } catch (err) {
+    console.error("❌ SMTP verify failed:", err);
+    throw err;
+  }
+
+  try {
+    await transporter.sendMail({
+      from,
+      to,
+      replyTo,
+      subject: options.subject,
+      text: options.text,
+      ...(options.html ? { html: options.html } : {}),
+    });
+
+    console.log("✅ Mail sent");
+  } catch (err) {
+    console.error("❌ Send mail error:", err);
+    throw err;
+  }
 }
 
 export function clampText(value: string, max: number): string {
