@@ -1,29 +1,52 @@
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
 /**
- * Env: RESEND_API_KEY, MAIL_TO
- * Opciono: MAIL_FROM (podrazumevano "Cyber Tracking <noreply@gpspracenje.rs>")
+ * Env: SMTP_USER, SMTP_PASS, MAIL_TO
+ * Host: SMTP_HOST + SMTP_PORT, ili SMTP_SERVICE=gmail (tada host nije obavezan)
+ * Opciono: MAIL_FROM, MAIL_REPLY_TO
  */
 
-let resend: Resend | null = null;
-
-function getResend(): Resend {
-  if (!resend) {
-    resend = new Resend(process.env.RESEND_API_KEY!.trim());
-  }
-  return resend;
+export function isMailConfigured(): boolean {
+  const auth = Boolean(
+    process.env.SMTP_USER?.trim() && process.env.SMTP_PASS?.trim() && process.env.MAIL_TO?.trim(),
+  );
+  if (!auth) return false;
+  if (process.env.SMTP_SERVICE?.trim().toLowerCase() === "gmail") return true;
+  return Boolean(process.env.SMTP_HOST?.trim());
 }
 
-export function isMailConfigured(): boolean {
-  return Boolean(
-    process.env.RESEND_API_KEY?.trim() && process.env.MAIL_TO?.trim(),
-  );
+function getTransporter() {
+  const user = process.env.SMTP_USER!.trim();
+  const pass = process.env.SMTP_PASS!.trim();
+  const service = process.env.SMTP_SERVICE?.trim().toLowerCase();
+  if (service === "gmail") {
+    return nodemailer.createTransport({
+      service: "gmail",
+      auth: { user, pass },
+    });
+  }
+
+  const host = process.env.SMTP_HOST!.trim();
+  const port = Number.parseInt(process.env.SMTP_PORT || "587", 10);
+  const secure = port === 465;
+
+  return nodemailer.createTransport({
+    host,
+    port,
+    secure,
+    auth: { user, pass },
+    // Port 587 = STARTTLS; bez ovoga neki serveri odbiju ili „vise“ na konekciji
+    ...(!secure ? { requireTLS: true } : {}),
+    connectionTimeout: 20_000,
+    greetingTimeout: 20_000,
+  });
 }
 
 export async function sendSiteMail(options: {
   subject: string;
   text: string;
   html?: string;
+  /** Ako je zadato (npr. email kupca), koristi se umesto MAIL_REPLY_TO */
   replyTo?: string;
 }): Promise<void> {
   if (!isMailConfigured()) {
@@ -32,12 +55,13 @@ export async function sendSiteMail(options: {
 
   const to = process.env.MAIL_TO!.trim();
   const from =
-    process.env.MAIL_FROM?.trim() || "Cyber Tracking <noreply@gpspracenje.rs>";
+    process.env.MAIL_FROM?.trim() || `"Cyber Tracking" <${process.env.SMTP_USER!.trim()}>`;
+
   const replyTo =
     options.replyTo?.trim() || process.env.MAIL_REPLY_TO?.trim() || undefined;
 
-  const r = getResend();
-  const { error } = await r.emails.send({
+  const transporter = getTransporter();
+  await transporter.sendMail({
     from,
     to,
     replyTo,
@@ -45,10 +69,6 @@ export async function sendSiteMail(options: {
     text: options.text,
     ...(options.html ? { html: options.html } : {}),
   });
-
-  if (error) {
-    throw new Error(error.message);
-  }
 }
 
 export function clampText(value: string, max: number): string {
