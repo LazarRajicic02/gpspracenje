@@ -10,6 +10,7 @@ export function isMailConfigured(): boolean {
   const auth = Boolean(
     process.env.SMTP_USER && process.env.SMTP_PASS && process.env.MAIL_TO
   );
+  
   if (!auth) return false;
 
   if (process.env.SMTP_SERVICE?.toLowerCase() === "gmail") return true;

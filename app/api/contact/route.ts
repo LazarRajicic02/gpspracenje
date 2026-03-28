@@ -58,6 +58,8 @@ export async function POST(request: Request) {
       text,
       html,
     });
+    console.log("USER:", process.env.SMTP_USER);
+console.log("PASS LENGTH:", process.env.SMTP_PASS?.length);
   } catch (err) {
     console.error("[contact mail]", err);
     const details =
