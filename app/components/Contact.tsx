@@ -5,10 +5,19 @@ import Image from "next/image";
 
 const CONTACT_IMAGE_SRC = "/kontakt.svg";
 
+const inputBaseClass =
+  "mt-2 block w-full rounded-lg border bg-white px-4 py-3 text-slate-900 shadow-sm placeholder:text-slate-500 focus:ring-2 dark:bg-white/[0.06] dark:text-white dark:placeholder:text-slate-400";
+const inputOkClass =
+  "border-slate-300 focus:border-teal-500 focus:ring-teal-500/30 dark:border-white/10 dark:focus:border-[#00ff9d] dark:focus:ring-[#00ff9d]/30";
+const inputErrClass =
+  "border-red-500 ring-2 ring-red-500/35 focus:border-red-500 focus:ring-red-500/25 dark:border-red-400 dark:ring-red-400/30 dark:focus:border-red-400 dark:focus:ring-red-400/25";
+
 export default function Contact() {
   const [sent, setSent] = useState(false);
   const [validationError, setValidationError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [nameInvalid, setNameInvalid] = useState(false);
+  const [phoneInvalid, setPhoneInvalid] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -18,9 +27,13 @@ export default function Contact() {
     const phone = (form.elements.namedItem("phone") as HTMLInputElement).value.trim();
     const message = (form.elements.namedItem("message") as HTMLTextAreaElement).value.trim();
     if (!name || !phone) {
+      setNameInvalid(!name);
+      setPhoneInvalid(!phone);
       setValidationError("Molimo popunite obavezna polja: Ime i Prezime / Ime Firme i Telefon.");
       return;
     }
+    setNameInvalid(false);
+    setPhoneInvalid(false);
     setSubmitting(true);
     try {
       const res = await fetch("/api/contact", {
@@ -94,8 +107,11 @@ export default function Contact() {
                       id="name"
                       name="name"
                       type="text"
-                      onChange={() => setValidationError(null)}
-                      className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 shadow-sm placeholder:text-slate-500 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/30 dark:border-white/10 dark:bg-white/[0.06] dark:text-white dark:placeholder:text-slate-400 dark:focus:border-[#00ff9d] dark:focus:ring-[#00ff9d]/30"
+                      onChange={() => {
+                        setValidationError(null);
+                        setNameInvalid(false);
+                      }}
+                      className={`${inputBaseClass} ${nameInvalid ? inputErrClass : inputOkClass}`}
                       placeholder="Vaše ime ili naziv firme"
                     />
                   </div>
@@ -108,8 +124,11 @@ export default function Contact() {
                       id="phone"
                       name="phone"
                       type="tel"
-                      onChange={() => setValidationError(null)}
-                      className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 shadow-sm placeholder:text-slate-500 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/30 dark:border-white/10 dark:bg-white/[0.06] dark:text-white dark:placeholder:text-slate-400 dark:focus:border-[#00ff9d] dark:focus:ring-[#00ff9d]/30"
+                      onChange={() => {
+                        setValidationError(null);
+                        setPhoneInvalid(false);
+                      }}
+                      className={`${inputBaseClass} ${phoneInvalid ? inputErrClass : inputOkClass}`}
                       placeholder="061 4030 888"
                     />
                   </div>

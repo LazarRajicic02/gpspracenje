@@ -12,9 +12,9 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Cyber Tracking – GPS praćenje vozila u realnom vremenu | Srbija",
+  title: "Preuzmite potpunu kontrolu nad vozilima u realnom vremenu",
   description:
-    "GPS praćenje vozila i praćenje flote u realnom vremenu. Geofencing, izveštaji, zaštita od krade. Kontrola kompanijskih vozila – pristupačne cene za sve veličine flote. gpspracenje.rs",
+    "Praćenje vozila u Srbiji i Evropi. Zaštita od krađe, kontrola zaposlenih i smanjenje troškova uz jednostavnu aplikaciju.",
   keywords: [
     "GPS praćenje",
     "praćenje vozila",
@@ -29,9 +29,16 @@ export const metadata: Metadata = {
     "nadzor vozila",
   ],
   openGraph: {
-    title: "Cyber Tracking – GPS praćenje vozila u realnom vremenu | Srbija",
-    description: "GPS praćenje vozila i flote u realnom vremenu. Geofencing, izveštaji, zaštita od krade. Kontrola vozila za kompanije i pojedince.",
+    title: "Preuzmite potpunu kontrolu nad vozilima u realnom vremenu",
+    description:
+      "Praćenje vozila u Srbiji i Evropi. Zaštita od krađe, kontrola zaposlenih i smanjenje troškova uz jednostavnu aplikaciju.",
     url: "https://gpspracenje.rs",
+    images: [
+      {
+        url: "/logo.png",
+        alt: "CyberTracking logo",
+      },
+    ],
   },
 };
 

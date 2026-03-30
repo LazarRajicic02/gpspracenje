@@ -241,6 +241,8 @@ export default function AppShowcase({
   const items = showDesktopPreview
     ? [...showcaseItems, desktopShowcaseItem]
     : showcaseItems;
+  // Na mobilu ne želimo da se prikazuje desktop screenshot.
+  const phoneItems = showcaseItems;
   const [index, setIndex] = useState(0);
   const total = items.length;
   const touchStartX = useRef<number | null>(null);
@@ -260,6 +262,8 @@ export default function AppShowcase({
   }, [goNext]);
 
   const item = items[index];
+  const mobileIndex = Math.min(index, phoneItems.length - 1);
+  const mobileItem = phoneItems[mobileIndex];
 
   function handleTouchStart(e: React.TouchEvent<HTMLDivElement>) {
     const t = e.changedTouches[0];
@@ -318,21 +322,21 @@ export default function AppShowcase({
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
-            {item.type !== "desktop" && (
+            {mobileItem.type !== "desktop" && (
               <ShowcaseSectionHeader className="border-b border-slate-200 pb-6 text-center dark:border-white/10" />
             )}
             <ShowcasePhoneColumn
-              items={items}
-              item={item}
-              index={index}
-              setIndex={setIndex}
+              items={phoneItems}
+              item={mobileItem}
+              index={mobileIndex}
+              setIndex={(i) => setIndex(i)}
               className={
-                item.type === "desktop"
+                mobileItem.type === "desktop"
                   ? "mx-auto flex w-full max-w-5xl flex-col items-center gap-2"
                   : "mx-auto flex w-fit max-w-[min(100%,320px)] flex-col items-center gap-2"
               }
             />
-            <ShowcaseSlideCaption item={item} className="text-center" />
+            <ShowcaseSlideCaption item={mobileItem} className="text-center" />
           </div>
 
           {/* sm+ kao ranije: telefon levo, desno naslov sekcije + opis slajda */}

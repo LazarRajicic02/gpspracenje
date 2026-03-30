@@ -63,9 +63,23 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
   const [paymentMethod, setPaymentMethod] = useState<"pouzece" | "racun">(isRenewal ? "racun" : "pouzece");
   const [validationError, setValidationError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [invalidName, setInvalidName] = useState(false);
+  const [invalidPhone, setInvalidPhone] = useState(false);
+  const [invalidAddress, setInvalidAddress] = useState(false);
+  const [invalidNotes, setInvalidNotes] = useState(false);
+  const [invalidTerms, setInvalidTerms] = useState(false);
 
   const selectedType = ORDER_TYPES.find((t) => t.id === type)!;
   const titleId = variant === "modal" ? "order-modal-title" : "order-form-title";
+
+  useEffect(() => {
+    setInvalidName(false);
+    setInvalidPhone(false);
+    setInvalidAddress(false);
+    setInvalidNotes(false);
+    setInvalidTerms(false);
+    setValidationError(null);
+  }, [type]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -76,25 +90,47 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
     const addressEl = form.elements.namedItem("address") as HTMLInputElement | null;
     const address = addressEl?.value.trim() ?? "";
     const email = (form.elements.namedItem("email") as HTMLInputElement).value.trim();
-    const notes = (form.elements.namedItem("notes") as HTMLTextAreaElement).value.trim();
+    const notesEl = form.elements.namedItem("notes");
+    const notes = notesEl instanceof HTMLTextAreaElement ? notesEl.value.trim() : "";
     const qtyRaw = (form.elements.namedItem("quantity") as HTMLInputElement).value;
     const quantity = Math.min(99, Math.max(1, Number.parseInt(qtyRaw, 10) || 1));
-    if (!name || !phone || (!isRenewal && !address)) {
+
+    const notesMissingRenewal = isRenewal && !notes;
+    const missingCore = !name || !phone || (!isRenewal && !address);
+
+    if (missingCore || notesMissingRenewal) {
+      setInvalidName(!name);
+      setInvalidPhone(!phone);
+      setInvalidAddress(!isRenewal && !address);
+      setInvalidNotes(notesMissingRenewal);
+      setInvalidTerms(false);
+      if (missingCore) {
+        setValidationError(
+          isRenewal
+            ? "Molimo popunite obavezna polja: ime i prezime ili naziv firme, telefon i napomena (količina pretplata i serijski brojevi uređaja)."
+            : "Molimo popunite obavezna polja: ime i prezime ili naziv firme, telefon i ulica sa gradom.",
+        );
+        return;
+      }
       setValidationError(
-        isRenewal
-          ? "Molimo popunite obavezna polja: ime i prezime ili naziv firme i telefon."
-          : "Molimo popunite obavezna polja: ime i prezime ili naziv firme, telefon i ulica sa gradom.",
+        "Napomena je obavezna za produžavanje pretplate. Unesite količinu pretplata i serijske brojeve uređaja.",
       );
       return;
     }
-    if (isRenewal && !notes) {
-      setValidationError("Napomena je obavezna. Unesite količinu pretplata i serijske brojeve uređaja.");
-      return;
-    }
     if (!acceptedTerms) {
+      setInvalidName(false);
+      setInvalidPhone(false);
+      setInvalidAddress(false);
+      setInvalidNotes(false);
+      setInvalidTerms(true);
       setValidationError("Morate prihvatiti uslove korišćenja i politiku privatnosti.");
       return;
     }
+    setInvalidName(false);
+    setInvalidPhone(false);
+    setInvalidAddress(false);
+    setInvalidNotes(false);
+    setInvalidTerms(false);
     setSubmitting(true);
     try {
       const res = await fetch("/api/order", {
@@ -146,9 +182,25 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
       }
     : null;
 
-  const fieldInputClass = pageForm
-    ? "mt-1.5 block w-full rounded-lg border border-slate-300 bg-white px-3.5 py-3.5 text-base text-slate-900 shadow-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20 dark:border-white/10 dark:bg-white/[0.08] dark:text-white max-lg:min-h-[54px] lg:mt-1 lg:px-3 lg:py-2 lg:text-base"
-    : "mt-1.5 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20 dark:border-white/10 dark:bg-white/[0.08] dark:text-white";
+  const fieldInputBase = pageForm
+    ? "mt-1.5 block w-full rounded-lg border bg-white px-3.5 py-3.5 text-base text-slate-900 shadow-sm focus:outline-none max-lg:min-h-[54px] lg:mt-1 lg:px-3 lg:py-2 lg:text-base"
+    : "mt-1.5 block w-full rounded-lg border bg-white px-3 py-2.5 text-sm text-slate-900 shadow-sm focus:outline-none";
+
+  const fieldInputOkRing =
+    "border-slate-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 dark:border-white/10 dark:bg-white/[0.08] dark:text-white";
+
+  const fieldInputErrRing =
+    "border-red-500 ring-2 ring-red-500/35 focus:border-red-500 focus:ring-2 focus:ring-red-500/25 dark:border-red-400 dark:bg-white/[0.08] dark:text-white dark:focus:border-red-400 dark:focus:ring-red-400/25";
+
+  function fieldInputClass(invalid: boolean) {
+    return `${fieldInputBase} ${invalid ? fieldInputErrRing : fieldInputOkRing}`;
+  }
+
+  const termsLabelBase =
+    "group flex cursor-pointer items-center gap-3 rounded-xl border bg-white px-4 py-3.5 text-xs text-slate-600 shadow-sm transition hover:border-teal-200/80 hover:bg-teal-50/30 focus-within:ring-2 focus-within:ring-teal-500/30 focus-within:ring-offset-2 focus-within:ring-offset-white dark:border-white/10 dark:bg-white/[0.05] dark:text-slate-300 dark:hover:border-[#00ff9d]/25 dark:hover:bg-[#00ff9d]/[0.06] dark:focus-within:ring-[#00ff9d]/40 dark:focus-within:ring-offset-black";
+
+  const termsLabelOk = `${termsLabelBase} border-slate-200`;
+  const termsLabelErr = `${termsLabelBase} border-red-500 ring-2 ring-red-500/35 dark:border-red-400 dark:ring-red-400/30`;
 
   const sectionCardClass = pageForm
     ? "rounded-xl border border-slate-200 bg-slate-50/90 p-5 shadow-sm dark:border-white/10 dark:bg-white/[0.04] lg:rounded-lg lg:border-slate-200/70 lg:bg-slate-50/50 lg:p-3 lg:shadow-none dark:lg:border-white/[0.08] dark:lg:bg-white/[0.02]"
@@ -156,42 +208,55 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
 
   const mainBody = (
     <>
-      <div
-        className={
-          pageForm
-            ? "mb-4 rounded-xl border border-teal-200 bg-teal-50 p-4 dark:border-teal-700/50 dark:bg-teal-900/30 lg:mb-2 lg:rounded-lg lg:border-teal-200/70 lg:bg-teal-50/70 lg:p-3 dark:lg:border-teal-800/45 dark:lg:bg-teal-950/30"
-            : "mb-4 rounded-xl border border-teal-200 bg-teal-50 p-3 dark:border-teal-700/50 dark:bg-teal-900/30"
-        }
-      >
-        <h3 id={titleId} className="font-semibold text-slate-900 dark:text-white">
-          {selectedType.title}
-        </h3>
-        <p
+      {!sent && (
+        <div
           className={
             pageForm
-              ? "mt-1.5 text-base leading-relaxed text-slate-600 dark:text-slate-300 lg:mt-1 lg:text-sm lg:leading-snug"
-              : "mt-0.5 text-base text-slate-600 dark:text-slate-300"
+              ? "mb-4 rounded-xl border border-teal-200 bg-teal-50 p-4 dark:border-teal-700/50 dark:bg-teal-900/30 lg:mb-2 lg:rounded-lg lg:border-teal-200/70 lg:bg-teal-50/70 lg:p-3 dark:lg:border-teal-800/45 dark:lg:bg-teal-950/30"
+              : "mb-4 rounded-xl border border-teal-200 bg-teal-50 p-3 dark:border-teal-700/50 dark:bg-teal-900/30"
           }
         >
-          {selectedType.description}
-        </p>
-      </div>
+          <h3 id={titleId} className="font-semibold text-slate-900 dark:text-white">
+            {selectedType.title}
+          </h3>
+          <p
+            className={
+              pageForm
+                ? "mt-1.5 text-base leading-relaxed text-slate-600 dark:text-slate-300 lg:mt-1 lg:text-sm lg:leading-snug"
+                : "mt-0.5 text-base text-slate-600 dark:text-slate-300"
+            }
+          >
+            {selectedType.description}
+          </p>
+        </div>
+      )}
 
       {sent ? (
-        <div className="rounded-xl border border-teal-200 bg-teal-50 p-6 text-center dark:border-teal-700/50 dark:bg-teal-900/20 max-lg:py-8 lg:mx-auto lg:max-w-md lg:p-5">
-          <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-teal-500 text-white">
-            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div
+          className={
+            pageForm
+              ? "rounded-2xl border border-teal-200 bg-teal-50 px-6 py-10 text-center shadow-sm dark:border-teal-700/50 dark:bg-teal-900/20 sm:px-10 sm:py-12 lg:mx-auto lg:max-w-2xl lg:px-14 lg:py-14"
+              : "rounded-xl border border-teal-200 bg-teal-50 p-8 text-center dark:border-teal-700/50 dark:bg-teal-900/20 max-lg:py-10 sm:p-10 lg:max-w-lg lg:mx-auto lg:p-12"
+          }
+        >
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-teal-500 text-white shadow-md shadow-teal-600/25 sm:h-16 sm:w-16">
+            <svg className="h-7 w-7 sm:h-8 sm:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h4 className="mt-3 font-semibold text-slate-900 dark:text-white">Narudžbina je poslata</h4>
-          <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-            Hvala vam. Kontaktiraćemo vas uskoro u vezi narudžbine.
+          <h3
+            id={titleId}
+            className="mt-5 text-xl font-bold tracking-tight text-slate-900 dark:text-white sm:mt-6 sm:text-2xl lg:text-3xl"
+          >
+            Porudžbina je uspešno poslata
+          </h3>
+          <p className="mx-auto mt-3 max-w-md text-base leading-relaxed text-slate-600 dark:text-slate-300 sm:mt-4 sm:text-lg lg:max-w-lg lg:text-lg">
+            Hvala vam! Uskoro vas kontaktiramo radi potvrde i brze isporuke sistema.
           </p>
           <button
             type="button"
             onClick={onDismiss}
-            className="mt-3 rounded-lg bg-teal-600 px-4 py-2 text-sm font-medium text-white hover:bg-teal-500"
+            className="mt-6 rounded-xl bg-teal-600 px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-teal-500 sm:mt-8 dark:bg-[#00ff9d] dark:text-black dark:hover:bg-[#00e699]"
           >
             Zatvori
           </button>
@@ -306,9 +371,11 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
                       id={`order-name${suffix}`}
                       name="name"
                       type="text"
-                      required
-                      onChange={() => setValidationError(null)}
-                      className={fieldInputClass}
+                      onChange={() => {
+                        setValidationError(null);
+                        setInvalidName(false);
+                      }}
+                      className={fieldInputClass(invalidName)}
                       placeholder="Unesite ime i prezime ili naziv firme"
                     />
                   </div>
@@ -328,9 +395,11 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
                         id={`order-phone${suffix}`}
                         name="phone"
                         type="tel"
-                        required
-                        onChange={() => setValidationError(null)}
-                        className={fieldInputClass}
+                        onChange={() => {
+                          setValidationError(null);
+                          setInvalidPhone(false);
+                        }}
+                        className={fieldInputClass(invalidPhone)}
                         placeholder="061 4030 888"
                       />
                     </div>
@@ -350,7 +419,7 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
                         name="email"
                         type="email"
                         onChange={() => setValidationError(null)}
-                        className={fieldInputClass}
+                        className={fieldInputClass(false)}
                         placeholder="email@primer.rs"
                       />
                     </div>
@@ -371,9 +440,11 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
                         id={`order-address${suffix}`}
                         name="address"
                         type="text"
-                        required
-                        onChange={() => setValidationError(null)}
-                        className={fieldInputClass}
+                        onChange={() => {
+                          setValidationError(null);
+                          setInvalidAddress(false);
+                        }}
+                        className={fieldInputClass(invalidAddress)}
                         placeholder="Unesite ulicu i grad"
                       />
                     </div>
@@ -398,10 +469,12 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
                       id={`order-notes${suffix}`}
                       name="notes"
                       rows={pageForm ? 3 : 2}
-                      required={isRenewal}
                       placeholder={isRenewal ? "Unesite količinu pretplata i serijske brojeve uređaja" : "Unesite napomenu"}
-                      onChange={() => setValidationError(null)}
-                      className={`${fieldInputClass} max-lg:min-h-[5.5rem] lg:min-h-[3.25rem] lg:resize-none lg:py-1.5`}
+                      onChange={() => {
+                        setValidationError(null);
+                        setInvalidNotes(false);
+                      }}
+                      className={`${fieldInputClass(invalidNotes)} max-lg:min-h-[5.5rem] lg:min-h-[3.25rem] lg:resize-none lg:py-1.5`}
                     />
                   </div>
                   <div className="max-w-full sm:max-w-[12rem]">
@@ -422,7 +495,7 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
                       min={1}
                       defaultValue={1}
                       onChange={() => setValidationError(null)}
-                      className={fieldInputClass}
+                      className={fieldInputClass(false)}
                     />
                   </div>
                 </div>
@@ -499,7 +572,7 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
               </div>
 
               <label
-                className={`group flex cursor-pointer items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3.5 text-xs text-slate-600 shadow-sm transition hover:border-teal-200/80 hover:bg-teal-50/30 focus-within:ring-2 focus-within:ring-teal-500/30 focus-within:ring-offset-2 focus-within:ring-offset-white dark:border-white/10 dark:bg-white/[0.05] dark:text-slate-300 dark:hover:border-[#00ff9d]/25 dark:hover:bg-[#00ff9d]/[0.06] dark:focus-within:ring-[#00ff9d]/40 dark:focus-within:ring-offset-black ${pageForm ? "max-lg:px-4 max-lg:py-4 max-lg:text-sm lg:px-3 lg:py-2 lg:text-[11px] lg:leading-snug" : ""} ${pageGrid?.terms ?? ""}`}
+                className={`${invalidTerms ? termsLabelErr : termsLabelOk} ${pageForm ? "max-lg:px-4 max-lg:py-4 max-lg:text-sm lg:px-3 lg:py-2 lg:text-[11px] lg:leading-snug" : ""} ${pageGrid?.terms ?? ""}`}
               >
                 <input
                   type="checkbox"
@@ -507,6 +580,7 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
                   onChange={(e) => {
                     setAcceptedTerms(e.target.checked);
                     setValidationError(null);
+                    setInvalidTerms(false);
                   }}
                   className="sr-only"
                 />
@@ -545,7 +619,7 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
 
               <button
                 type="submit"
-                disabled={!acceptedTerms || submitting}
+                disabled={submitting}
                 className={`w-full rounded-xl bg-teal-600 text-sm font-semibold text-white shadow-lg shadow-teal-500/25 transition hover:bg-teal-500 disabled:cursor-not-allowed disabled:opacity-45 dark:bg-[#00ff9d] dark:text-black dark:hover:bg-[#00e699] dark:disabled:opacity-40 ${pageForm ? "max-lg:py-3.5 max-lg:text-base lg:py-2.5 lg:text-sm" : "py-3"} ${pageGrid?.submit ?? ""}`}
               >
                 {submitting ? "Šaljem…" : "Pošalji porudžbinu"}

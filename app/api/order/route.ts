@@ -45,8 +45,28 @@ export async function POST(request: Request) {
   const nameStr = typeof b.name === "string" ? clampText(b.name, MAX_NAME) : "";
   const phoneStr = typeof b.phone === "string" ? clampText(b.phone, MAX_PHONE) : "";
   const addressStr = typeof b.address === "string" ? clampText(b.address, MAX_ADDRESS) : "";
+  const notesStr = typeof b.notes === "string" ? clampText(b.notes, MAX_NOTES) : "";
 
-  if (!nameStr || !phoneStr || !addressStr) {
+  const isRenewal = orderType === "renewal";
+
+  if (!nameStr || !phoneStr) {
+    return NextResponse.json(
+      { error: "Ime i telefon su obavezni." },
+      { status: 400 },
+    );
+  }
+
+  if (isRenewal) {
+    if (!notesStr) {
+      return NextResponse.json(
+        {
+          error:
+            "Napomena je obavezna za produžavanje pretplate. Unesite količinu pretplata i serijske brojeve uređaja.",
+        },
+        { status: 400 },
+      );
+    }
+  } else if (!addressStr) {
     return NextResponse.json(
       { error: "Ime, telefon i adresa su obavezni." },
       { status: 400 },
@@ -73,7 +93,8 @@ export async function POST(request: Request) {
 
   const emailStr =
     typeof b.email === "string" && b.email.trim() ? clampText(b.email, MAX_EMAIL) : "";
-  const notesStr = typeof b.notes === "string" ? clampText(b.notes, MAX_NOTES) : "";
+
+  const addressForMail = isRenewal && !addressStr ? "— (produžavanje pretplate)" : addressStr;
 
   const typeLabel =
     orderType === "pro"
@@ -94,7 +115,7 @@ export async function POST(request: Request) {
     "",
     `Ime / firma: ${nameStr}`,
     `Telefon: ${phoneStr}`,
-    `Adresa: ${addressStr}`,
+    `Adresa: ${addressForMail}`,
     emailStr ? `Email: ${emailStr}` : "",
     notesStr ? `\nNapomena:\n${notesStr}` : "",
     "",
@@ -112,7 +133,7 @@ export async function POST(request: Request) {
     quantity,
     name: nameStr,
     phone: phoneStr,
-    address: addressStr,
+    address: addressForMail,
     email: emailStr,
     notes: notesStr,
     payLabel,

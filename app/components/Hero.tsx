@@ -2,7 +2,7 @@ import HeroRouteVansAnimated from "./HeroRouteVansAnimated";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[calc(100dvh-7rem)] overflow-hidden px-4 pb-0 pt-4 sm:px-6 sm:pb-16 sm:pt-6 lg:px-8">
+    <section className="relative min-h-0 sm:min-h-[calc(100dvh-7rem)] overflow-hidden px-4 pb-0 pt-4 sm:px-6 sm:pb-16 sm:pt-6 lg:px-8">
       {/* Light: gradient + subtle grid */}
       <div
         className="absolute inset-0 bg-gradient-to-b from-slate-50 via-white to-slate-100 dark:hidden"
@@ -35,12 +35,24 @@ export default function Hero() {
           aria-hidden
         >
           <defs>
-            <linearGradient id="hero-gps-route-light" x1="0%" y1="0%" x2="100%" y2="0%">
+            <linearGradient
+              id="hero-gps-route-light"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="0%"
+            >
               <stop offset="0%" stopColor="#0d9488" stopOpacity="0.35" />
               <stop offset="50%" stopColor="#14b8a6" stopOpacity="0.5" />
               <stop offset="100%" stopColor="#0d9488" stopOpacity="0.45" />
             </linearGradient>
-            <pattern id="hero-gps-hex-light" width="28" height="48" patternUnits="userSpaceOnUse" patternTransform="scale(1)">
+            <pattern
+              id="hero-gps-hex-light"
+              width="28"
+              height="48"
+              patternUnits="userSpaceOnUse"
+              patternTransform="scale(1)"
+            >
               <path
                 d="M14 4 L24 12 L24 24 L14 32 L4 24 L4 12 Z"
                 fill="none"
@@ -50,11 +62,33 @@ export default function Hero() {
               />
             </pattern>
             {/* Nevidljive putanje za animateMotion (tri segmenta iste rute kao glavni path) */}
-            <path id="hero-van-seg-1-light" d="M 120 320 Q 280 200 450 260" fill="none" stroke="none" />
-            <path id="hero-van-seg-2-light" d="M 450 260 Q 620 320 800 220" fill="none" stroke="none" />
-            <path id="hero-van-seg-3-light" d="M 800 220 Q 980 120 1080 280" fill="none" stroke="none" />
+            <path
+              id="hero-van-seg-1-light"
+              d="M 120 320 Q 280 200 450 260"
+              fill="none"
+              stroke="none"
+            />
+            <path
+              id="hero-van-seg-2-light"
+              d="M 450 260 Q 620 320 800 220"
+              fill="none"
+              stroke="none"
+            />
+            <path
+              id="hero-van-seg-3-light"
+              d="M 800 220 Q 980 120 1080 280"
+              fill="none"
+              stroke="none"
+            />
           </defs>
-          <rect x="0" y="120" width="1200" height="300" fill="url(#hero-gps-hex-light)" opacity="0.22" />
+          <rect
+            x="0"
+            y="120"
+            width="1200"
+            height="300"
+            fill="url(#hero-gps-hex-light)"
+            opacity="0.22"
+          />
           {/* „Sateliti“ / fix tačke na nebu */}
           <g fill="#94a3b8" opacity="0.45">
             <circle cx="180" cy="95" r="2.5" />
@@ -65,9 +99,33 @@ export default function Hero() {
             <circle cx="1040" cy="55" r="2" />
             {/* Jednostavan satelit */}
             <g transform="translate(1020, 88)">
-              <rect x="-14" y="-5" width="28" height="10" rx="2" fill="#64748b" opacity="0.7" />
-              <rect x="-22" y="-4" width="6" height="8" rx="1" fill="#94a3b8" opacity="0.6" />
-              <rect x="16" y="-4" width="6" height="8" rx="1" fill="#94a3b8" opacity="0.6" />
+              <rect
+                x="-14"
+                y="-5"
+                width="28"
+                height="10"
+                rx="2"
+                fill="#64748b"
+                opacity="0.7"
+              />
+              <rect
+                x="-22"
+                y="-4"
+                width="6"
+                height="8"
+                rx="1"
+                fill="#94a3b8"
+                opacity="0.6"
+              />
+              <rect
+                x="16"
+                y="-4"
+                width="6"
+                height="8"
+                rx="1"
+                fill="#94a3b8"
+                opacity="0.6"
+              />
             </g>
           </g>
           {/* GPS isprekidana istorija trase */}
@@ -107,11 +165,26 @@ export default function Hero() {
           </g>
           {/* Smer kretanja duž rute (chevron markeri) */}
           <g fill="#14b8a6" opacity="0.55">
-            <polygon points="248,262 256,256 248,250" transform="rotate(-28 252 256)" />
-            <polygon points="410,248 418,242 410,236" transform="rotate(-8 414 242)" />
-            <polygon points="560,228 568,222 560,216" transform="rotate(12 564 222)" />
-            <polygon points="720,218 728,212 720,206" transform="rotate(-18 724 212)" />
-            <polygon points="900,248 908,242 900,236" transform="rotate(22 904 242)" />
+            <polygon
+              points="248,262 256,256 248,250"
+              transform="rotate(-28 252 256)"
+            />
+            <polygon
+              points="410,248 418,242 410,236"
+              transform="rotate(-8 414 242)"
+            />
+            <polygon
+              points="560,228 568,222 560,216"
+              transform="rotate(12 564 222)"
+            />
+            <polygon
+              points="720,218 728,212 720,206"
+              transform="rotate(-18 724 212)"
+            />
+            <polygon
+              points="900,248 908,242 900,236"
+              transform="rotate(22 904 242)"
+            />
           </g>
           {/* Blok „ulice“ / dashboard mapa */}
           <g fill="none" stroke="#64748b" strokeWidth="0.8" opacity="0.12">
@@ -125,16 +198,28 @@ export default function Hero() {
           {/* Glavni pinovi */}
           <g transform="translate(120, 320)">
             <circle r="14" fill="#0d9488" className="drop-shadow-md" />
-            <path d="M0 18 L-8 32 L0 28 L8 32 Z" fill="#0f766e" className="drop-shadow-sm" />
+            <path
+              d="M0 18 L-8 32 L0 28 L8 32 Z"
+              fill="#0f766e"
+              className="drop-shadow-sm"
+            />
           </g>
           <g transform="translate(450, 260)">
             <circle r="14" fill="#0d9488" className="drop-shadow-md" />
-            <path d="M0 18 L-8 32 L0 28 L8 32 Z" fill="#0f766e" className="drop-shadow-sm" />
+            <path
+              d="M0 18 L-8 32 L0 28 L8 32 Z"
+              fill="#0f766e"
+              className="drop-shadow-sm"
+            />
           </g>
           {/* Aktivno vozilo: čist, statičan pin */}
           <g transform="translate(1080, 280)">
             <circle r="14" fill="#0d9488" className="drop-shadow-md" />
-            <path d="M0 18 L-8 32 L0 28 L8 32 Z" fill="#0f766e" className="drop-shadow-sm" />
+            <path
+              d="M0 18 L-8 32 L0 28 L8 32 Z"
+              fill="#0f766e"
+              className="drop-shadow-sm"
+            />
           </g>
         </svg>
       </div>
@@ -147,11 +232,22 @@ export default function Hero() {
           aria-hidden
         >
           <defs>
-            <linearGradient id="hero-gps-route-dark" x1="0%" y1="0%" x2="100%" y2="0%">
+            <linearGradient
+              id="hero-gps-route-dark"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="0%"
+            >
               <stop offset="0%" stopColor="#5eead4" stopOpacity="0.25" />
               <stop offset="100%" stopColor="#2dd4bf" stopOpacity="0.4" />
             </linearGradient>
-            <pattern id="hero-gps-hex-dark" width="28" height="48" patternUnits="userSpaceOnUse">
+            <pattern
+              id="hero-gps-hex-dark"
+              width="28"
+              height="48"
+              patternUnits="userSpaceOnUse"
+            >
               <path
                 d="M14 4 L24 12 L24 24 L14 32 L4 24 L4 12 Z"
                 fill="none"
@@ -159,11 +255,33 @@ export default function Hero() {
                 strokeWidth="0.35"
               />
             </pattern>
-            <path id="hero-van-seg-1-dark" d="M 120 320 Q 280 200 450 260" fill="none" stroke="none" />
-            <path id="hero-van-seg-2-dark" d="M 450 260 Q 620 320 800 220" fill="none" stroke="none" />
-            <path id="hero-van-seg-3-dark" d="M 800 220 Q 980 120 1080 280" fill="none" stroke="none" />
+            <path
+              id="hero-van-seg-1-dark"
+              d="M 120 320 Q 280 200 450 260"
+              fill="none"
+              stroke="none"
+            />
+            <path
+              id="hero-van-seg-2-dark"
+              d="M 450 260 Q 620 320 800 220"
+              fill="none"
+              stroke="none"
+            />
+            <path
+              id="hero-van-seg-3-dark"
+              d="M 800 220 Q 980 120 1080 280"
+              fill="none"
+              stroke="none"
+            />
           </defs>
-          <rect x="0" y="120" width="1200" height="300" fill="url(#hero-gps-hex-dark)" opacity="0.18" />
+          <rect
+            x="0"
+            y="120"
+            width="1200"
+            height="300"
+            fill="url(#hero-gps-hex-dark)"
+            opacity="0.18"
+          />
           <g fill="rgba(255,255,255,0.35)">
             <circle cx="180" cy="95" r="2.5" />
             <circle cx="320" cy="68" r="2" />
@@ -172,9 +290,30 @@ export default function Hero() {
             <circle cx="900" cy="98" r="2" />
             <circle cx="1040" cy="55" r="2" />
             <g transform="translate(1020, 88)">
-              <rect x="-14" y="-5" width="28" height="10" rx="2" fill="rgba(148,163,184,0.55)" />
-              <rect x="-22" y="-4" width="6" height="8" rx="1" fill="rgba(148,163,184,0.45)" />
-              <rect x="16" y="-4" width="6" height="8" rx="1" fill="rgba(148,163,184,0.45)" />
+              <rect
+                x="-14"
+                y="-5"
+                width="28"
+                height="10"
+                rx="2"
+                fill="rgba(148,163,184,0.55)"
+              />
+              <rect
+                x="-22"
+                y="-4"
+                width="6"
+                height="8"
+                rx="1"
+                fill="rgba(148,163,184,0.45)"
+              />
+              <rect
+                x="16"
+                y="-4"
+                width="6"
+                height="8"
+                rx="1"
+                fill="rgba(148,163,184,0.45)"
+              />
             </g>
           </g>
           <path
@@ -211,11 +350,26 @@ export default function Hero() {
             <circle cx="935" cy="252" r="5" />
           </g>
           <g fill="rgba(45,212,191,0.5)">
-            <polygon points="248,262 256,256 248,250" transform="rotate(-28 252 256)" />
-            <polygon points="410,248 418,242 410,236" transform="rotate(-8 414 242)" />
-            <polygon points="560,228 568,222 560,216" transform="rotate(12 564 222)" />
-            <polygon points="720,218 728,212 720,206" transform="rotate(-18 724 212)" />
-            <polygon points="900,248 908,242 900,236" transform="rotate(22 904 242)" />
+            <polygon
+              points="248,262 256,256 248,250"
+              transform="rotate(-28 252 256)"
+            />
+            <polygon
+              points="410,248 418,242 410,236"
+              transform="rotate(-8 414 242)"
+            />
+            <polygon
+              points="560,228 568,222 560,216"
+              transform="rotate(12 564 222)"
+            />
+            <polygon
+              points="720,218 728,212 720,206"
+              transform="rotate(-18 724 212)"
+            />
+            <polygon
+              points="900,248 908,242 900,236"
+              transform="rotate(22 904 242)"
+            />
           </g>
           <g fill="none" stroke="rgba(148,163,184,0.22)" strokeWidth="0.8">
             <rect x="160" y="268" width="100" height="64" rx="2" />
@@ -226,16 +380,40 @@ export default function Hero() {
           </g>
           <HeroRouteVansAnimated theme="dark" />
           <g transform="translate(120, 320)">
-            <circle r="14" fill="rgba(255,255,255,0.92)" className="drop-shadow-md" />
-            <path d="M0 18 L-8 32 L0 28 L8 32 Z" fill="rgba(255,255,255,0.95)" className="drop-shadow-sm" />
+            <circle
+              r="14"
+              fill="rgba(255,255,255,0.92)"
+              className="drop-shadow-md"
+            />
+            <path
+              d="M0 18 L-8 32 L0 28 L8 32 Z"
+              fill="rgba(255,255,255,0.95)"
+              className="drop-shadow-sm"
+            />
           </g>
           <g transform="translate(450, 260)">
-            <circle r="14" fill="rgba(255,255,255,0.92)" className="drop-shadow-md" />
-            <path d="M0 18 L-8 32 L0 28 L8 32 Z" fill="rgba(255,255,255,0.95)" className="drop-shadow-sm" />
+            <circle
+              r="14"
+              fill="rgba(255,255,255,0.92)"
+              className="drop-shadow-md"
+            />
+            <path
+              d="M0 18 L-8 32 L0 28 L8 32 Z"
+              fill="rgba(255,255,255,0.95)"
+              className="drop-shadow-sm"
+            />
           </g>
           <g transform="translate(1080, 280)">
-            <circle r="14" fill="rgba(255,255,255,0.92)" className="drop-shadow-md" />
-            <path d="M0 18 L-8 32 L0 28 L8 32 Z" fill="rgba(255,255,255,0.95)" className="drop-shadow-sm" />
+            <circle
+              r="14"
+              fill="rgba(255,255,255,0.92)"
+              className="drop-shadow-md"
+            />
+            <path
+              d="M0 18 L-8 32 L0 28 L8 32 Z"
+              fill="rgba(255,255,255,0.95)"
+              className="drop-shadow-sm"
+            />
           </g>
         </svg>
       </div>
@@ -248,8 +426,8 @@ export default function Hero() {
           Smanjite troškove, zaštitite vozila od krađe i sprečite zloupotrebu
         </p>
         <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-          Rešenje za firme i privatna vozila, uz daljinsko gašenje vozila putem aplikacije. Već od 780 RSD mesečno po
-          vozilu.
+          Rešenje za firme i privatna vozila, uz daljinsko gašenje vozila putem
+          aplikacije. Već od 780 RSD mesečno po vozilu.
         </p>
 
         <div className="mt-4 flex flex-col items-center justify-center gap-4 sm:mt-10">
