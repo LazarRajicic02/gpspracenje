@@ -66,6 +66,7 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
   const [invalidName, setInvalidName] = useState(false);
   const [invalidPhone, setInvalidPhone] = useState(false);
   const [invalidAddress, setInvalidAddress] = useState(false);
+  const [invalidEmail, setInvalidEmail] = useState(false);
   const [invalidNotes, setInvalidNotes] = useState(false);
   const [invalidTerms, setInvalidTerms] = useState(false);
 
@@ -76,6 +77,7 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
     setInvalidName(false);
     setInvalidPhone(false);
     setInvalidAddress(false);
+    setInvalidEmail(false);
     setInvalidNotes(false);
     setInvalidTerms(false);
     setValidationError(null);
@@ -94,6 +96,7 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
     const notes = notesEl instanceof HTMLTextAreaElement ? notesEl.value.trim() : "";
     const qtyRaw = (form.elements.namedItem("quantity") as HTMLInputElement).value;
     const quantity = Math.min(99, Math.max(1, Number.parseInt(qtyRaw, 10) || 1));
+    const hasInvalidEmail = Boolean(email) && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
     const notesMissingRenewal = isRenewal && !notes;
     const missingCore = !name || !phone || (!isRenewal && !address);
@@ -102,6 +105,7 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
       setInvalidName(!name);
       setInvalidPhone(!phone);
       setInvalidAddress(!isRenewal && !address);
+      setInvalidEmail(false);
       setInvalidNotes(notesMissingRenewal);
       setInvalidTerms(false);
       if (missingCore) {
@@ -117,10 +121,21 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
       );
       return;
     }
+    if (hasInvalidEmail) {
+      setInvalidName(false);
+      setInvalidPhone(false);
+      setInvalidAddress(false);
+      setInvalidEmail(true);
+      setInvalidNotes(false);
+      setInvalidTerms(false);
+      setValidationError("Unesite ispravnu email adresu ili ostavite polje prazno.");
+      return;
+    }
     if (!acceptedTerms) {
       setInvalidName(false);
       setInvalidPhone(false);
       setInvalidAddress(false);
+      setInvalidEmail(false);
       setInvalidNotes(false);
       setInvalidTerms(true);
       setValidationError("Morate prihvatiti uslove korišćenja i politiku privatnosti.");
@@ -129,6 +144,7 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
     setInvalidName(false);
     setInvalidPhone(false);
     setInvalidAddress(false);
+    setInvalidEmail(false);
     setInvalidNotes(false);
     setInvalidTerms(false);
     setSubmitting(true);
@@ -264,6 +280,7 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
       ) : (
         <form
           onSubmit={handleSubmit}
+          noValidate
           className={
             pageForm
               ? "flex flex-col gap-6 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:gap-y-2"
@@ -417,9 +434,14 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
                       <input
                         id={`order-email${suffix}`}
                         name="email"
-                        type="email"
-                        onChange={() => setValidationError(null)}
-                        className={fieldInputClass(false)}
+                        type="text"
+                        inputMode="email"
+                        autoComplete="email"
+                        onChange={() => {
+                          setValidationError(null);
+                          setInvalidEmail(false);
+                        }}
+                        className={fieldInputClass(invalidEmail)}
                         placeholder="email@primer.rs"
                       />
                     </div>

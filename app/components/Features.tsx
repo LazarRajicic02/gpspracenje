@@ -4,7 +4,12 @@ const features = [
     description:
       "Omogućava uvid kada se vozilo koristi, koliko traje vožnja i da li se koristi van radnog vremena.",
     icon: (
-      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg
+        className="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -19,7 +24,12 @@ const features = [
     description:
       "Daljinska blokada pumpe za gorivo jednim klikom u aplikaciji, uz bezbedno aktiviranje kada vozilo miruje ili se kreće malom brzinom.",
     icon: (
-      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg
+        className="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -34,7 +44,12 @@ const features = [
     description:
       "Pregled vožnje i kilometraže omogućava otkrivanje nepotrebne potrošnje goriva, zloupotrebe i neefikasnog korišćenja vozila.",
     icon: (
-      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg
+        className="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -49,7 +64,12 @@ const features = [
     description:
       "Detaljan pregled kretanja vozila sa animacijom rute, zadržavanjem na lokacijama, prikazom brzine i istorijom do 180 dana.",
     icon: (
-      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg
+        className="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -64,7 +84,12 @@ const features = [
     description:
       "Prikaz početka i završetka vožnje, trajanja, pređene kilometraže i grafikona kroz detaljne izveštaje u aplikaciji.",
     icon: (
-      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg
+        className="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -79,7 +104,12 @@ const features = [
     description:
       "Automatsko povezivanje na najjači signal. Rad u Srbiji i preko 40 zemalja Evrope bez rominga.",
     icon: (
-      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg
+        className="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -93,15 +123,19 @@ const features = [
 
 export default function Features() {
   return (
-    <section id="prednosti" className="scroll-mt-20 bg-white px-4 py-8 dark:bg-black sm:px-6 sm:py-14 lg:px-8">
+    <section
+      id="prednosti"
+      className="scroll-mt-20 bg-white px-4 py-8 dark:bg-black sm:px-6 sm:py-14 lg:px-8"
+    >
       <div className="mx-auto max-w-6xl">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
-            Prednosti gps sistema
+            Prednosti GPS sistema
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-300">
-            Praćenje vozila u realnom vremenu, zaštita od krađe, kontrola zaposlenih, detaljni izveštaji i pouzdana
-            mrežna pokrivenost – sve u jednom sistemu.
+            Praćenje vozila u realnom vremenu, zaštita od krađe, kontrola
+            zaposlenih, detaljni izveštaji i pouzdana mrežna pokrivenost – sve u
+            jednom sistemu.
           </p>
         </div>
         <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -113,8 +147,12 @@ export default function Features() {
               <div className="transition-smooth flex h-12 w-12 items-center justify-center rounded-xl bg-teal-500 text-white group-hover:scale-110">
                 {feature.icon}
               </div>
-              <h3 className="card-title mt-4 text-slate-900 dark:text-white">{feature.title}</h3>
-              <p className="card-body mt-2 text-slate-600 dark:text-slate-300">{feature.description}</p>
+              <h3 className="card-title mt-4 text-slate-900 dark:text-white">
+                {feature.title}
+              </h3>
+              <p className="card-body mt-2 text-slate-600 dark:text-slate-300">
+                {feature.description}
+              </p>
             </div>
           ))}
         </div>
