@@ -68,6 +68,7 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
   const [invalidAddress, setInvalidAddress] = useState(false);
   const [invalidEmail, setInvalidEmail] = useState(false);
   const [invalidNotes, setInvalidNotes] = useState(false);
+  const [invalidQuantity, setInvalidQuantity] = useState(false);
   const [invalidTerms, setInvalidTerms] = useState(false);
 
   const selectedType = ORDER_TYPES.find((t) => t.id === type)!;
@@ -79,6 +80,7 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
     setInvalidAddress(false);
     setInvalidEmail(false);
     setInvalidNotes(false);
+    setInvalidQuantity(false);
     setInvalidTerms(false);
     setValidationError(null);
   }, [type]);
@@ -97,27 +99,33 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
     const qtyRaw = (form.elements.namedItem("quantity") as HTMLInputElement).value;
     const quantity = Math.min(99, Math.max(1, Number.parseInt(qtyRaw, 10) || 1));
     const hasInvalidEmail = Boolean(email) && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const quantityMissingRenewal = isRenewal && (!qtyRaw.trim() || Number.parseInt(qtyRaw, 10) < 1);
 
     const notesMissingRenewal = isRenewal && !notes;
     const missingCore = !name || !phone || (!isRenewal && !address);
 
-    if (missingCore || notesMissingRenewal) {
+    if (missingCore || notesMissingRenewal || quantityMissingRenewal) {
       setInvalidName(!name);
       setInvalidPhone(!phone);
       setInvalidAddress(!isRenewal && !address);
       setInvalidEmail(false);
       setInvalidNotes(notesMissingRenewal);
+      setInvalidQuantity(quantityMissingRenewal);
       setInvalidTerms(false);
       if (missingCore) {
         setValidationError(
           isRenewal
-            ? "Molimo popunite obavezna polja: ime i prezime ili naziv firme, telefon i napomena (količina pretplata i serijski brojevi uređaja)."
+            ? "Molimo popunite obavezna polja: ime i prezime ili naziv firme i telefon."
             : "Molimo popunite obavezna polja: ime i prezime ili naziv firme, telefon i ulica sa gradom.",
         );
         return;
       }
+      if (quantityMissingRenewal) {
+        setValidationError("Broj sistema za produženje je obavezno polje i mora biti najmanje 1.");
+        return;
+      }
       setValidationError(
-        "Napomena je obavezna za produžavanje pretplate. Unesite količinu pretplata i serijske brojeve uređaja.",
+        "Unesite ID brojeve od uređaja. Ovo polje je obavezno za produžavanje pretplate.",
       );
       return;
     }
@@ -127,6 +135,7 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
       setInvalidAddress(false);
       setInvalidEmail(true);
       setInvalidNotes(false);
+      setInvalidQuantity(false);
       setInvalidTerms(false);
       setValidationError("Unesite ispravnu email adresu ili ostavite polje prazno.");
       return;
@@ -137,6 +146,7 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
       setInvalidAddress(false);
       setInvalidEmail(false);
       setInvalidNotes(false);
+      setInvalidQuantity(false);
       setInvalidTerms(true);
       setValidationError("Morate prihvatiti uslove korišćenja i politiku privatnosti.");
       return;
@@ -146,6 +156,7 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
     setInvalidAddress(false);
     setInvalidEmail(false);
     setInvalidNotes(false);
+    setInvalidQuantity(false);
     setInvalidTerms(false);
     setSubmitting(true);
     try {
@@ -491,7 +502,7 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
                       id={`order-notes${suffix}`}
                       name="notes"
                       rows={pageForm ? 3 : 2}
-                      placeholder={isRenewal ? "Unesite količinu pretplata i serijske brojeve uređaja" : "Unesite napomenu"}
+                      placeholder={isRenewal ? "Unesite ID brojeve od uređaja" : "Unesite napomenu"}
                       onChange={() => {
                         setValidationError(null);
                         setInvalidNotes(false);
@@ -508,7 +519,8 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
                           : "block text-sm font-medium text-slate-700 dark:text-slate-300"
                       }
                     >
-                      {isRenewal ? "Broj uređaja za produženje" : "Količina sistema"}
+                      {isRenewal ? "Broj sistema za produženje" : "Količina sistema"}
+                      {isRenewal && <span className="text-red-500"> *</span>}
                     </label>
                     <input
                       id={`order-quantity${suffix}`}
@@ -516,8 +528,11 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
                       type="number"
                       min={1}
                       defaultValue={1}
-                      onChange={() => setValidationError(null)}
-                      className={fieldInputClass(false)}
+                      onChange={() => {
+                        setValidationError(null);
+                        setInvalidQuantity(false);
+                      }}
+                      className={fieldInputClass(invalidQuantity)}
                     />
                   </div>
                 </div>
@@ -647,7 +662,7 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
                 {submitting ? "Šaljem…" : "Pošalji porudžbinu"}
               </button>
 
-              <p className={`text-center text-xs text-slate-500 dark:text-slate-400 ${pageForm ? "max-lg:text-sm lg:text-[11px]" : ""} ${pageGrid?.foot ?? ""}`}>
+              <p className={`text-center text-sm text-slate-500 dark:text-slate-400 ${pageForm ? "max-lg:text-base lg:text-sm" : ""} ${pageGrid?.foot ?? ""}`}>
                 Bez ugovornih obaveza i skrivenih troškova
               </p>
 
