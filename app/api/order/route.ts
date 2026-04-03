@@ -1,3 +1,4 @@
+import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { buildOrderEmailHtml } from "@/lib/email-templates";
 import { clampText, isMailConfigured, sendSiteMail } from "@/lib/mail";
@@ -161,5 +162,6 @@ export async function POST(request: Request) {
     );
   }
 
-  return NextResponse.json({ ok: true });
+  const transactionId = randomUUID();
+  return NextResponse.json({ ok: true, transactionId });
 }

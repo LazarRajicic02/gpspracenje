@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { reportPurchaseConversion } from "@/lib/googleAdsGtag";
 
 export type OrderType = "pro" | "smart" | "renewal" | null;
 
@@ -175,13 +176,22 @@ export function OrderFormBody({ type, variant, onDismiss }: OrderFormBodyProps) 
           paymentMethod,
         }),
       });
-      const data = (await res.json().catch(() => ({}))) as { error?: string; details?: string };
+      const data = (await res.json().catch(() => ({}))) as {
+        error?: string;
+        details?: string;
+        transactionId?: string;
+      };
       if (!res.ok) {
         const base = data.error || "Slanje nije uspelo. Pokušajte ponovo.";
         setValidationError(data.details ? `${base} (${data.details})` : base);
         return;
       }
       setSent(true);
+      const tid =
+        typeof data.transactionId === "string" && data.transactionId.trim()
+          ? data.transactionId.trim()
+          : `ord_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
+      reportPurchaseConversion(tid);
     } catch {
       setValidationError("Mrežna greška. Proverite vezu i pokušajte ponovo.");
     } finally {

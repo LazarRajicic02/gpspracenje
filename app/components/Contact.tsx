@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { reportContactOfferConversion } from "@/lib/googleAdsGtag";
+import { TrackedTelLink } from "./TrackedTelLink";
 
 const CONTACT_IMAGE_SRC = "/kontakt.svg";
 
@@ -48,6 +50,7 @@ export default function Contact() {
         return;
       }
       setSent(true);
+      reportContactOfferConversion();
     } catch {
       setValidationError("Mrežna greška. Proverite vezu i pokušajte ponovo.");
     } finally {
@@ -170,7 +173,10 @@ export default function Contact() {
                 </svg>
                 podrska@gpspracenje.rs
               </a>
-              <a href="tel:+381614030888" className="flex items-center gap-2 transition hover:text-teal-600 dark:hover:text-[#00ff9d]">
+              <TrackedTelLink
+                href="tel:+381614030888"
+                className="flex items-center gap-2 transition hover:text-teal-600 dark:hover:text-[#00ff9d]"
+              >
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     strokeLinecap="round"
@@ -180,7 +186,7 @@ export default function Contact() {
                   />
                 </svg>
                 061 4030 888
-              </a>
+              </TrackedTelLink>
             </div>
           </div>
 

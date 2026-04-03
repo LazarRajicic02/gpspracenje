@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { TrackedTelLink } from "../components/TrackedTelLink";
 import {
   termsBulletSections,
   termsProvider,
@@ -63,12 +64,12 @@ export default function UsloviKoriscenjaPage() {
             </li>
             <li>
               <span className="font-medium text-slate-800 dark:text-slate-200">Telefon:</span>{" "}
-              <a
+              <TrackedTelLink
                 href={`tel:${termsProvider.phone.replace(/\s/g, "")}`}
                 className="text-teal-600 underline-offset-2 hover:underline dark:text-teal-400"
               >
                 {termsProvider.phone}
-              </a>
+              </TrackedTelLink>
             </li>
             <li>
               <span className="font-medium text-slate-800 dark:text-slate-200">Email:</span>{" "}

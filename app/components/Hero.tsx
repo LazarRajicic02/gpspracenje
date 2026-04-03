@@ -1,4 +1,5 @@
 import HeroRouteVansAnimated from "./HeroRouteVansAnimated";
+import { TrackedTelLink } from "./TrackedTelLink";
 
 export default function Hero() {
   return (
@@ -431,12 +432,12 @@ export default function Hero() {
         </p>
 
         <div className="mt-4 flex flex-col items-center justify-center gap-4 sm:mt-10">
-          <a
+          <TrackedTelLink
             href="tel:+381614030888"
             className="transition-smooth w-full rounded-xl bg-teal-600 px-8 py-4 text-center text-sm font-bold uppercase tracking-wide text-white shadow-lg shadow-teal-500/30 hover:bg-teal-500 hover:shadow-teal-500/40 hover:-translate-y-0.5 sm:w-auto dark:bg-[#00ff9d] dark:text-black dark:hover:bg-[#00e699] dark:hover:shadow-[0_0_24px_rgba(0,255,157,0.35)]"
           >
             Pozovite: 061 4030 888
-          </a>
+          </TrackedTelLink>
         </div>
         <p className="mt-4 text-center text-sm text-slate-500 dark:text-slate-300">
           Bez ugovorne obaveze i uz potpunu tehničku podršku.

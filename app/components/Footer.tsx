@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { companyLegal } from "../data/company";
+import { TrackedTelLink } from "./TrackedTelLink";
 
 export default function Footer() {
   return (
@@ -96,12 +97,12 @@ export default function Footer() {
                       </a>
                     </li>
                     <li>
-                      <a
+                      <TrackedTelLink
                         href="tel:+381614030888"
                         className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]"
                       >
                         061 4030 888
-                      </a>
+                      </TrackedTelLink>
                     </li>
                   </ul>
                 </div>

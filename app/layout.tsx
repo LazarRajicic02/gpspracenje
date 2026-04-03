@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { GoogleTagManager, GoogleTagManagerNoScript } from "./components/GoogleTagManager";
+import { GoogleAdsGtag } from "./components/GoogleAdsGtag";
 
 const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta",
@@ -69,6 +70,7 @@ export default function RootLayout({
       <body className={`${plusJakarta.variable} font-sans antialiased bg-[var(--background)] text-[var(--foreground)]`}>
         <GoogleTagManagerNoScript />
         <GoogleTagManager />
+        <GoogleAdsGtag />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
