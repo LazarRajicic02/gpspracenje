@@ -1,7 +1,6 @@
 export type BlogAuthor = {
   name: string;
   role: string;
-  /** Opciono; bez slike prikazuju se inicijali */
   avatarSrc?: string;
 };
 
@@ -10,104 +9,82 @@ export type BlogPost = {
   title: string;
   publishedAt: string;
   excerpt: string;
-  /** Naslovna slika (putanja ispod /public) */
   coverImage: string;
   category: string;
   readTimeMinutes: number;
   author: BlogAuthor;
+  intro?: string[];
   sections: { heading: string; paragraphs: string[] }[];
+  outro?: string[];
+  cta?: { label: string; href: string };
 };
 
-/** Članci bloga — dodajte nove objekte u niz za nove tekstove. */
 export const blogPosts: BlogPost[] = [
   {
-    slug: "zasto-gps-pracenje-flote",
-    title: "Zašto GPS praćenje flote isplati investiciju",
-    publishedAt: "2026-03-15",
+    slug: "kako-funkcionise-gps-pracenje-vozila",
+    title: "Kako funkcioniše GPS praćenje vozila i šta sve sadrži GPS lokator",
+    publishedAt: "2026-05-25",
     excerpt:
-      "Kako real-time lokacija, istorija ruta i izveštaji smanjuju troškove goriva i povećavaju odgovornost vozača — bez dodatnog administrativnog tereta.",
+      "Kako GPS lokator radi u realnom vremenu, šta sve sadrži sistem i na koji način vam pomaže u zaštiti vozila i smanjenju troškova.",
     coverImage: "/003 sva vozila na mapi.png",
-    category: "Flota i kontrola",
-    readTimeMinutes: 6,
+    category: "GPS praćenje",
+    readTimeMinutes: 8,
     author: {
-      name: "Cyber Tracking",
+      name: "Cyber Tracking GPS",
       role: "Tim za podršku korisnicima",
     },
+    intro: [
+      "GPS praćenje vozila danas predstavlja potrebu za svakoga ko želi potpunu kontrolu nad svojim vozilom. Bez obzira da li ste privatno lice ili koristite vozila u poslovne svrhe, ovaj sistem vam omogućava da u svakom trenutku znate gde se vozilo nalazi, kako se koristi i da li dolazi do zloupotrebe.",
+      "U nastavku teksta objašnjavamo kako funkcioniše GPS lokator, šta sve sadrži i na koji način vam može pomoći u zaštiti vozila i smanjenju troškova.",
+    ],
     sections: [
       {
-        heading: "Kontrola bez „papira“",
+        heading: "Kako izgleda GPS lokator?",
         paragraphs: [
-          "Kompanije koje koriste vozila u svakodnevnom radu brzo uoče da telefonski pozivi i ručni zapisi ne daju pouzdanu sliku gde su vozila i kako se koriste.",
-          "GPS sistem sa aplikacijom omogućava da na jednom mestu vidite sve aktivne vozila, status (u pokretu / parkirano) i osnovne parametre vožnje.",
+          "GPS lokator je uređaj malih dimenzija i možete povezati na apsolutno sve vrste prevoznih sredstava, bez obzira da li su vozila ili plovila. Potrebno je samo da postoji akumulator ili baterija koja će obezbediti konstantno napajanje GPS lokatora. Momentalno je spreman za rad bez ikakvih dodatnih konfiguracija i podešavanja. Uređaj je u obliku male kockice (releja), pa ga je izuzetno jednostavno sakriti.",
+          "Ugradnja GPS lokatora je jednostavna i može se izvršiti samostalno ili uz pomoć auto-električara, a uređaj se najčešće postavlja na skrivena mesta unutar vozila.",
         ],
       },
       {
-        heading: "Manje skrivenih troškova",
+        heading: "Na kom principu funkcioniše GPS praćenje vozila u realnom vremenu?",
         paragraphs: [
-          "Optimizacija ruta i uvid u stil vožnje često dovode do uštede na gorivu i servisu. Istorija kretanja pomaže i u rešavanju sporova sa klijentima ili osiguranjem.",
-          "Ulaganje u uređaj i pretplatu tipično se isplati kroz bolju organizaciju i transparentnost, posebno kod većih flota.",
+          "Jedan od osnovnih delova GPS sistema za praćenje vozila je GPS lokator koji konstantno prima signal sa GPS satelita i na osnovu toga određuje tačnu lokaciju vozila. Zahvaljujući ovom principu, omogućeno je precizno GPS praćenje vozila u realnom vremenu.",
+          "Kada uređaj izračuna svoju poziciju, podatke putem mobilne mreže šalje na server, odakle ih vi u svakom trenutku možete pratiti preko mobilne aplikacije ili računara. Lokacija vozila se najčešće osvežava na svakih 30 do 60 sekundi, što omogućava veoma precizan uvid u kretanje vozila.",
+          "U praksi, to znači da više ne morate da zovete vozača ili nagađate gde se vozilo nalazi jer sve informacije imate direktno na telefonu, u svakom trenutku.",
+          "Pored praćenja u realnom vremenu, sistem beleži i istoriju kretanja vozila, uključujući rute, zaustavljanja i trajanje vožnje, do 180 dana unazad. Ovo je posebno korisno za kontrolu rada zaposlenih, optimizaciju ruta i smanjenje nepotrebnih troškova goriva.",
+        ],
+      },
+      {
+        heading: "Kako funkcioniše GPS praćenje preko telefona?",
+        paragraphs: [
+          "GPS praćenje vozila preko telefona funkcioniše putem mobilne aplikacije koja je dostupna za iPhone i Android uređaje. Nakon instalacije aplikacije, unosite podatke za prijavljivanje koje dobijate uz GPS lokator i odmah dobijate pristup sistemu.",
+          "U aplikaciji u svakom trenutku možete videti tačnu lokaciju vozila na mapi, kretanje u realnom vremenu, kao i informacije o brzini i zaustavljanjima.",
+          "Pored trenutne lokacije, aplikacija omogućava i pregled istorije kretanja, što vam daje jasnu sliku gde se vozilo kretalo, koliko se zadržavalo na određenim lokacijama i na koji način se koristi.",
+        ],
+      },
+      {
+        heading: "Na koji način GPS praćenje sprečava krađu i neželjeno korišćenje?",
+        paragraphs: [
+          "GPS lokator u sebi ima integrisan relej koji se najčešće povezuje na pumpu goriva. U slučaju krađe ili neželjenog korišćenja vozila, jednim klikom u aplikaciji aktivirate relej koji prekida dovod električne energije, čime se vozilo bezbedno zaustavlja i onemogućava njegovo dalje kretanje.",
+          "U praksi, to znači da čak i ako dođe do krađe, imate mogućnost da reagujete odmah i sprečite dalje udaljavanje vozila, bez potrebe za fizičkim kontaktom sa njim.",
+          "Važno je naglasiti da povezivanje releja nije obavezno kako bi GPS praćenje vozila funkcionisalo. Osnovne funkcije poput praćenja lokacije, istorije kretanja i kontrole aktivnosti dostupne su i bez ove opcije, dok se relej koristi kao dodatni nivo zaštite.",
+        ],
+      },
+      {
+        heading: "Da li GPS lokator ima bateriju u sebi?",
+        paragraphs: [
+          "Uređaj u sebi ima ugrađenu rezervnu bateriju koja omogućava rad GPS lokatora i do 4 sata u situacijama kada se prekine napajanje sa vozila, na primer kada se skine akumulator. Zahvaljujući tome, GPS praćenje vozila nastavlja da funkcioniše i u ovakvim situacijama, što dodatno povećava sigurnost.",
+          "U praksi, to znači da uređaj nastavlja da šalje lokaciju čak i kada vozilo ostane bez glavnog napajanja, što može biti ključno u slučaju pokušaja krađe ili neovlašćenog korišćenja vozila.",
         ],
       },
     ],
-  },
-  {
-    slug: "bezbednost-vozila-i-daljinsko-gasenje",
-    title: "Bezbednost vozila i uloga daljinskog gašenja",
-    publishedAt: "2026-03-01",
-    excerpt:
-      "Šta treba znati o zaštiti od krađe, odgovornom korišćenju funkcije blokade goriva i obaveštenju učesnika u saobraćaju.",
-    coverImage: "/005 gasenje vozila.png",
-    category: "Bezbednost",
-    readTimeMinutes: 5,
-    author: {
-      name: "Cyber Tracking",
-      role: "Tim za podršku korisnicima",
-    },
-    sections: [
-      {
-        heading: "Prevencija i brza reakcija",
-        paragraphs: [
-          "GPS ne zamenjuje fizičku zaštitu vozila, ali značajno skraćuje vreme reakcije: alarmi, geozone i praćenje u realnom vremenu pomažu da se brzo reaguje na sumnjive situacije.",
-        ],
-      },
-      {
-        heading: "Daljinska blokada goriva",
-        paragraphs: [
-          "Napredni sistemi omogućavaju blokadu pumpe uz jasna pravila bezbednosti (npr. aktivacija kada vozilo miruje ili ide malom brzinom). Korisnik je uvek odgovoran za zakonito i bezbedno korišćenje, u skladu sa uputstvima pružaoca usluge.",
-          "Preporučuje se da vozači i korisnici vozila budu obavešteni o ugrađenom uređaju gde to zakon zahteva.",
-        ],
-      },
+    outro: [
+      "GPS lokator danas predstavlja jednostavno i pouzdano rešenje za praćenje vozila u realnom vremenu, zaštitu vozila i kontrolu troškova. Bez obzira da li koristite vozilo privatno ili poslovno, ovaj sistem vam daje sigurnost i kontrolu u svakom trenutku.",
     ],
-  },
-  {
-    slug: "kako-izabrati-gps-za-firmu",
-    title: "Kako izabrati GPS rešenje za firmu u Srbiji",
-    publishedAt: "2026-02-18",
-    excerpt:
-      "Kratki vodič: šta pitati dobavljača, šta uključuje pretplata i na šta obratiti pažnju pre kupovine.",
-    coverImage: "/002 istorija kretanja.png",
-    category: "Vodič",
-    readTimeMinutes: 7,
-    author: {
-      name: "Cyber Tracking",
-      role: "Tim za podršku korisnicima",
+    cta: {
+      label: "Pogledajte ponudu GPS sistema i započnite praćenje već danas",
+      href: "/#ponuda",
     },
-    sections: [
-      {
-        heading: "Šta sistem treba da pokrije",
-        paragraphs: [
-          "Proverite da li ponuda uključuje uređaj, SIM karticu i aplikaciju, kao i da li postoji jasna cena pretplate bez skrivenih naknada.",
-          "Bitno je i da aplikacija radi stabilno na telefonu i računaru i da podrška na srpskom jeziku može pomoći pri ugradnji i rešavanju problema.",
-        ],
-      },
-      {
-        heading: "Pitanja za dobavljača",
-        paragraphs: [
-          "Koliko dugo se čuva istorija lokacija? Da li postoji obuka ili uputstvo? Kako funkcioniše produžetak pretplate i šta se dešava pri isteku?",
-          "Odgovori na ova pitanja pomažu da izbegnete rešenja koja deluju jeftino, a kasnije otkrijete ograničenja.",
-        ],
-      },
-    ],
   },
 ];
 

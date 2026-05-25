@@ -1,15 +1,16 @@
 /** Podaci o pravnom licu (sajt, futer, uslovi korišćenja). */
 export const companyLegal = {
   /** Naziv firme u APR-u */
-  company: "Cyber Master PR",
+  company: "Cyber Tracking GPS",
   /** Brend / sajt */
-  brand: "Cyber Tracking",
+  brand: "Cyber Tracking GPS",
   address: "Čačak, Srbija",
   pib: "115037196",
   maticni: "68042453",
   racun: "155-0000000093194-79",
   phone: "+381 60 4030 888",
-  email: "podrska@gpspracenje.rs",
+  email: "cybertrackinggps@gmail.com",
+  facebookUrl: "https://www.facebook.com/cybertrackinggps/",
 } as const;
 
 /** Datum poslednje izmene dokumenta „uslovi korišćenja“. */

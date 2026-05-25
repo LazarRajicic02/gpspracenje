@@ -4,7 +4,7 @@ import Link from "next/link";
 import { blogPosts } from "../data/blog";
 
 export const metadata: Metadata = {
-  title: "Blog o GPS praćenju vozila – Cyber Tracking",
+  title: "Blog o GPS praćenju vozila – Cyber Tracking GPS",
   description: "Saveti, informacije i novosti o praćenju, zaštiti i kontroli vozila",
 };
 
@@ -34,7 +34,7 @@ export default function BlogPage() {
           </p>
         </header>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto grid max-w-xl gap-6">
           {sorted.map((post, i) => (
             <article
               key={post.slug}

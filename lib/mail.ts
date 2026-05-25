@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { companyLegal } from "@/app/data/company";
 
 /**
  * Env: SMTP_USER, SMTP_PASS, MAIL_TO
@@ -7,9 +8,7 @@ import nodemailer from "nodemailer";
  */
 
 export function isMailConfigured(): boolean {
-  const auth = Boolean(
-    process.env.SMTP_USER && process.env.SMTP_PASS && process.env.MAIL_TO
-  );
+  const auth = Boolean(process.env.SMTP_USER && process.env.SMTP_PASS);
   
   if (!auth) return false;
 
@@ -57,7 +56,7 @@ export async function sendSiteMail(options: {
     throw new Error("Mail is not configured");
   }
 
-  const to = process.env.MAIL_TO!;
+  const to = process.env.MAIL_TO || companyLegal.email;
   
   // ✅ Loopia-safe FROM (mora da matchuje SMTP_USER)
   const from = process.env.SMTP_USER!;

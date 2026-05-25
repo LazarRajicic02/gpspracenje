@@ -93,7 +93,7 @@ function ShowcaseSectionHeader({ className = "" }: { className?: string }) {
   return (
     <header className={className}>
       <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-3xl lg:text-4xl">
-        Kontrola svih vozila u naprednoj aplikaciji
+        Kontrola svih vozila u aplikaciji
       </h2>
       <p className="mt-3 text-base leading-relaxed text-slate-600 dark:text-slate-300 sm:mt-4 sm:text-lg">
         Praćenje vozila u realnom vremenu sa prikazom na Google mapama,

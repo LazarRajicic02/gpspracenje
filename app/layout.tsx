@@ -18,15 +18,22 @@ const SITE_URL = "https://gpspracenje.rs";
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "Cyber Tracking",
+  name: "Cyber Tracking GPS",
   url: SITE_URL,
-  logo: `${SITE_URL}/google.png`,
-  image: `${SITE_URL}/google.png`,
+  logo: `${SITE_URL}/icon-512.png`,
+  image: `${SITE_URL}/icon-512.png`,
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://gpspracenje.rs"),
-  title: "GPS praćenje vozila od 780 rsd. mesečno | Bez ugovora | Cyber Tracking",
+  icons: {
+    icon: [
+      { url: "/icon-48.png", sizes: "48x48", type: "image/png" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: [{ url: "/icon-192.png", sizes: "192x192", type: "image/png" }],
+  },
+  title: "GPS praćenje vozila | Bez ugovora | Cyber Tracking GPS",
   description:
     "GPS praćenje vozila u Srbiji i Evropi bez skrivenih troškova. Uređaj, SIM kartica i aplikacija – sve uključeno. Daljinska blokada vozila putem aplikacije.",
   keywords: [
@@ -38,7 +45,7 @@ export const metadata: Metadata = {
     "praćenje vozila u realnom vremenu",
     "geofencing",
     "kontrola flote",
-    "Cyber Tracking",
+    "Cyber Tracking GPS",
     "gps za vozila",
     "nadzor vozila",
   ],

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { companyLegal } from "../data/company";
 
 export const metadata: Metadata = {
-  title: "Politika privatnosti – Cyber Tracking",
+  title: "Politika privatnosti – Cyber Tracking GPS",
   description:
-    "Politika privatnosti Cyber Tracking (gpspracenje.rs). Kako prikupljamo, koristimo i štitimo vaše podatke pri upitu i narudžbi GPS praćenja vozila.",
+    "Politika privatnosti Cyber Tracking GPS (gpspracenje.rs). Kako prikupljamo, koristimo i štitimo vaše podatke pri upitu i narudžbi GPS praćenja vozila.",
 };
 
 export default function PolitikaPrivatnostiPage() {
@@ -34,7 +35,7 @@ export default function PolitikaPrivatnostiPage() {
         <section className="mb-10">
           <h2 className="text-xl font-semibold text-slate-900 dark:text-white">1. Uvod</h2>
           <p>
-            Cyber Tracking („mi“, „nas“, sajt gpspracenje.rs) poštuje vašu privatnost. Ova politika objašnjava koje
+            Cyber Tracking GPS („mi“, „nas“, sajt gpspracenje.rs) poštuje vašu privatnost. Ova politika objašnjava koje
             podatke o vama prikupljamo, kako ih koristimo i koja su vaša prava u skladu sa zakonom o zaštiti podataka
             o ličnosti (uključujući GDPR gde je primenjivo).
           </p>
@@ -43,8 +44,8 @@ export default function PolitikaPrivatnostiPage() {
         <section className="mb-10">
           <h2 className="text-xl font-semibold text-slate-900 dark:text-white">2. Ko prikuplja podatke</h2>
           <p>
-            Podatke prikuplja i obrađuje Cyber Tracking, vlasnik sajta gpspracenje.rs. Za pitanja u vezi sa podacima
-            možete nas kontaktirati putem emaila podrska@gpspracenje.rs ili telefona navedenog na sajtu.
+            Podatke prikuplja i obrađuje Cyber Tracking GPS, vlasnik sajta gpspracenje.rs. Za pitanja u vezi sa podacima
+            možete nas kontaktirati putem emaila {companyLegal.email} ili telefona navedenog na sajtu.
           </p>
         </section>
 
@@ -110,7 +111,7 @@ export default function PolitikaPrivatnostiPage() {
             <li>Uložite prigovor nadležnom organu za zaštitu podataka ako smatrate da je obrada nezakonita.</li>
           </ul>
           <p className="mt-4">
-            Za ostvarivanje ovih prava pošaljite nam zahtev na podrska@gpspracenje.rs. Odgovorićemo u roku propisanom
+            Za ostvarivanje ovih prava pošaljite nam zahtev na {companyLegal.email}. Odgovorićemo u roku propisanom
             zakonom.
           </p>
         </section>
@@ -147,10 +148,10 @@ export default function PolitikaPrivatnostiPage() {
           <p>
             Za sva pitanja u vezi sa ovom politikom privatnosti i vašim podacima kontaktirajte nas na{" "}
             <a
-              href="mailto:podrska@gpspracenje.rs"
+              href={`mailto:${companyLegal.email}`}
               className="text-teal-600 underline hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
             >
-              podrska@gpspracenje.rs
+              {companyLegal.email}
             </a>{" "}
             ili putem telefona navedenog na sajtu.
           </p>

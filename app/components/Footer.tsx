@@ -12,7 +12,7 @@ export default function Footer() {
             <Link href="/" className="inline-block">
               <Image
                 src="/logo.svg"
-                alt="Cyber Tracking – GPS praćenje vozila Srbija"
+                alt="Cyber Tracking GPS – GPS praćenje vozila Srbija"
                 width={400}
                 height={115}
                 className="mx-auto h-20 w-auto sm:h-24 md:mx-0 md:h-28 lg:h-32"
@@ -65,14 +65,6 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/porucivanje"
-                  className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]"
-                >
-                  Poručivanje
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/kontakt"
                   className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]"
                 >
@@ -108,7 +100,7 @@ export default function Footer() {
                 </div>
                 <div className="mx-auto w-full max-w-[13rem] shrink-0 sm:mx-0">
                   <h3 className="mb-2 font-semibold text-white">
-                    Cyber Tracking
+                    Cyber Tracking GPS
                   </h3>
                   <p className="text-xs leading-relaxed text-slate-400 sm:text-sm">
                     Profesionalni GPS sistem za praćenje i zaštitu vozila. 12
@@ -130,22 +122,35 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-slate-700 pt-8 text-center text-sm text-slate-500 dark:border-white/10 dark:text-slate-400">
-          © 2014-2026 Cyber Tracking – gpspracenje.rs.{" "}
-          <Link
-            href="/politika-privatnosti"
-            className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]"
+        <div className="mt-10 flex w-full items-end justify-between gap-4 border-t border-slate-700 pt-8 dark:border-white/10">
+          <p className="min-w-0 flex-1 text-left text-sm text-slate-500 dark:text-slate-400">
+            © 2014-2026 Cyber Tracking GPS – gpspracenje.rs.{" "}
+            <Link
+              href="/politika-privatnosti"
+              className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]"
+            >
+              Politika privatnosti
+            </Link>
+            {" · "}
+            <Link
+              href="/uslovi-koriscenja"
+              className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]"
+            >
+              Uslovi korišćenja
+            </Link>
+            . Sva prava zadržana.
+          </p>
+          <a
+            href={companyLegal.facebookUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-teal-600 hover:text-white dark:hover:bg-teal-800"
+            aria-label="Facebook — Cyber Tracking GPS"
           >
-            Politika privatnosti
-          </Link>
-          {" · "}
-          <Link
-            href="/uslovi-koriscenja"
-            className="transition-smooth hover:text-teal-400 dark:hover:text-[#00ff9d]"
-          >
-            Uslovi korišćenja
-          </Link>
-          . Sva prava zadržana.
+            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg>
+          </a>
         </div>
       </div>
     </footer>

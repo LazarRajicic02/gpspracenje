@@ -5,19 +5,23 @@ import WhyUs from "./components/WhyUs";
 import WhyChooseCyberTracking from "./components/WhyChooseCyberTracking";
 import Reviews from "./components/Reviews";
 import FAQ from "./components/FAQ";
-import Order from "./components/Order";
+import Contact from "./components/Contact";
 
 export default function Home() {
   return (
     <main>
       <Hero />
-      <Features />
       <AppShowcase showDesktopPreview />
+      <Features />
       <WhyUs />
       <WhyChooseCyberTracking />
       <Reviews />
       <FAQ />
-      <Order />
+      <Contact
+        sectionId="ponuda"
+        heading="Zatražite ponudu i formular"
+        description="Popunite formular i kontaktiraćemo vas u najkraćem roku sa ponudom prilagođenom vašim potrebama."
+      />
     </main>
   );
 }

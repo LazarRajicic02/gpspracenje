@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { ctaOfferSubmitClass } from "@/lib/ctaStyles";
 import { reportContactOfferConversion } from "@/lib/googleAdsGtag";
+import { companyLegal } from "../data/company";
 import { TrackedTelLink } from "./TrackedTelLink";
 
 const CONTACT_IMAGE_SRC = "/kontakt.svg";
@@ -14,7 +16,17 @@ const inputOkClass =
 const inputErrClass =
   "border-red-500 ring-2 ring-red-500/35 focus:border-red-500 focus:ring-red-500/25 dark:border-red-400 dark:ring-red-400/30 dark:focus:border-red-400 dark:focus:ring-red-400/25";
 
-export default function Contact() {
+type ContactProps = {
+  sectionId?: string;
+  heading?: string;
+  description?: string;
+};
+
+export default function Contact({
+  sectionId = "kontakt",
+  heading = "Zainteresovani ste za GPS praćenje?",
+  description = "Pošaljite upit i kontaktiraćemo vas u najkraćem roku.",
+}: ContactProps) {
   const [sent, setSent] = useState(false);
   const [validationError, setValidationError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -60,7 +72,7 @@ export default function Contact() {
 
   return (
     <section
-      id="kontakt"
+      id={sectionId}
       className="scroll-mt-20 bg-white px-4 py-0 text-slate-900 sm:px-6 sm:py-14 lg:px-8 lg:py-20 dark:bg-black dark:text-white"
     >
       <div className="mx-auto max-w-6xl">
@@ -69,10 +81,10 @@ export default function Contact() {
           <div>
             <div className="max-w-xl">
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-                Zainteresovani ste za GPS praćenje?
+                {heading}
               </h2>
               <p className="mt-4 text-lg text-slate-600 dark:text-slate-200/90">
-                Pošaljite upit i kontaktiraćemo vas u najkraćem roku.
+                {description}
               </p>
             </div>
 
@@ -153,7 +165,7 @@ export default function Contact() {
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="transition-smooth w-full rounded-xl bg-[#00ff9d] px-6 py-4 font-semibold text-black shadow-[0_0_28px_rgba(0,255,157,0.25)] hover:bg-[#00e699] hover:shadow-[0_0_38px_rgba(0,255,157,0.35)] disabled:cursor-not-allowed disabled:opacity-50"
+                    className={ctaOfferSubmitClass}
                   >
                     {submitting ? "Šaljem…" : "Zatraži ponudu"}
                   </button>
@@ -162,7 +174,10 @@ export default function Contact() {
             </div>
 
             <div className="mt-8 flex flex-wrap gap-6 text-slate-600 dark:text-slate-200/90">
-              <a href="mailto:podrska@gpspracenje.rs" className="flex items-center gap-2 transition hover:text-teal-600 dark:hover:text-[#00ff9d]">
+              <a
+                href={`mailto:${companyLegal.email}`}
+                className="flex items-center gap-2 transition hover:text-teal-600 dark:hover:text-[#00ff9d]"
+              >
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     strokeLinecap="round"
@@ -171,7 +186,7 @@ export default function Contact() {
                     d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                   />
                 </svg>
-                podrska@gpspracenje.rs
+                {companyLegal.email}
               </a>
               <TrackedTelLink
                 href="tel:+381614030888"

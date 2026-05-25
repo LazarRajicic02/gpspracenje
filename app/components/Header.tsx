@@ -3,12 +3,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { ctaOfferButtonClass, ctaOfferButtonCompactClass } from "@/lib/ctaStyles";
 
 const navLinks = [
   { href: "/prednosti", label: "Prednosti" },
   { href: "/gps-sistem", label: "GPS sistem" },
   { href: "/aplikacija", label: "Aplikacija" },
-  { href: "/porucivanje", label: "Poručivanje" },
   { href: "/faq", label: "FAQ" },
   { href: "/blog", label: "Blog" },
 ];
@@ -23,11 +23,11 @@ export default function Header() {
         <Link
           href="/"
           className="-ml-1 flex shrink-0 items-center sm:-ml-2"
-          aria-label="Cyber Tracking – GPS praćenje vozila, početna"
+          aria-label="Cyber Tracking GPS – GPS praćenje vozila, početna"
         >
           <Image
             src="/logo.svg"
-            alt="Cyber Tracking – GPS praćenje vozila u realnom vremenu"
+            alt="Cyber Tracking GPS – GPS praćenje vozila u realnom vremenu"
             width={360}
             height={103}
             className="h-14 w-auto sm:h-16 md:h-[4.25rem] lg:h-[4.75rem]"
@@ -52,10 +52,7 @@ export default function Header() {
 
         {/* Right: CTA */}
         <div className="flex shrink-0 items-center gap-2">
-          <Link
-            href="/kontakt"
-            className="transition-smooth hidden rounded-lg bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-teal-500 hover:-translate-y-0.5 md:inline-block dark:bg-[#00ff9d] dark:text-black dark:hover:bg-[#00e699] dark:hover:shadow-[0_0_20px_rgba(0,255,157,0.3)]"
-          >
+          <Link href="/#ponuda" className={`${ctaOfferButtonCompactClass} hidden md:inline-block`}>
             Zatraži ponudu
           </Link>
           <button
@@ -94,8 +91,8 @@ export default function Header() {
             ))}
             <li className="mt-2">
               <Link
-                href="/kontakt"
-                className="block rounded-lg bg-[#00ff9d] px-3 py-3 text-center font-semibold text-black hover:bg-[#00e699]"
+                href="/#ponuda"
+                className={`${ctaOfferButtonClass} block px-3 py-3 normal-case`}
                 onClick={() => setOpen(false)}
               >
                 Zatraži ponudu

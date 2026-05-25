@@ -8,7 +8,7 @@ import {
 } from "../data/usloviKoriscenja";
 
 export const metadata: Metadata = {
-  title: "Uslovi i pravila korišćenja – Cyber Tracking",
+  title: "Uslovi i pravila korišćenja – Cyber Tracking GPS",
   description:
     "Uslovi i pravila korišćenja GPS usluge na gpspracenje.rs: privatnost, opis usluge, obaveze korisnika, garancija, odgovornost i pretplata.",
 };
