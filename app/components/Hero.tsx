@@ -4,7 +4,7 @@ import { TrackedTelLink } from "./TrackedTelLink";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-0 sm:min-h-[calc(100dvh-7rem)] overflow-hidden px-4 pb-0 pt-4 sm:px-6 sm:pb-16 sm:pt-6 lg:px-8">
+    <section className="relative overflow-hidden px-4 pb-0 pt-4 sm:px-6 sm:pb-8 sm:pt-6 lg:px-8">
       <div
         className="absolute inset-0 bg-gradient-to-b from-slate-50 via-white to-slate-100 dark:hidden"
         style={{
